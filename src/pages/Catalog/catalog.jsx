@@ -1,25 +1,67 @@
+import { useContext, useState } from "react";
+import { ServiceContext } from "../../pages/Context/serviceContext.jsx";
+import { serviceCategories } from "../../data/categories.js";
 import { Link } from "react-router-dom";
 
 export default function Catalog() {
-  const prestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
+  const { prestadores } = useContext(ServiceContext);
+  const [search, setSearch] = useState("");
+
+  // Combina prestadores do contexto + localStorage
+  const todosPrestadores = [...prestadores];
+
+  // Filtrar prestadores
+  const filteredPrestadores = todosPrestadores.filter((p) => {
+    const termo = search.toLowerCase();
+
+    return (
+      p.nomeProfissional.toLowerCase().includes(termo) ||
+      p.area.toLowerCase().includes(termo) ||
+      p.descricao.toLowerCase().includes(termo)
+    );
+  });
 
   return (
-    <div>
-      <h1>Catálogo de Serviços</h1>
+    <div className="catalog-container">
+      <h2>Catálogo de Serviços</h2>
 
-      {prestadores.length === 0 && <p>Nenhum prestador cadastrado.</p>}
+      {/* Campo de busca */}
+      <input
+        type="text"
+        placeholder="Buscar por nome, área ou palavra-chave..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="search-input"
+      />
 
-      <ul>
-        {prestadores.map(p => (
-          <li key={p.id}>
-            <h3>{p.nome}</h3>
-            <p>Área: {p.area}</p>
-            <p>Nome do Profissional: {p.nomeProfissional}</p>
-            <p>Preço Médio: R$ {p.preco}</p>
-            <Link to={`/prestador/${p.id}`}>Ver Perfil</Link>
-          </li>
+      <h3>Categorias disponíveis</h3>
+      <div className="category-list">
+        {serviceCategories.map((cat) => (
+          <span key={cat} className="category-chip">
+            {cat}
+          </span>
         ))}
-      </ul>
+      </div>
+
+      <h3>Prestadores encontrados</h3>
+
+      <div className="prestadores-list">
+        {filteredPrestadores.length === 0 ? (
+          <p>Nenhum serviço encontrado…</p>
+        ) : (
+          filteredPrestadores.map((p) => (
+            <div key={p.id} className="prestador-card">
+              <h4>{p.nomeProfissional}</h4>
+              <p><strong>Área:</strong> {p.area}</p>
+              <p><strong>Descrição:</strong> {p.descricao}</p>
+              <p><strong>Preço médio:</strong> R$ {p.preco}</p>
+              <p><strong>Disponibilidade:</strong> {p.disponibilidade}</p>
+
+             <Link to={`/prestador/${p.id}`}>Ver Perfil</Link>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }

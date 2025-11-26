@@ -1,15 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 
-// Criando o contexto
 export const ServiceContext = createContext();
 
 export function ServiceProvider({ children }) {
-  // Lista de prestadores (pode vir de API futuramente)
   const [prestadores, setPrestadores] = useState([]);
 
-  // Simulação de carregamento inicial
   useEffect(() => {
-    // Aqui futuramente você pode buscar via API
+    // Prestadores fixos
     const fakeData = [
       {
         id: 1,
@@ -37,21 +34,27 @@ export function ServiceProvider({ children }) {
       }
     ];
 
-    setPrestadores(fakeData);
+    // Prestadores salvos no localStorage
+    const localPrestadores =
+      JSON.parse(localStorage.getItem("prestadores")) || [];
+
+    // Junta os dois
+    setPrestadores([...fakeData, ...localPrestadores]);
   }, []);
 
-  // Função para adicionar novos prestadores (caso tenha cadastro)
   const adicionarPrestador = (novoPrestador) => {
-    setPrestadores((prev) => [...prev, novoPrestador]);
+    setPrestadores((prev) => {
+      const updated = [...prev, novoPrestador];
+
+      // mantém salvo no localStorage
+      localStorage.setItem("prestadores", JSON.stringify(updated));
+
+      return updated;
+    });
   };
 
   return (
-    <ServiceContext.Provider
-      value={{
-        prestadores,
-        adicionarPrestador
-      }}
-    >
+    <ServiceContext.Provider value={{ prestadores, adicionarPrestador }}>
       {children}
     </ServiceContext.Provider>
   );

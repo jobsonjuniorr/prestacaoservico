@@ -1,25 +1,34 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ServiceContext } from "../Context/serviceContext.jsx";
 
 export default function PrestadorProfile() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { prestadores: prestadoresFixos } = useContext(ServiceContext);
 
-    const prestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
-    const prestador = prestadores.find(p => p.id == id);
+    const prestadoresLocal =
+        JSON.parse(localStorage.getItem("prestadores")) || [];
+
+    // Enquanto o contexto ainda não carregou os dados fixos
+    if (prestadoresFixos.length === 0 && prestadoresLocal.length === 0) {
+        return <p>Carregando...</p>;
+    }
+
+    const todosPrestadores = [...prestadoresFixos, ...prestadoresLocal];
+
+    const prestador = todosPrestadores.find(
+        (p) => String(p.id) === String(id)
+    );
 
     if (!prestador) {
         return <p>Prestador não encontrado.</p>;
-    }
-
-    function contratar() {
-        navigate(`/solicitar/${id}`);
     }
 
     return (
         <div className="prestador-profile">
             <h1>{prestador.nomeProfissional}</h1>
 
-            {/* Caso deseje adicionar foto futuramente */}
             {prestador.foto && (
                 <img
                     src={prestador.foto}

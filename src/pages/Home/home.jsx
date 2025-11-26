@@ -14,7 +14,10 @@ export default function Home() {
                 <Link to="/prestador/register">
                     <button>Cadastre-se como Prestador</button>
                 </Link>
-                <button type="submit">Perfil</button>
+                
+                 <Link to="/solicitacoes">
+                    <button>Solicitações</button>
+                </Link>
 
             </div>
         </div>

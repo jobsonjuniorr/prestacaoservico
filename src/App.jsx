@@ -5,8 +5,13 @@ import Register from "./pages/Register/register.jsx";
 import PrestadorRegister from "./pages/Prestador/PrestadorRegister.jsx";
 import Catalog from "./pages/Catalog/catalog.jsx";
 import PrestadorProfile from "./pages/Prestador/PrestadorProfile.jsx";
+import { ServiceProvider } from "./pages/Context/serviceContext.jsx";
+import SolicitarServico from "./pages/SolicitacaoServico/SolicitarServico.jsx";
+import VerSolicitacoes from "./pages/SolicitacaoServico/verSolicitacoes.jsx";
+
 export default function App() {
   return (
+    <ServiceProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -15,7 +20,10 @@ export default function App() {
         <Route path="/prestador/register" element={<PrestadorRegister />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/prestador/:id" element={<PrestadorProfile />} />
+        <Route path="/solicitar/:idPrestador" element={<SolicitarServico />} />
+        <Route path="/solicitacoes" element={<VerSolicitacoes />} />
       </Routes>
     </BrowserRouter>
+    </ServiceProvider>
   );
 }
