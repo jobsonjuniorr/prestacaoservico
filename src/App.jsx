@@ -5,9 +5,6 @@ import Register from "./pages/Register/register.jsx";
 import PrestadorRegister from "./pages/Prestador/PrestadorRegister.jsx";
 import Catalog from "./pages/Catalog/catalog.jsx";
 import PrestadorProfile from "./pages/Prestador/PrestadorProfile.jsx";
-import SolicitarServico from "./pages/SolicitacaoServico/SolicitarServico.jsx";
-import SolicitacoesPrestador from "./pages/SolicitacaoServico/SolicitacoesPrestador.jsx";
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -18,8 +15,6 @@ export default function App() {
         <Route path="/prestador/register" element={<PrestadorRegister />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/prestador/:id" element={<PrestadorProfile />} />
-        <Route path="/solicitar/:prestadorId" element={<SolicitarServico />} />
-        <Route path="/prestador/solicitacoes" element={<SolicitacoesPrestador />} />
       </Routes>
     </BrowserRouter>
   );
