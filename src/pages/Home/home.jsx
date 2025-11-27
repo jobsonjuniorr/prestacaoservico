@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
     const user = JSON.parse(localStorage.getItem("loggedUser"));
     const navigate = useNavigate();
-     const handleLogout = () => {
+    const handleLogout = () => {
     localStorage.removeItem("loggedUser");
     navigate("/");
   };
@@ -24,6 +24,9 @@ export default function Home() {
                 
                  <Link to="/solicitacoes">
                     <button>Solicitações</button>
+                </Link>
+                <Link to="/perfil">
+                    <button>Perfil</button>
                 </Link>
                  <button onClick={handleLogout}>Sair</button>
             </div>
