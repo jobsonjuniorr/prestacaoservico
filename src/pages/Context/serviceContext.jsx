@@ -11,26 +11,26 @@ export function ServiceProvider({ children }) {
       {
         id: 1,
         nomeProfissional: "João Silva",
+        email:"joao@gmail.com",
         area: "Eletricista",
         descricao: "Instalações elétricas em geral",
         preco: 120,
-        disponibilidade: "Seg–Sex"
       },
       {
         id: 2,
         nomeProfissional: "Maria Santos",
+        email:"maria@gmail.com",
         area: "Diarista",
         descricao: "Limpeza residencial e comercial",
         preco: 150,
-        disponibilidade: "Seg–Sáb"
       },
       {
         id: 3,
         nomeProfissional: "Carlos Andrade",
+        email:"carlos@gmail.com",
         area: "Encanador",
         descricao: "Conserto de vazamentos e manutenção",
         preco: 180,
-        disponibilidade: "Todos os dias"
       }
     ];
 

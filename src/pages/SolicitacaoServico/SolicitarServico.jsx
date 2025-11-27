@@ -20,9 +20,12 @@ export default function SolicitarServico() {
         const encontrado = prestadores.find(
             item => String(item.id) === String(idPrestador)
         );
+        const encontradoLocalStorage = JSON.parse(localStorage.getItem("prestadores"))?.find(
+            item => String(item.id) === String(idPrestador)
+        );
 
-        if (encontrado) {
-            setPrestador(encontrado);
+        if (encontrado || encontradoLocalStorage) {
+            setPrestador(encontrado || encontradoLocalStorage);
         } else {
             // ID inválido / prestador não encontrado
             setPrestador(null);
@@ -55,7 +58,8 @@ export default function SolicitarServico() {
             prestador: {
                 id: prestador.id,
                 nome: prestador.nomeProfissional,
-                area: prestador.area
+                area: prestador.area,
+                email: prestador.email
             },
             dataSolicitada: data,
             tipoServico: tipoServ,

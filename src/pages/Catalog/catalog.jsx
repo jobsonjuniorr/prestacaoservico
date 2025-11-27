@@ -1,17 +1,37 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ServiceContext } from "../../pages/Context/serviceContext.jsx";
 import { serviceCategories } from "../../data/categories.js";
 import { Link } from "react-router-dom";
 
 export default function Catalog() {
   const { prestadores } = useContext(ServiceContext);
+  const [prestadoresLista, setPrestadoresLista] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Combina prestadores do contexto + localStorage
-  const todosPrestadores = [...prestadores];
 
-  // Filtrar prestadores
-  const filteredPrestadores = todosPrestadores.filter((p) => {
+useEffect(() => {
+  const storagePrestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+
+  const dadosCombinados = [...prestadores, ...storagePrestadores];
+
+
+  const semDuplicados = dadosCombinados.filter(
+    (item, index, self) =>
+      index === self.findIndex((p) => p.id === item.id)
+  );
+
+  const semMeuServico = semDuplicados.filter((p) => {
+    if (!loggedUser) return true;
+    return p.email !== loggedUser.email; 
+  });
+
+  setPrestadoresLista(semMeuServico);
+}, [prestadores]);
+
+
+  const filteredPrestadores = prestadoresLista.filter((p) => {
     const termo = search.toLowerCase();
 
     return (
@@ -55,9 +75,8 @@ export default function Catalog() {
               <p><strong>Área:</strong> {p.area}</p>
               <p><strong>Descrição:</strong> {p.descricao}</p>
               <p><strong>Preço médio:</strong> R$ {p.preco}</p>
-              <p><strong>Disponibilidade:</strong> {p.disponibilidade}</p>
 
-             <Link to={`/prestador/${p.id}`}>Ver Perfil</Link>
+              <Link to={`/prestador/${p.id}`}>Ver Perfil</Link>
             </div>
           ))
         )}

@@ -29,15 +29,10 @@ export default function PrestadorProfile() {
         <div className="prestador-profile">
             <h1>{prestador.nomeProfissional}</h1>
 
-            {prestador.foto && (
-                <img
-                    src={prestador.foto}
-                    alt={prestador.nomeProfissional}
-                    className="prestador-foto"
-                />
-            )}
+           
 
             <p><strong>Área de atuação:</strong> {prestador.area}</p>
+            <p><strong>Email:</strong> {prestador.email}</p>
             <p><strong>Descrição:</strong> {prestador.descricao}</p>
             <p><strong>Preço médio:</strong> R$ {prestador.preco}</p>
             <p><strong>Disponibilidade:</strong> {prestador.disponibilidade}</p>

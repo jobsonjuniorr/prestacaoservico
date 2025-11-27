@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../../styles/global.css";
 
 export default function PrestadorRegister() {
-  
-  const usuarioLogado = JSON.parse(localStorage.getItem("loggedUser")); // ← ADICIONADO
+  const usuarioLogado = JSON.parse(localStorage.getItem("loggedUser"));
 
   const [nome, setNome] = useState("");
+  const [email, setEmail] = useState(""); // ← NOVO CAMPO
   const [area, setArea] = useState("");
   const [descricao, setDescricao] = useState("");
   const [preco, setPreco] = useState("");
@@ -13,10 +14,17 @@ export default function PrestadorRegister() {
 
   const navigate = useNavigate();
 
+  // Preencher nome + email automaticamente ao abrir a página
+  useEffect(() => {
+    if (usuarioLogado) {
+      setNome(usuarioLogado.nome);
+      setEmail(usuarioLogado.email);
+    }
+  }, []);
+
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Verifica se existe usuário logado
     if (!usuarioLogado) {
       alert("Você precisa estar logado para se cadastrar como prestador.");
       return navigate("/");
@@ -24,8 +32,9 @@ export default function PrestadorRegister() {
 
     const novoPrestador = {
       id: Date.now(),
-      usuarioId: usuarioLogado.id, // ← VINCULADO AO USUÁRIO
+      usuarioId: usuarioLogado.id,
       nomeProfissional: nome,
+      email: email,   // ← EMAIL SALVO NO LOCALSTORAGE
       area,
       descricao,
       preco,
@@ -37,7 +46,7 @@ export default function PrestadorRegister() {
     localStorage.setItem("prestadores", JSON.stringify(prestadores));
 
     alert("Prestador cadastrado com sucesso!");
-    navigate("/catalog");
+    navigate("/home");
   }
 
   return (
@@ -45,9 +54,17 @@ export default function PrestadorRegister() {
       <h2>Cadastrar Prestador</h2>
 
       <input
-        placeholder="Nome profissional"
+        placeholder="Nome"
         value={nome}
         onChange={e => setNome(e.target.value)}
+        disabled
+      />
+
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        disabled // ← Usuário não altera o email
       />
 
       <input
@@ -64,16 +81,23 @@ export default function PrestadorRegister() {
 
       <input
         type="number"
+        inputMode="numeric"
+        pattern="[0-9]*"
         placeholder="Preço médio"
+        className="no-arrows"
         value={preco}
-        onChange={e => setPreco(e.target.value)}
+        onChange={(e) => setPreco(e.target.value)}
+        onWheel={(e) => e.target.blur()}
       />
-
-      <input
-        placeholder="Disponibilidade"
+      <select
         value={disponibilidade}
-        onChange={e => setDisponibilidade(e.target.value)}
-      />
+        onChange={(e) => setDisponibilidade(e.target.value)}
+      >
+        <option value="">Selecione a disponibilidade</option>
+        <option value="Manhã">Manhã</option>
+        <option value="Tarde">Tarde</option>
+        <option value="Noite">Noite</option>
+      </select>
 
       <button type="submit">Cadastrar</button>
     </form>
