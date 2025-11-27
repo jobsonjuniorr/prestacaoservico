@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/login.css";
 import logo from "../../assets/logo.png"; // ajuste o caminho conforme seu projeto
+import user from "../../data/users";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,9 +18,12 @@ export default function Login() {
     const userFound = users.find(
       (user) => user.email === email && user.senha === senha
     );
+    const userFoundDefault = user.find(
+      (user) => user.email === email && user.senha === senha
+    );
 
-    if (userFound) {
-      localStorage.setItem("loggedUser", JSON.stringify(userFound));
+    if (userFound || userFoundDefault) {
+      localStorage.setItem("loggedUser", JSON.stringify(userFound || userFoundDefault ));
       navigate("/home");
     } else {
       alert("E-mail ou senha incorretos!");
