@@ -8,6 +8,7 @@ import PrestadorProfile from "./pages/Prestador/PrestadorProfile.jsx";
 import { ServiceProvider } from "./pages/Context/serviceContext.jsx";
 import SolicitarServico from "./pages/SolicitacaoServico/SolicitarServico.jsx";
 import VerSolicitacoes from "./pages/SolicitacaoServico/verSolicitacoes.jsx";
+import Perfil from "./pages/PerfilUsuario/perfil.jsx"; 
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/prestador/:id" element={<PrestadorProfile />} />
         <Route path="/solicitar/:idPrestador" element={<SolicitarServico />} />
         <Route path="/solicitacoes" element={<VerSolicitacoes />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </BrowserRouter>
     </ServiceProvider>

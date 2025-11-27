@@ -5,7 +5,7 @@ const user = [
     email: "iza@gmail.com",
     senha: "123456",
     telefone: "47999999999",
-    cpf: "12345678900"
+    cpf: "12345678"
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const user = [
     email: "job@gmail.com",
     senha: "123456",
     telefone: "47999999999",
-    cpf: "12345678900"
+    cpf: "1234567"
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const user = [
     email: "joao@gmail.com",
     senha: "123456",
     telefone: "1234456",
-    cpf: "12345678900"
+    cpf: "123456"
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const user = [
     email: "maria@gmail.com",
     senha: "123456",
     telefone: "1234456",
-    cpf: "12345678900"
+    cpf: "12345"
   },
   {
     id: 5,
