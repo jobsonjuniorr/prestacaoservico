@@ -1,23 +1,430 @@
-.home-container {
-  text-align: center;
-  margin-top: 80px;
+/* Variáveis de Cor */
+:root {
+  --primary-blue: #1A8BF0;
+  --bg-gray: #f2f4f7;
+  --text-dark: #333;
+  --text-gray: #666;
+  --white: #ffffff;
 }
 
-.home-buttons {
+body {
+  background-color: var(--bg-gray);
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 80px; /* Espaço para não colar no fundo */
+}
+
+/* --- HEADER --- */
+.home-header {
+  background-color: var(--primary-blue);
+  padding: 20px;
+  padding-bottom: 30px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header-logo {
+  max-width: 120px;
+}
+
+.user-profile-chip {
+  background-color: rgba(255,255,255,0.3);
+  padding: 5px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.user-icon {
+  font-size: 1.2rem;
+}
+
+.search-bar-container {
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.search-icon {
+  color: #999;
+  margin-right: 10px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+/* --- CATEGORIAS --- */
+.categories-section {
+  margin-top: -20px; /* Sobe um pouco para pegar a curva do header */
+  padding-left: 20px;
+}
+
+.categories-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; /* Permite rolagem horizontal */
+  padding: 10px 5px;
+  scrollbar-width: none; /* Esconde barra de rolagem no Firefox */
+}
+
+/* Esconde barra de rolagem no Chrome/Safari */
+.categories-list::-webkit-scrollbar {
+  display: none;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.category-item.active {
+  opacity: 1;
+}
+
+.cat-icon-box {
+  background-color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #ccc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  margin-bottom: 5px;
 }
 
-.btn {
-  padding: 10px 20px;
-  background: #007bff;
+.category-item.active .cat-icon-box {
+  background-color: #dbeafe; /* Azul bem clarinho */
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
+}
+
+.cat-name {
+  font-size: 0.8rem;
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
+/* --- BANNER --- */
+.banner-section {
+  padding: 20px;
+}
+
+.banner-card {
+  border-radius: 20px;
+  /* Removemos o padding padrão e usamos overflow hidden para cortar cantos */
+  /* padding: 30px; <--- REMOVIDO */
+  height: 180px;
+  position: relative;
+  transition: background-color 0.5s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  overflow: hidden; /* Garante que nada saia dos cantos arredondados */
+}
+
+.banner-content {
+  display: flex; /* Coloca imagem e texto lado a lado */
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 0 20px; /* Padding lateral */
+}
+
+/* Container da Imagem (Esquerda) */
+.banner-img-container {
+  flex: 1; /* Ocupa espaço proporcional */
+  height: 100%;
+  display: flex;
+  align-items: flex-end; /* Alinha imagem na base */
+  justify-content: center;
+}
+
+.banner-image {
+  max-height: 95%; /* Altura máxima para não estourar */
+  width: auto;
+  object-fit: contain;
+  margin-bottom: -5px; /* Truque para colar bem na base */
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); /* Sombra só na silhueta da imagem PNG */
+}
+
+/* Texto (Direita) */
+.banner-text {
+  flex: 1.5; /* Texto tem mais espaço que a imagem */
+  padding-left: 10px;
+  z-index: 2; /* Texto fica acima se algo sobrepor */
+  text-align: right; /* Alinha texto à direita como na ref */
+}
+
+.banner-text h3 {
+  font-size: 1.1rem; /* Ajustado para mobile */
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-weight: 800;
   color: white;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.btn.green {
-  background: #28a745;
+.banner-text p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Bolinhas */
+.banner-dots {
+  position: absolute;
+  bottom: 10px;
+  right: 20px; /* Mudei para direita para não ficar em cima da imagem */
+  /* left: 50%; <--- REMOVIDO */
+  /* transform: translateX(-50%); <--- REMOVIDO */
+  display: flex;
+  gap: 5px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.4);
+}
+
+.dot.active {
+  background-color: white;
+  width: 15px;
+  border-radius: 10px;
+}
+
+/* --- FILTROS --- */
+.filters-section {
+  padding: 0 20px;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+/* --- LISTA DE PRESTADORES (CARDS) --- */
+.providers-list {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.provider-card {
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  gap: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+/* Lado Esquerdo (Avatar) */
+.card-left {
+  display: flex;
+  align-items: flex-start;
+}
+
+.provider-avatar-wrapper {
+  position: relative;
+}
+
+.provider-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f0f0f0;
+}
+
+.verified-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--primary-blue);
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  border: 2px solid white;
+}
+
+/* Lado Direito (Info) */
+.card-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.role-title {
+  font-size: 1.1rem;
+  color: #222;
+  margin: 0;
+  font-weight: 700;
+}
+
+.stars {
+  color: #FFC107; /* Amarelo Estrela */
+  font-size: 0.9rem;
+}
+.star-empty {
+  color: #ddd;
+}
+
+.provider-info {
+  margin: 10px 0;
+}
+
+.p-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.p-detail {
+  font-size: 0.8rem;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 2px;
+}
+
+.orcamento-btn {
+  align-self: flex-end; /* Joga o botão para a direita */
+  background-color: var(--azul-escuro, #1b3f66);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.orcamento-btn:hover {
+  background-color: var(--primary-blue);
+}
+
+
+/* --- VERSÃO PC / NOTEBOOK (@MEDIA) --- */
+@media (min-width: 768px) {
+  
+  .home-container {
+    padding: 0 5%; /* Margem lateral no PC */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+  }
+
+  /* Header expandido */
+  .home-header {
+    border-radius: 20px; /* Arredonda tudo no PC */
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  
+  .header-top {
+    margin-bottom: 0;
+    gap: 30px;
+    flex: 1;
+  }
+
+  .search-bar-container {
+    flex: 2; /* Barra de busca maior no meio */
+    margin: 0 40px;
+  }
+
+  /* Categorias como Grid no PC ou Linha maior */
+  .categories-list {
+    justify-content: center; /* Centraliza categorias */
+    margin-top: 20px;
+    gap: 40px;
+  }
+
+  .banner-card {
+    height: 300px;
+  }
+  
+  .banner-image {
+    max-height: 100%; /* No PC pode deixar a imagem maior */
+  }
+
+  .banner-text h3 {
+    font-size: 2.5rem;
+    max-width: 100%;
+  }
+  
+  .banner-text p {
+    font-size: 1.2rem;
+  }
+
+  /* GRID DE PRESTADORES (Transformação Importante) */
+  .providers-list {
+    display: grid;
+    /* Cria colunas automáticas com mínimo de 350px de largura */
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+    gap: 30px;
+  }
 }

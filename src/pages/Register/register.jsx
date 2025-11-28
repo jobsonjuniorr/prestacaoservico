@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/register.css";
 import user from "../../data/users";
-import logo from "../../assets/logo.png"; // <-- LOGO IMPORTADA
+import logo from "../../assets/logo.png"; 
 
 export default function Register() {
   const [email, setEmail] = useState("");
