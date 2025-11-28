@@ -9,13 +9,14 @@ import { ServiceProvider } from "./pages/Context/serviceContext.jsx";
 import SolicitarServico from "./pages/SolicitacaoServico/SolicitarServico.jsx";
 import VerSolicitacoes from "./pages/SolicitacaoServico/verSolicitacoes.jsx";
 import Perfil from "./pages/PerfilUsuario/perfil.jsx"; 
+import FirstScreen from "./pages/First Screen/FirstScreen.jsx";
 
 export default function App() {
   return (
     <ServiceProvider>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<FirstScreen />} />
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/prestador/register" element={<PrestadorRegister />} />

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/register.css";
 import user from "../../data/users";
+import logo from "../../assets/logo.png"; // <-- LOGO IMPORTADA
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ export default function Register() {
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
   const [cpf, setCpf] = useState("");
-  const [cpfError, setCpfError] = useState(""); // <-- ERRO DO CPF
+  const [cpfError, setCpfError] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ export default function Register() {
       return;
     }
 
-    setCpfError(""); 
+    setCpfError("");
 
     const newUser = { nome, email, senha, telefone, cpf };
     users.push(newUser);
@@ -45,12 +46,8 @@ export default function Register() {
   function formatTelefone(value) {
     value = value.replace(/\D/g, "");
 
-    if (value.length <= 2) {
-      return `(${value}`;
-    }
-    if (value.length <= 9) {
-      return `(${value.slice(0, 2)}) ${value.slice(2)}`;
-    }
+    if (value.length <= 2) return `(${value}`;
+    if (value.length <= 9) return `(${value.slice(0, 2)}) ${value.slice(2)}`;
 
     return `(${value.slice(0, 2)}) ${value.slice(2, 9)}-${value.slice(9, 11)}`;
   }
@@ -66,6 +63,9 @@ export default function Register() {
   return (
     <div className="register-page">
       <form className="register-form" onSubmit={handleRegister}>
+
+        {/* LOGO CENTRALIZADA NO FORM */}
+        <img src={logo} alt="Logo" className="logo" />
 
         <div className="flex-column">
           <label>Nome</label>

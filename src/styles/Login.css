@@ -1,10 +1,19 @@
+:root {
+  --azul-escuro: #1b3f66;
+  --azul-claro: #2d8cff;
+  --cinza-escuro: #1f2937;
+  --cinza-claro: #f2f4f7;
+  --verde: #4cc38a;
+}
 
 .login-page {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f3f3f3;
+  background: linear-gradient(to right, #2d8cff, #1b3f66, #2d8cff);
+
+
 }
 
 .form {

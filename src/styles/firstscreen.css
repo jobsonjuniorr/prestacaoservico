@@ -1,0 +1,221 @@
+/* Definição de Cores */
+:root {
+  --primary-blue: #1A8BF0; 
+  --white: #ffffff;
+    --azul-escuro: #1b3f66;
+  --azul-claro: #2d8cff;
+  --cinza-escuro: #1f2937;
+  --cinza-claro: #f2f4f7;
+  --verde: #4cc38a;
+}
+
+html, body, .container {
+  height: 100vh; /* 100% da altura da viewport */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  padding: 20px;
+  background: linear-gradient(110deg, #2d8cff, #1f5996, #2d8cff);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* --- HEADER COM LOGO IMAGEM --- */
+.header {
+  text-align: center;
+  margin-top: 20px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  margin-bottom: 5px;
+}
+
+/* Classe para controlar o tamanho da sua logo */
+.app-logo {
+  max-width: 200px; /* Ajuste este valor conforme o tamanho da sua imagem */
+  height: auto;
+  display: block;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--azul-escuro);
+  margin-top: 5px;
+}
+
+/* --- MAIN CONTENT --- */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* empurra conteúdo para baixo */
+  align-items: center;
+  position: relative;
+  width: 100%;
+  overflow: visible; /* permite que elementos saiam da caixa */
+}
+
+/* Card de Login - Versão Mobile */
+.login-card {
+  background-color: var(--white);
+  border-radius: 20px;
+  padding: 8px 10px; /* Reduzi um pouco o padding vertical */
+  
+  /* --- MUDANÇAS AQUI --- */
+  position: absolute; 
+  top: 17%;  /* Desce ele um pouco para sair de cima da logo */
+  right: 5%; /* Cola ele na direita */
+  
+  width: 20px;      /* Deixa o tamanho automático */
+  min-width: 280px; /* Garante um tamanho mínimo bonito */
+  max-width: 320px; /* Tamanho máximo */
+  
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 10;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  
+  /* --- MEXA NA LARGURA AQUI --- */
+  width: 180px; /* Coloque o valor que quiser (ex: 150px, 200px) */
+  align-self: center; /* Isso garante que o botão fique no MEIO do card */
+  
+  /* Altura/Grossura do botão */
+  padding: 8px 0; 
+  
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+.btn-outline:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+  background-color: #f0f8ff;
+}
+
+.divider {
+  height: 1px;
+  background-color: #eee;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Imagem da Mulher - Versão Mobile */
+.image-wrapper {
+  position: absolute;
+  
+  /* Cola no chão (com o truque do padding negativo que ensinei) */
+  bottom: -20px; 
+  
+  /* --- MUDANÇAS AQUI --- */
+  left: -50px;   /* Empurra ela BEM para a esquerda */
+  width: 85%;    /* Deixa ela grande */
+  max-width: 500px;
+  
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+}
+.person-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* --- BOTÃO AJUDA --- */
+.help-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  z-index: 20;
+}
+
+.help-icon {
+  background-color: rgba(0, 0, 50, 0.2);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+/* --- VERSÃO PC (Media Query) --- */
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+  }
+
+  .header {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+  }
+  
+  .main-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 80vh;
+  }
+
+  .image-wrapper {
+    position: static;
+    width: 90%;
+    max-width: 500px;
+    margin-top: 100px;
+  }
+
+  .login-card {
+    position: static;
+    width: 350px;
+    margin-left: auto;
+    padding: 50px 40px;
+  }
+  
+  .subtitle {
+    font-size: 1.5rem;
+  }
+  
+  /* Aumenta a logo no PC */
+  .app-logo {
+    max-width: 300px; 
+  }
+}
