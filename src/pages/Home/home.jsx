@@ -21,7 +21,7 @@ const HomeScreen = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const { prestadores } = useContext(ServiceContext);
-
+  const navigate = useNavigate();
   const banners = [
     { id: 1, title: "TODOS OS SERVIÇOS EM UM SÓ LUGAR!", sub: "Encontre profissionais confiáveis.", color: "#2d8cff", img: equipe },
     { id: 2, title: "PRECISA DE UM PEDREIRO?", sub: "Reformas rápidas e baratas.", color: "#4cc38a", img: pedreiro },
@@ -77,11 +77,9 @@ const HomeScreen = () => {
     );
   };
   const user = JSON.parse(localStorage.getItem("loggedUser"));
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("loggedUser");
-    navigate("/");
-  };
+  if(!user){
+    navigate("/login")
+  }
   return (
     <div className="home-container">
 
@@ -115,7 +113,6 @@ const HomeScreen = () => {
               <span className="cat-name">{cat.name}</span>
             </div>
           ))}
-          <button onClick={handleLogout}>Sair</button>
         </div>
 
       </section>

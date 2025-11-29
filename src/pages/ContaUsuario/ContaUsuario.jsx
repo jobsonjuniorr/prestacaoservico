@@ -12,7 +12,7 @@ import {
 } from "react-icons/lu";
 import "../../styles/contaUsuario.css";
 
-const placeholderUserImg = "https://i.imgur.com/6XYb83n.png";
+const placeholderUserImg = "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector";
 
 export default function ContaUsuario() {
   const navigate = useNavigate();

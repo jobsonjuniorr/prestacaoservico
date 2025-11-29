@@ -32,7 +32,7 @@ export default function PrestadorProfile() {
             <p><strong>Email:</strong> {prestador.email}</p>
             <p><strong>Descrição:</strong> {prestador.descricao}</p>
             <p><strong>Preço médio:</strong> R$ {prestador.preco}</p>
-
+            <p><strong>Horário de atendimento:</strong> {prestador.horarioAtendimento}</p>
             {prestador.extraInfo && (
                 <div className="extra-info-box">
                     <h3>Informações adicionais</h3>

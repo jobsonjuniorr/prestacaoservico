@@ -1,0 +1,361 @@
+/* prestadorRegister.css - Versão Otimizada */
+
+/* Definições de Cores e Tipografia */
+:root {
+    --primary-blue: #1A8BF0;
+    --header-blue: #2d8cff;
+    --provider-blue: #1f3a57;
+    --bg-gray: #f2f4f7;
+    --white: #ffffff;
+    --text-dark: #333;
+    --text-gray: #666;
+    --border-color: #e0e0e0;
+    --success-green: #28a745;
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Container principal */
+.register-page-container {
+    background-color: var(--bg-gray);
+    min-height: 100vh;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Card do Formulário - Mais compacto */
+.register-form-card {
+    background-color: var(--white);
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    width: 100%;
+    max-width: 700px; /* Largura aumentada para acomodar colunas */
+    margin: 0 auto;
+}
+
+/* Título e Subtítulo */
+.card-title {
+    color: var(--provider-blue);
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.card-subtitle {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Seções do Formulário - Mais compactas */
+.form-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-left: 4px solid var(--primary-blue);
+    background-color: #f7f9fc;
+    border-radius: 4px;
+}
+
+.section-title {
+    color: var(--provider-blue);
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+/* LAYOUT EM LINHA - PRINCIPAL MELHORIA */
+
+/* Container para inputs lado a lado */
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Container para opções lado a lado */
+.options-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Container individual para cada opção e seu input extra */
+.option-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Agrupamento de Input */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.input-label.required::after {
+    content: " *";
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+
+/* Estilo dos Inputs e Select */
+.input-field,
+.textarea-field,
+.select-field {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--white);
+}
+
+.input-field:focus,
+.textarea-field:focus,
+.select-field:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(26, 139, 240, 0.2);
+    outline: none;
+}
+
+.input-field:disabled {
+    background-color: var(--bg-gray);
+    color: var(--text-gray);
+    cursor: not-allowed;
+    border-style: dashed;
+}
+
+.textarea-field {
+    resize: vertical;
+    min-height: 80px; /* Reduzido para economizar espaço */
+}
+
+/* ===== NOVOS ESTILOS PARA OPÇÕES DE RÁDIO ===== */
+
+/* Container para grupo de opções */
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: var(--bg-gray);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Estilo dos botões de opção (radio buttons) */
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: background-color 0.2s;
+    border-radius: 6px;
+}
+
+.option-label:hover {
+    background-color: rgba(26, 139, 240, 0.05);
+}
+
+.option-label input[type="radio"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+.option-checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.option-label:hover .option-checkmark {
+    border-color: var(--primary-blue);
+}
+
+.option-label input[type="radio"]:checked + .option-checkmark {
+    border-color: var(--primary-blue);
+    background-color: var(--primary-blue);
+}
+
+.option-label input[type="radio"]:checked + .option-checkmark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.option-text {
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.option-label input[type="radio"]:checked ~ .option-text {
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+/* Dica para o campo extra */
+.option-hint {
+    color: var(--text-gray);
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+}
+
+/* ===== FIM DOS NOVOS ESTILOS ===== */
+
+/* Estilo para Inputs Extras */
+.extra-info-group {
+    padding: 8px;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    background-color: #fff;
+    margin-top: 5px;
+}
+
+.extra-info-group .input-field {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+}
+
+/* Botão de Envio */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-btn:hover {
+    background-color: #1670cc;
+}
+
+.submit-btn:active {
+    transform: translateY(1px);
+}
+
+/* RESPONSIVIDADE */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .input-row,
+    .options-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .register-form-card {
+        padding: 20px 15px;
+        max-width: 95%;
+    }
+    
+    .form-section {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .option-group {
+        padding: 12px;
+    }
+    
+    .option-label {
+        padding: 6px 10px;
+    }
+    
+    .option-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .register-page-container {
+        padding: 10px 5px;
+    }
+    
+    .register-form-card {
+        padding: 15px 10px;
+    }
+    
+    .card-title {
+        font-size: 1.4rem;
+    }
+    
+    .section-title {
+        font-size: 1rem;
+    }
+    
+    .input-field,
+    .textarea-field,
+    .select-field {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+    
+    .option-group {
+        padding: 10px;
+    }
+    
+    .option-checkmark {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .option-label input[type="radio"]:checked + .option-checkmark::after {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* Telas grandes - ajustes finos */
+@media (min-width: 1200px) {
+    .register-form-card {
+        max-width: 750px;
+    }
+}

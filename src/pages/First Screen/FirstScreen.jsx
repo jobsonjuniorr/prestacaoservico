@@ -20,24 +20,32 @@ const FirstScreen = () => {
 
       <main className="main-content">
         <div className="image-wrapper">
-          <img 
-            src={imgMulher} 
-            alt="Mulher apontando" 
-            className="person-image" 
+          <img
+            src={imgMulher}
+            alt="Mulher apontando"
+            className="person-image"
           />
         </div>
 
         <div className="login-card">
-          <button 
-            className="btn-outline" 
-            onClick={() => navigate("/login")}
+          <button
+            className="btn-outline"
+            onClick={() => {
+              const savedUser = localStorage.getItem("loggedUser");
+
+              if (savedUser) {
+                navigate("/auto-login"); 
+              } else {
+                navigate("/login");
+              }
+            }}
           >
             Já tenho login
           </button>
 
           <div className="divider"></div>
 
-          <button 
+          <button
             className="btn-outline"
             onClick={() => navigate("/register")}
           >
@@ -46,7 +54,7 @@ const FirstScreen = () => {
         </div>
       </main>
 
-      <button 
+      <button
         className="help-btn"
         onClick={() => navigate("/ajuda")}
       >

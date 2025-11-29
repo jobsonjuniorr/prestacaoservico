@@ -11,7 +11,7 @@ import VerSolicitacoes from "./pages/SolicitacaoServico/verSolicitacoes.jsx";
 import Perfil from "./pages/PerfilUsuario/perfil.jsx"; 
 import FirstScreen from "./pages/First Screen/FirstScreen.jsx";
 import Help from "./pages/Help/Help.jsx";
-
+import AutoLoginScreen from "./pages/Login/autoLoginScreen.jsx";
 // --- NOVO IMPORT ---
 import ContaUsuario from "./pages/ContaUsuario/ContaUsuario.jsx"; 
 
@@ -31,6 +31,7 @@ export default function App() {
           <Route path="/solicitacoes" element={<VerSolicitacoes />} />
           <Route path="/ContaUsuario" element={<ContaUsuario />} /> 
           <Route path="/perfil" element={<Perfil />} />
+          <Route path="/auto-login" element={<AutoLoginScreen />} />
           
           <Route path="/ajuda" element={<Help />} />            
         </Routes>
