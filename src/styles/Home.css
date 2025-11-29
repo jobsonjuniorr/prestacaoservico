@@ -1,4 +1,3 @@
-/* Variáveis de Cor */
 :root {
   --primary-blue: #1A8BF0;
   --bg-gray: #f2f4f7;
@@ -14,10 +13,9 @@ body {
 .home-container {
   display: flex;
   flex-direction: column;
-  padding-bottom: 80px; /* Espaço para não colar no fundo */
+  padding-bottom: 80px;
 }
 
-/* --- HEADER --- */
 .home-header {
   background-color: var(--primary-blue);
   padding: 20px;
@@ -45,9 +43,8 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  /* --- ADICIONE ESSAS DUAS LINHAS --- */
-  text-decoration: none; /* Remove o sublinhado */
-  color: white; /* Garante que o texto fique branco e não roxo/azul de link */
+  text-decoration: none;
+  color: white;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -79,21 +76,19 @@ body {
   color: var(--text-dark);
 }
 
-/* --- CATEGORIAS --- */
 .categories-section {
-  margin-top: -20px; /* Sobe um pouco para pegar a curva do header */
+  margin-top: -20px;
   padding-left: 20px;
 }
 
 .categories-list {
   display: flex;
   gap: 20px;
-  overflow-x: auto; /* Permite rolagem horizontal */
+  overflow-x: auto;
   padding: 10px 5px;
-  scrollbar-width: none; /* Esconde barra de rolagem no Firefox */
+  scrollbar-width: none;
 }
 
-/* Esconde barra de rolagem no Chrome/Safari */
 .categories-list::-webkit-scrollbar {
   display: none;
 }
@@ -127,7 +122,7 @@ body {
 }
 
 .category-item.active .cat-icon-box {
-  background-color: #dbeafe; /* Azul bem clarinho */
+  background-color: #dbeafe;
   color: var(--primary-blue);
   border: 2px solid var(--primary-blue);
 }
@@ -138,58 +133,53 @@ body {
   font-weight: 500;
 }
 
-/* --- BANNER --- */
 .banner-section {
   padding: 20px;
 }
 
 .banner-card {
   border-radius: 20px;
-  /* Removemos o padding padrão e usamos overflow hidden para cortar cantos */
-  /* padding: 30px; <--- REMOVIDO */
   height: 180px;
   position: relative;
   transition: background-color 0.5s ease;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  overflow: hidden; /* Garante que nada saia dos cantos arredondados */
+  overflow: hidden;
 }
 
 .banner-content {
-  display: flex; /* Coloca imagem e texto lado a lado */
+  display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100%;
   width: 100%;
-  padding: 0 20px; /* Padding lateral */
+  padding: 0 20px;
 }
 
-/* Container da Imagem (Esquerda) */
 .banner-img-container {
-  flex: 1; /* Ocupa espaço proporcional */
+  flex: 1;
   height: 100%;
   display: flex;
-  align-items: flex-end; /* Alinha imagem na base */
+  align-items: flex-end;
   justify-content: center;
 }
 
 .banner-image {
-  max-height: 95%; /* Altura máxima para não estourar */
+  max-height: 95%;
   width: auto;
   object-fit: contain;
-  margin-bottom: -5px; /* Truque para colar bem na base */
-  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); /* Sombra só na silhueta da imagem PNG */
+  margin-bottom: -5px;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
 }
 
-/* Texto (Direita) */
 .banner-text {
-  flex: 1.5; /* Texto tem mais espaço que a imagem */
+  flex: 1.5;
   padding-left: 10px;
-  z-index: 2; /* Texto fica acima se algo sobrepor */
-  text-align: right; /* Alinha texto à direita como na ref */
+  z-index: 2;
+  text-align: right;
 }
 
 .banner-text h3 {
-  font-size: 1.1rem; /* Ajustado para mobile */
+  font-size: 1.1rem;
   margin-bottom: 5px;
   text-transform: uppercase;
   line-height: 1.2;
@@ -203,13 +193,10 @@ body {
   color: rgba(255,255,255,0.9);
 }
 
-/* Bolinhas */
 .banner-dots {
   position: absolute;
   bottom: 10px;
-  right: 20px; /* Mudei para direita para não ficar em cima da imagem */
-  /* left: 50%; <--- REMOVIDO */
-  /* transform: translateX(-50%); <--- REMOVIDO */
+  right: 20px;
   display: flex;
   gap: 5px;
 }
@@ -227,7 +214,6 @@ body {
   border-radius: 10px;
 }
 
-/* --- FILTROS --- */
 .filters-section {
   padding: 0 20px;
   display: flex;
@@ -248,7 +234,6 @@ body {
   cursor: pointer;
 }
 
-/* --- LISTA DE PRESTADORES (CARDS) --- */
 .providers-list {
   padding: 0 20px;
   display: flex;
@@ -266,7 +251,6 @@ body {
   position: relative;
 }
 
-/* Lado Esquerdo (Avatar) */
 .card-left {
   display: flex;
   align-items: flex-start;
@@ -300,7 +284,6 @@ body {
   border: 2px solid white;
 }
 
-/* Lado Direito (Info) */
 .card-right {
   flex: 1;
   display: flex;
@@ -322,9 +305,10 @@ body {
 }
 
 .stars {
-  color: #FFC107; /* Amarelo Estrela */
+  color: #FFC107;
   font-size: 0.9rem;
 }
+
 .star-empty {
   color: #ddd;
 }
@@ -350,7 +334,7 @@ body {
 }
 
 .orcamento-btn {
-  align-self: flex-end; /* Joga o botão para a direita */
+  align-self: flex-end;
   background-color: var(--azul-escuro, #1b3f66);
   color: white;
   border: none;
@@ -366,20 +350,16 @@ body {
   background-color: var(--primary-blue);
 }
 
-
-/* --- VERSÃO PC / NOTEBOOK (@MEDIA) --- */
 @media (min-width: 768px) {
-  
   .home-container {
-    padding: 0 5%; /* Margem lateral no PC */
+    padding: 0 5%;
     max-width: 1200px;
     margin: 0 auto;
     padding-bottom: 50px;
   }
 
-  /* Header expandido */
   .home-header {
-    border-radius: 20px; /* Arredonda tudo no PC */
+    border-radius: 20px;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
@@ -394,13 +374,12 @@ body {
   }
 
   .search-bar-container {
-    flex: 2; /* Barra de busca maior no meio */
+    flex: 2;
     margin: 0 40px;
   }
 
-  /* Categorias como Grid no PC ou Linha maior */
   .categories-list {
-    justify-content: center; /* Centraliza categorias */
+    justify-content: center;
     margin-top: 20px;
     gap: 40px;
   }
@@ -410,7 +389,7 @@ body {
   }
   
   .banner-image {
-    max-height: 100%; /* No PC pode deixar a imagem maior */
+    max-height: 100%;
   }
 
   .banner-text h3 {
@@ -422,11 +401,9 @@ body {
     font-size: 1.2rem;
   }
 
-  /* GRID DE PRESTADORES (Transformação Importante) */
   .providers-list {
     display: grid;
-    /* Cria colunas automáticas com mínimo de 350px de largura */
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 30px;
   }
 }

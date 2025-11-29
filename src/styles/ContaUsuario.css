@@ -1,95 +1,87 @@
-/* --- VARIÁVEIS (Baseadas na sua imagem) --- */
 :root {
-    --header-blue: #2d8cff; /* Azul vibrante do topo */
-    --provider-blue: #1f3a57; /* Azul escuro do banner */
-    --bg-light-gray: #f8f9fa; /* Fundo geral */
-    --bg-dark-gray: #e9ecef; /* Fundo da área de PDFs */
+    --header-blue: #2d8cff;
+    --provider-blue: #1f3a57;
+    --bg-light-gray: #f8f9fa;
+    --bg-dark-gray: #e9ecef;
     --text-dark: #333;
     --text-gray: #666;
-    --icon-blue: #1f5996; /* Cor dos ícones do menu principal */
-    --icon-gray: #999; /* Cor dos ícones do menu legal */
+    --icon-blue: #1f5996;
+    --icon-gray: #999;
     --border-color: #eee;
-  }
-  
-  /* Reset básico para listas */
-  ul.menu-list {
+}
+
+ul.menu-list {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-  
-  .conta-container {
+}
+
+.conta-container {
     background-color: var(--bg-light-gray);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-  }
-  
-  /* Título "Sua conta" */
-  .page-header-title {
+}
+
+.page-header-title {
     text-align: center;
     font-size: 1rem;
     color: var(--text-gray);
     margin: 15px 0;
     font-weight: 500;
-  }
-  
-  /* --- HERO SECTION (TOPO AZUL) --- */
-  .user-hero {
+}
+
+.user-hero {
     background-color: var(--header-blue);
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     color: white;
-    /* Arredondar apenas embaixo se quiser igual a Home, 
-       mas a imagem de referência é reto. Vou deixar reto. */
-  }
-  
-  .user-hero-content {
+}
+
+.user-hero-content {
     display: flex;
     align-items: center;
     gap: 15px;
-  }
-  
-  .hero-profile-img {
+}
+
+.hero-profile-img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid rgba(255, 255, 255, 0.2);
-  }
-  
-  .hero-user-details h3 {
+}
+
+.hero-user-details h3 {
     margin: 0;
     font-size: 1.4rem;
     font-weight: 700;
-  }
-  
-  .hero-user-details p {
+}
+
+.hero-user-details p {
     margin: 5px 0 0 0;
     font-size: 0.9rem;
     opacity: 0.9;
-  }
-  
-  .notification-btn {
+}
+
+.notification-btn {
     background: none;
     border: none;
     color: white;
     cursor: pointer;
     padding: 5px;
     position: relative;
-  }
-  
-  /* --- MENUS (ESTILO GERAL) --- */
-  .menu-list li {
+}
+
+.menu-list li {
     background-color: white;
     border-bottom: 1px solid var(--border-color);
-  }
-  
-  /* Estilo dos Links (<a> e <Link>) dentro da lista */
-  .menu-list li a,
-  .logout-btn-link {
+}
+
+.menu-list li a,
+.logout-btn-link {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -99,48 +91,44 @@
     width: 100%;
     cursor: pointer;
     transition: background-color 0.2s;
-  }
-  
-  .menu-list li a:hover,
-  .logout-btn-link:hover {
-      background-color: #f0f5ff;
-  }
-  
-  /* Botão de sair (resetando estilo de botão) */
-  .logout-btn-link {
-      background: none;
-      border: none;
-      font-family: inherit;
-      font-size: inherit;
-  }
-  
-  /* Lado esquerdo do item (Ícone + Texto) */
-  .menu-item-left {
+}
+
+.menu-list li a:hover,
+.logout-btn-link:hover {
+    background-color: #f0f5ff;
+}
+
+.logout-btn-link {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.menu-item-left {
     display: flex;
     align-items: center;
     gap: 15px;
-  }
-  
-  .menu-item-left span {
+}
+
+.menu-item-left span {
     font-size: 1.05rem;
     font-weight: 500;
-  }
-  
-  .chevron-icon {
+}
+
+.chevron-icon {
     color: #ccc;
-  }
-  
-  /* Cores específicas dos ícones */
-  .menu-icon-blue {
+}
+
+.menu-icon-blue {
     color: var(--icon-blue);
-  }
-  
-  .menu-icon-gray {
+}
+
+.menu-icon-gray {
     color: var(--icon-gray);
-  }
-  
-  /* --- BANNER PRESTADOR --- */
-  .provider-banner-link {
+}
+
+.provider-banner-link {
     background-color: var(--provider-blue);
     color: white;
     text-decoration: none;
@@ -152,155 +140,145 @@
     font-weight: 600;
     font-size: 1.1rem;
     transition: opacity 0.2s;
-  }
-  
-  .provider-banner-link:hover {
+}
+
+.provider-banner-link:hover {
     opacity: 0.9;
-  }
-  
-  /* --- MENU LEGAL (Fundo Cinza) --- */
-  .legal-menu {
+}
+
+.legal-menu {
     background-color: var(--bg-dark-gray);
-    flex-grow: 1; /* Ocupa o resto do espaço se a tela for grande */
-  }
-  
-  .legal-menu li {
-    background-color: transparent; /* Fica transparente para pegar o cinza do fundo */
+    flex-grow: 1;
+}
+
+.legal-menu li {
+    background-color: transparent;
     border-color: #ddd;
-  }
-  
-  .legal-menu li a {
+}
+
+.legal-menu li a {
     color: var(--text-gray);
-    padding: 15px 20px; /* Um pouco mais fino que o menu principal */
-  }
-  
-  .legal-menu .menu-item-left span {
-      font-size: 0.95rem;
-      font-weight: 400;
-  }
-  
-  
-/* --- VARIÁVEIS (Mesmas da Home para manter padrão) --- */
+    padding: 15px 20px;
+}
+
+.legal-menu .menu-item-left span {
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
 :root {
-  --primary-blue: #1A8BF0; /* Azul principal */
-  --header-blue: #2d8cff;  /* Azul do topo */
-  --provider-blue: #1f3a57; /* Azul escuro do banner */
-  --bg-gray: #f2f4f7;      /* Fundo geral */
-  --white: #ffffff;
-  --text-dark: #333;
-  --text-gray: #666;
-  --border-color: #eee;
+    --primary-blue: #1A8BF0;
+    --header-blue: #2d8cff;
+    --provider-blue: #1f3a57;
+    --bg-gray: #f2f4f7;
+    --white: #ffffff;
+    --text-dark: #333;
+    --text-gray: #666;
+    --border-color: #eee;
 }
 
-/* Reset básico */
 ul.menu-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* CONTAINER PRINCIPAL */
 .conta-container {
-  background-color: var(--bg-gray);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 50px;
+    background-color: var(--bg-gray);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
 }
 
-/* Título "Sua conta" */
 .page-header-title {
-  text-align: center;
-  font-size: 1rem;
-  color: var(--text-gray);
-  margin: 15px 0;
-  font-weight: 500;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-gray);
+    margin: 15px 0;
+    font-weight: 500;
 }
 
-/* --- HERO SECTION (TOPO AZUL) --- */
 .user-hero {
-  background-color: var(--header-blue);
-  padding: 25px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Centraliza verticalmente */
-  color: var(--white);
-  /* Sombra leve para destacar */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+    background-color: var(--header-blue);
+    padding: 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .user-hero-content {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .hero-profile-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.3);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.3);
 }
 
 .hero-user-details h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .hero-user-details p {
-  margin: 5px 0 0 0;
-  font-size: 0.95rem;
-  opacity: 0.9;
+    margin: 5px 0 0 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
 }
 
 .notification-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
 }
 
 .notification-btn:hover {
     background: rgba(255, 255, 255, 0.4);
 }
 
-/* --- LISTAS DE MENU --- */
-/* Cria um bloco branco para a lista */
 .main-menu, .legal-menu {
-  background-color: var(--white);
-  margin-top: 0; 
+    background-color: var(--white);
+    margin-top: 0;
 }
 
 .menu-list li {
-  border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .menu-list li:last-child {
-  border-bottom: none; /* Remove linha do último item */
+    border-bottom: none;
 }
 
 .menu-list li a,
 .logout-btn-link {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px; /* Botões grandes e fáceis de clicar */
-  text-decoration: none;
-  color: var(--text-dark);
-  width: 100%;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 1rem;
-  transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text-dark);
+    width: 100%;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    transition: background-color 0.2s;
 }
 
 .menu-list li a:hover,
@@ -309,88 +287,76 @@ ul.menu-list {
 }
 
 .menu-item-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .menu-icon-blue { color: #1f5996; }
 .menu-icon-gray { color: #999; }
 .chevron-icon { color: #ccc; }
 
-/* --- BANNER PRESTADOR --- */
 .provider-banner-link {
-  background-color: var(--provider-blue);
-  color: var(--white);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 20px; /* Banner mais alto */
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin: 0; /* Cola nas listas */
+    background-color: var(--provider-blue);
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0;
 }
 
 .provider-banner-link:hover {
-  opacity: 0.95;
+    opacity: 0.95;
 }
 
-/* --- MENU LEGAL (Rodapé Cinza) --- */
 .legal-menu {
-  background-color: #e9ecef; /* Cinza um pouco mais escuro que o fundo */
-  margin-top: 0;
+    background-color: #e9ecef;
+    margin-top: 0;
 }
 
 .legal-menu li {
     border-color: #ddd;
 }
+
 .legal-menu li a {
     color: var(--text-gray);
 }
 
-
-/* --- VERSÃO PC / NOTEBOOK (Onde a mágica acontece) --- */
 @media (min-width: 768px) {
-  
-  .conta-container {
-    /* 1. Limita a largura para não ficar infinito */
-    max-width: 1000px; 
-    
-    /* 2. Centraliza na tela */
-    margin: 0 auto; 
-    
-    /* 3. Dá um respiro nas laterais */
-    padding: 20px; 
-    width: 100%;
-  }
+    .conta-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        width: 100%;
+    }
 
-  /* Faz os blocos ficarem separados e bonitos no PC (arredondados) */
-  .user-hero, 
-  .main-menu, 
-  .provider-banner-link, 
-  .legal-menu {
-    border-radius: 15px; /* Arredonda cantos */
-    margin-bottom: 1px; /* Espaço entre eles */
-    overflow: hidden; /* Garante que o conteúdo respeite a borda */
-  }
+    .user-hero,
+    .main-menu,
+    .provider-banner-link,
+    .legal-menu {
+        border-radius: 15px;
+        margin-bottom: 1px;
+        overflow: hidden;
+    }
 
-  /* No PC, o título "Sua Conta" pode sumir ou ficar maior */
-  .page-header-title {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      text-align: left; /* Alinha a esquerda no PC */
-      padding-left: 10px;
-  }
-  
-  /* Aumenta um pouco a fonte no PC */
-  .menu-list li a {
-      font-size: 1.1rem;
-      padding: 25px;
-  }
+    .page-header-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        text-align: left;
+        padding-left: 10px;
+    }
 
-  .user-hero {
-      padding: 40px; /* Hero maior no PC */
-  }
+    .menu-list li a {
+        font-size: 1.1rem;
+        padding: 25px;
+    }
+
+    .user-hero {
+        padding: 40px;
+    }
 }
