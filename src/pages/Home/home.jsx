@@ -1,24 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
-import "../../styles/Home.css"; // Verifique se o nome do arquivo CSS está correto
+import "../../styles/Home.css";
 import { useNavigate } from "react-router-dom";
 import { ServiceContext } from "../Context/serviceContext.jsx";
 import { Link } from "react-router-dom";  
-// --- SEUS IMPORTS ---
 import tecnico from "../../assets/arcond.png";
 import diarista from "../../assets/diarista.png";
 import equipe from "../../assets/equipe.png";
 import pedreiro from "../../assets/pedreiro.png";
+import logoImg from '../../assets/logobranca.png';
 
-// Ícones
+// icon
 import {
   LuSearch, LuUser, LuFilter, LuArrowUpDown,
   LuLayoutGrid, LuSparkles, LuMonitor, LuHammer, LuPalette, LuBookOpen,
   LuCalendar, LuClock
 } from "react-icons/lu";
 import { FaStar, FaRegStar } from "react-icons/fa";
-
-// Imagens
-import logoImg from '../../assets/logobranca.png';
 
 const HomeScreen = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
@@ -91,7 +88,7 @@ const HomeScreen = () => {
       <header className="home-header">
         <div className="header-top">
           <img src={logoImg} alt="Local Logo" className="header-logo" />
-          <Link to="/perfil"  className="user-profile-chip">
+          <Link to="/ContaUsuario"  className="user-profile-chip">
                    <LuUser className="user-icon" />
             <span> {user?.nome}</span>
           </Link>

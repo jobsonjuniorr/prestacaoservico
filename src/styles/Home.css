@@ -45,7 +45,9 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: white;
+  /* --- ADICIONE ESSAS DUAS LINHAS --- */
+  text-decoration: none; /* Remove o sublinhado */
+  color: white; /* Garante que o texto fique branco e não roxo/azul de link */
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;

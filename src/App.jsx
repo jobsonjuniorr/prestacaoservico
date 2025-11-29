@@ -10,7 +10,10 @@ import SolicitarServico from "./pages/SolicitacaoServico/SolicitarServico.jsx";
 import VerSolicitacoes from "./pages/SolicitacaoServico/verSolicitacoes.jsx";
 import Perfil from "./pages/PerfilUsuario/perfil.jsx"; 
 import FirstScreen from "./pages/First Screen/FirstScreen.jsx";
-import Help from "./pages/Help/Help.jsx"; // <-- nova página de ajuda
+import Help from "./pages/Help/Help.jsx";
+
+// --- NOVO IMPORT ---
+import ContaUsuario from "./pages/ContaUsuario/ContaUsuario.jsx"; 
 
 export default function App() {
   return (
@@ -19,15 +22,17 @@ export default function App() {
         <Routes>
           <Route path="/" element={<FirstScreen />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />            {/* <--- adicionada */}
+          <Route path="/login" element={<Login />} />       
           <Route path="/register" element={<Register />} />
           <Route path="/prestador/register" element={<PrestadorRegister />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/prestador/:id" element={<PrestadorProfile />} />
           <Route path="/solicitar/:idPrestador" element={<SolicitarServico />} />
           <Route path="/solicitacoes" element={<VerSolicitacoes />} />
+          <Route path="/ContaUsuario" element={<ContaUsuario />} /> 
           <Route path="/perfil" element={<Perfil />} />
-          <Route path="/ajuda" element={<Help />} />            {/* <--- adicionada */}
+          
+          <Route path="/ajuda" element={<Help />} />            
         </Routes>
       </BrowserRouter>
     </ServiceProvider>
