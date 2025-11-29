@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 export default function Perfil() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -19,6 +19,14 @@ export default function Perfil() {
 
   return (
     <div style={styles.container}>
+      <Link to="/prestador/register">
+             <button>Cadastre-se como Prestador</button>
+      </Link>
+
+       <Link to="/solicitacoes">
+                    <button>Solicitações</button>
+      </Link>
+
       <h2 style={styles.title}>Meu Perfil</h2>
 
       <div style={styles.card}>
@@ -26,7 +34,9 @@ export default function Perfil() {
         <p><strong>E-mail:</strong> {user.email}</p>
         <p><strong>Telefone:</strong> {user.telefone}</p>
         <p><strong>CPF:</strong> {user.cpf}</p>
+        
       </div>
+
     </div>
   );
 }

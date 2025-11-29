@@ -1,20 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/global.css";
+
+import { ServiceContext } from "../Context/serviceContext.jsx";
 
 export default function PrestadorRegister() {
   const usuarioLogado = JSON.parse(localStorage.getItem("loggedUser"));
 
+  const { adicionarPrestador } = useContext(ServiceContext);
+
   const [nome, setNome] = useState("");
-  const [email, setEmail] = useState(""); // ← NOVO CAMPO
+  const [email, setEmail] = useState("");
   const [area, setArea] = useState("");
   const [descricao, setDescricao] = useState("");
   const [preco, setPreco] = useState("");
   const [disponibilidade, setDisponibilidade] = useState("");
 
+  // novos campos:
+  const [urgent, setUrgent] = useState(false);
+  const [calendar, setCalendar] = useState(false);
+  const [extraUrgent, setExtraUrgent] = useState("");
+  const [extraCalendar, setExtraCalendar] = useState("");
+
   const navigate = useNavigate();
 
-  // Preencher nome + email automaticamente ao abrir a página
   useEffect(() => {
     if (usuarioLogado) {
       setNome(usuarioLogado.nome);
@@ -25,25 +34,28 @@ export default function PrestadorRegister() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!usuarioLogado) {
-      alert("Você precisa estar logado para se cadastrar como prestador.");
-      return navigate("/");
-    }
-
     const novoPrestador = {
       id: Date.now(),
       usuarioId: usuarioLogado.id,
       nomeProfissional: nome,
-      email: email,   // ← EMAIL SALVO NO LOCALSTORAGE
+      email,
       area,
       descricao,
       preco,
-      disponibilidade,
+      img: "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector",
+      category: area,
+      verified: false,
+      urgent,
+      calendar,
+
+      extraInfo: {
+        Disponibilidade: extraUrgent || "Verificar com prestador",
+        Agenda: extraCalendar || "Disponível imediato"
+      }
     };
 
-    const prestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
-    prestadores.push(novoPrestador);
-    localStorage.setItem("prestadores", JSON.stringify(prestadores));
+    // Atualiza via contexto
+    adicionarPrestador(novoPrestador);
 
     alert("Prestador cadastrado com sucesso!");
     navigate("/home");
@@ -53,42 +65,28 @@ export default function PrestadorRegister() {
     <form onSubmit={handleSubmit}>
       <h2>Cadastrar Prestador</h2>
 
-      <input
-        placeholder="Nome"
-        value={nome}
-        onChange={e => setNome(e.target.value)}
-        disabled
-      />
-
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        disabled // ← Usuário não altera o email
-      />
+      <input value={nome} disabled />
+      <input value={email} disabled />
 
       <input
         placeholder="Área de atuação"
         value={area}
-        onChange={e => setArea(e.target.value)}
+        onChange={(e) => setArea(e.target.value)}
       />
 
       <textarea
         placeholder="Descrição"
         value={descricao}
-        onChange={e => setDescricao(e.target.value)}
+        onChange={(e) => setDescricao(e.target.value)}
       />
 
       <input
         type="number"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        placeholder="Preço médio"
-        className="no-arrows"
+        placeholder="Preço"
         value={preco}
         onChange={(e) => setPreco(e.target.value)}
-        onWheel={(e) => e.target.blur()}
       />
+
       <select
         value={disponibilidade}
         onChange={(e) => setDisponibilidade(e.target.value)}
@@ -98,6 +96,36 @@ export default function PrestadorRegister() {
         <option value="Tarde">Tarde</option>
         <option value="Noite">Noite</option>
       </select>
+
+      <label>
+        Atende urgência?
+        <input
+          type="checkbox"
+          checked={urgent}
+          onChange={() => setUrgent(!urgent)}
+        />
+      </label>
+
+      <input
+        placeholder="Mensagem sobre urgência"
+        value={extraUrgent}
+        onChange={(e) => setExtraUrgent(e.target.value)}
+      />
+
+      <label>
+        Agenda flexível?
+        <input
+          type="checkbox"
+          checked={calendar}
+          onChange={() => setCalendar(!calendar)}
+        />
+      </label>
+
+      <input
+        placeholder="Mensagem sobre agenda"
+        value={extraCalendar}
+        onChange={(e) => setExtraCalendar(e.target.value)}
+      />
 
       <button type="submit">Cadastrar</button>
     </form>

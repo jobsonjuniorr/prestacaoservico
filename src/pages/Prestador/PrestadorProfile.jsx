@@ -10,7 +10,6 @@ export default function PrestadorProfile() {
     const prestadoresLocal =
         JSON.parse(localStorage.getItem("prestadores")) || [];
 
-    // Enquanto o contexto ainda não carregou os dados fixos
     if (prestadoresFixos.length === 0 && prestadoresLocal.length === 0) {
         return <p>Carregando...</p>;
     }
@@ -29,13 +28,22 @@ export default function PrestadorProfile() {
         <div className="prestador-profile">
             <h1>{prestador.nomeProfissional}</h1>
 
-           
-
             <p><strong>Área de atuação:</strong> {prestador.area}</p>
             <p><strong>Email:</strong> {prestador.email}</p>
             <p><strong>Descrição:</strong> {prestador.descricao}</p>
             <p><strong>Preço médio:</strong> R$ {prestador.preco}</p>
-            <p><strong>Disponibilidade:</strong> {prestador.disponibilidade}</p>
+
+            {prestador.extraInfo && (
+                <div className="extra-info-box">
+                    <h3>Informações adicionais</h3>
+
+                    {Object.entries(prestador.extraInfo).map(([key, value]) => (
+                        <p key={key}>
+                            <strong>{key}:</strong> {value}
+                        </p>
+                    ))}
+                </div>
+            )}
 
             <button onClick={() => navigate(`/solicitar/${prestador.id}`)}>
                 Contratar
