@@ -1,0 +1,233 @@
+/*:root {
+  --header-blue: #2d8cff;
+  --bg-gray: #f2f4f7;
+  --white: #ffffff;
+  --text-dark: #333;
+  --text-gray: #666;
+  --border-color: #eee;
+}
+
+.perfil-container {
+  background-color: var(--bg-gray);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header-nav {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: var(--white);
+    position: relative;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 20px;
+}
+
+.page-header-title {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-gray);
+  font-weight: 500;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.user-hero {
+  background-color: var(--header-blue);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  color: var(--white);
+}
+
+.hero-img-wrapper {
+    position: relative;
+    width: 90px;
+    height: 90px;
+}
+
+.hero-profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.edit-photo-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--text-dark);
+    color: var(--white);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#file-upload {
+    display: none;
+}
+
+.hero-user-details h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.hero-user-details p {
+  margin: 5px 0 0 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: var(--white);
+  margin-top: 20px;
+}
+
+.menu-list li {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.menu-list li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 20px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+  transition: background-color 0.2s;
+}
+
+.menu-list li a:hover {
+    background-color: #f9f9f9;
+}
+
+.menu-item-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 500;
+}
+
+.edit-icon {
+    color: var(--text-dark);
+}
+
+.form-container {
+    padding: 30px 20px;
+    background-color: var(--white);
+    flex: 1;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.form-input, .form-textarea, .form-select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.form-textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 18px;
+    background-color: var(--header-blue);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.save-btn:hover {
+    background-color: #1a75d8;
+}
+
+@media (min-width: 768px) {
+  
+  .perfil-container {
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #e9ecef;
+  }
+
+  .pc-card-wrapper {
+    background-color: var(--white);
+    width: 100%;
+    max-width: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  }
+
+  .page-header-nav {
+    padding: 25px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-header-title { font-size: 1.2rem; }
+
+  .user-hero {
+      padding: 40px;
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .hero-img-wrapper { width: 120px; height: 120px; }
+
+  .hero-user-details h3 { font-size: 2rem; }
+
+  .hero-user-details p { font-size: 1.1rem; }
+
+  .menu-list, .form-container {
+      margin-top: 0;
+  }
+
+  .menu-list li a { padding: 30px; }
+
+  .form-container { padding: 40px; }
+}
+/*
