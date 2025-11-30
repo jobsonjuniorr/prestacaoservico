@@ -11,7 +11,7 @@ import {
 } from "react-icons/lu";
 import "../../styles/perfil.css";
 
-const placeholderUserImg = "https://i.imgur.com/6XYb83n.png"; 
+const placeholderUserImg = "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector"; 
 
 export default function Perfil() {
   const navigate = useNavigate();
@@ -29,11 +29,23 @@ export default function Perfil() {
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const previewURL = URL.createObjectURL(file);
-      setUser({ ...user, fotoPreview: previewURL });
-      alert("Foto atualizada visualmente!");
-    }
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64String = reader.result;
+
+      const updatedUser = { ...user, fotoPreview: base64String };
+      setUser(updatedUser);
+
+      localStorage.setItem("loggedUser", JSON.stringify(updatedUser));
+
+      alert("Foto atualizada e salva!");
+    };
+
+    reader.readAsDataURL(file);
+  }
   };
 
   if (!user) return null;

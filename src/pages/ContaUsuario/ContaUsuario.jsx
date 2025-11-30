@@ -44,7 +44,7 @@ export default function ContaUsuario() {
       <section className="user-hero">
         <div className="user-hero-content">
             <img 
-                src={user.img || placeholderUserImg} 
+                src={user.img || user.fotoPreview || placeholderUserImg} 
                 alt="Foto de Perfil" 
                 className="hero-profile-img" 
             />
