@@ -1,5 +1,10 @@
-/*:root {
+/* --- src/styles/perfil.css (VERSÃO FINAL CORRIGIDA) --- */
+
+/* --- VARIÁVEIS --- */
+:root {
+  --primary-blue: #1A8BF0;
   --header-blue: #2d8cff;
+  --provider-blue: #1f3a57;
   --bg-gray: #f2f4f7;
   --white: #ffffff;
   --text-dark: #333;
@@ -7,55 +12,74 @@
   --border-color: #eee;
 }
 
+ul.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* CONTAINER PRINCIPAL (MOBILE FIRST) */
 .perfil-container {
   background-color: var(--bg-gray);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-bottom: 50px;
 }
 
+/* --- HEADER DE NAVEGAÇÃO (MOBILE) --- */
+/* Usamos posição absoluta no botão para garantir o centro no mobile */
 .page-header-nav {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    background: var(--white);
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 15px 20px;
+  background-color: var(--bg-gray);
+  min-height: 60px; /* Garante altura mínima */
 }
 
 .back-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-dark);
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: 20px;
+  position: absolute; /* Tira do fluxo normal */
+  left: 20px;         /* Cola na esquerda */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-gray);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  z-index: 2;
 }
 
 .page-header-title {
   text-align: center;
   font-size: 1.1rem;
   color: var(--text-gray);
+  margin: 0;
   font-weight: 500;
-  margin: 0 auto;
-  width: 100%;
+  width: 100%; /* Ocupa tudo para o text-align funcionar */
+  z-index: 1;
 }
 
+/* --- HERO SECTION (MOBILE) --- */
 .user-hero {
   background-color: var(--header-blue);
-  padding: 30px 20px;
+  padding: 30px 25px;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 20px;
+  /* No mobile, junta na esquerda com um gap */
+  justify-content: flex-start;
+  gap: 25px;
   color: var(--white);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .hero-img-wrapper {
-    position: relative;
-    width: 90px;
-    height: 90px;
+  position: relative;
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
 }
 
 .hero-profile-img {
@@ -63,29 +87,30 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  border: 4px solid rgba(255, 255, 255, 0.3);
 }
 
 .edit-photo-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: var(--text-dark);
-    color: var(--white);
-    border: 2px solid var(--white);
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 0.9rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--white);
+  color: var(--header-blue);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  border: 2px solid var(--bg-gray);
+  font-size: 1rem;
 }
 
-#file-upload {
-    display: none;
-}
+#file-upload { display: none; }
+
+.hero-user-details { text-align: left; }
 
 .hero-user-details h3 {
   margin: 0;
@@ -95,139 +120,121 @@
 
 .hero-user-details p {
   margin: 5px 0 0 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   opacity: 0.9;
 }
 
+/* --- LISTA DE MENU (MOBILE) --- */
 .menu-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   background-color: var(--white);
-  margin-top: 20px;
+  margin-top: 0; 
 }
 
 .menu-list li {
   border-bottom: 1px solid var(--border-color);
+}
+.menu-list li:last-child {
+  border-bottom: none;
 }
 
 .menu-list li a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 20px;
+  padding: 25px;
   text-decoration: none;
   color: var(--text-dark);
+  width: 100%;
+  cursor: pointer;
   font-size: 1.1rem;
   transition: background-color 0.2s;
 }
 
 .menu-list li a:hover {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 .menu-item-left {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
+}
+
+.menu-item-left span {
+  font-size: 1.1rem;
   font-weight: 500;
 }
 
-.edit-icon {
-    color: var(--text-dark);
-}
+.edit-icon { color: #888; }
 
-.form-container {
-    padding: 30px 20px;
-    background-color: var(--white);
-    flex: 1;
-}
 
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: var(--text-dark);
-}
-
-.form-input, .form-textarea, .form-select {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-family: inherit;
-    box-sizing: border-box;
-}
-
-.form-textarea {
-    resize: vertical;
-    height: 120px;
-}
-
-.save-btn {
-    width: 100%;
-    padding: 18px;
-    background-color: var(--header-blue);
-    color: var(--white);
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.save-btn:hover {
-    background-color: #1a75d8;
-}
-
+/* ==================================================================
+   --- VERSÃO PC / NOTEBOOK (AQUI ESTÃO AS CORREÇÕES) ---
+   Tudo aqui só se aplica se a tela for maior que 768px
+================================================================== */
 @media (min-width: 768px) {
   
   .perfil-container {
-    align-items: center;
-    padding: 40px 20px;
-    background-color: #e9ecef;
-  }
-
-  .pc-card-wrapper {
-    background-color: var(--white);
+    max-width: 1000px; 
+    margin: 0 auto; 
+    padding: 20px; 
     width: 100%;
-    max-width: 600px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
   }
 
+  /* Transforma em blocos separados e arredondados */
+  .user-hero, 
+  .menu-list {
+    border-radius: 15px; 
+    margin-bottom: 20px; 
+    overflow: hidden; 
+  }
+
+  /* --- CORREÇÃO 1: Título Centralizado no PC --- */
+  /* Usamos CSS Grid para garantir que o título fique EXATAMENTE no meio */
   .page-header-nav {
-    padding: 25px;
-    border-bottom: 1px solid var(--border-color);
+    background-color: transparent;
+    padding-bottom: 20px;
+    display: grid;
+    /* 3 colunas: [botão] [espaço flexível título] [espaço vazio para equilibrar] */
+    grid-template-columns: 50px 1fr 50px; 
+    align-items: center;
   }
+  
+  .back-btn {
+    position: static; /* Remove a posição absoluta do mobile */
+    grid-column: 1; /* Fica na primeira coluna */
+  }
+  
+  .page-header-title {
+    grid-column: 2; /* Fica na coluna do meio */
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  /* ------------------------------------------- */
 
-  .page-header-title { font-size: 1.2rem; }
 
+  /* --- CORREÇÃO 2: Foto e Nome Juntos no PC --- */
   .user-hero {
-      padding: 40px;
-      flex-direction: column;
-      text-align: center;
+    padding: 40px;
+    display: flex;
+    /* FORÇA eles a ficarem juntos na esquerda */
+    justify-content: flex-start !important; 
+    /* Define o espaço exato entre eles */
+    gap: 40px; 
   }
-
-  .hero-img-wrapper { width: 120px; height: 120px; }
-
+  
+  /* Aumenta um pouco os elementos no PC */
+  .hero-img-wrapper {
+    width: 110px;
+    height: 110px;
+  }
+  
   .hero-user-details h3 { font-size: 2rem; }
+  .hero-user-details p { font-size: 1.2rem; }
 
-  .hero-user-details p { font-size: 1.1rem; }
-
-  .menu-list, .form-container {
-      margin-top: 0;
+  .menu-list li a {
+    font-size: 1.1rem;
+    padding: 30px;
   }
-
-  .menu-list li a { padding: 30px; }
-
-  .form-container { padding: 40px; }
+  /* ------------------------------------------- */
 }
-/*

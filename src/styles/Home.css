@@ -1,3 +1,4 @@
+/* --- VARIÁVEIS --- */
 :root {
   --primary-blue: #1A8BF0;
   --bg-gray: #f2f4f7;
@@ -8,14 +9,18 @@
 
 body {
   background-color: var(--bg-gray);
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden; /* Evita rolagem lateral */
 }
 
 .home-container {
   display: flex;
   flex-direction: column;
   padding-bottom: 80px;
+  width: 100%;
 }
 
+/* --- HEADER --- */
 .home-header {
   background-color: var(--primary-blue);
   padding: 20px;
@@ -40,9 +45,10 @@ body {
   background-color: rgba(255,255,255,0.3);
   padding: 10px 15px;
   border-radius: 20px;
-  width: 150px;
+  min-width: 120px; /* Ajustado para não fixar demais */
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   text-decoration: none;
   color: white;
@@ -77,9 +83,11 @@ body {
   color: var(--text-dark);
 }
 
+/* --- CATEGORIAS --- */
 .categories-section {
   margin-top: -20px;
   padding-left: 20px;
+  width: 100%;
 }
 
 .categories-list {
@@ -134,6 +142,7 @@ body {
   font-weight: 500;
 }
 
+/* --- BANNER --- */
 .banner-section {
   padding: 20px;
 }
@@ -215,6 +224,7 @@ body {
   border-radius: 10px;
 }
 
+/* --- FILTROS --- */
 .filters-section {
   padding: 0 20px;
   display: flex;
@@ -235,23 +245,45 @@ body {
   cursor: pointer;
 }
 
+/* --- LISTA DE PRESTADORES (NOVO DESIGN "NEON") --- */
 .providers-list {
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px; /* Espaço maior entre os cards */
 }
 
+/* 1. O CARD PAI (A Borda Colorida) */
 .provider-card {
-  background-color: white;
-  border-radius: 15px;
-  padding: 20px;
-  display: flex;
-  gap: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   position: relative;
+  width: 100%;
+  border-radius: 20px;
+  /* Espessura da borda colorida */
+  padding: 3px; 
+  /* Gradiente Azul Local+ (Borda) */
+  background-image: linear-gradient(144deg,#1A8BF0,#2368E8 50%, #00C4FF);
+  /* Sombra azulada suave */
+  box-shadow: 0 10px 20px rgba(26, 139, 240, 0.15);
+  transition: transform 0.2s;
 }
 
+.provider-card:active {
+    transform: scale(0.98); /* Efeito de clique */
+}
+
+/* 2. O CARD FILHO (O Conteúdo Branco) */
+.provider-card-content {
+  background: #ffffff;;
+ /* Fundo branco */
+  border-radius: 17px; /* 20px (pai) - 3px (padding) */
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex; /* Layout Flex para organizar foto e texto */
+  gap: 15px;
+}
+
+/* Elementos internos do card */
 .card-left {
   display: flex;
   align-items: flex-start;
@@ -306,12 +338,10 @@ body {
 }
 
 .stars {
-  color: #FFC107;
+  color: rgb(180, 180, 180);
   font-size: 0.9rem;
-}
-
-.star-empty {
-  color: #ddd;
+  display: flex; 
+  gap: 2px;
 }
 
 .provider-info {
@@ -323,6 +353,9 @@ body {
   font-size: 0.9rem;
   color: #555;
   margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .p-detail {
@@ -336,21 +369,23 @@ body {
 
 .orcamento-btn {
   align-self: flex-end;
-  background-color: var(--azul-escuro, #1b3f66);
+  background-color: var(--primary-blue); /* Botão combinando */
   color: white;
   border: none;
   padding: 8px 20px;
-  border-radius: 6px;
+  border-radius: 20px; /* Mais arredondado */
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
   transition: 0.2s;
+  box-shadow: 0 4px 10px rgba(26, 139, 240, 0.2);
 }
 
 .orcamento-btn:hover {
-  background-color: var(--primary-blue);
+  background-color: #1570c4;
 }
 
+/* --- VERSÃO PC (Grid e Ajustes) --- */
 @media (min-width: 768px) {
   .home-container {
     padding: 0 5%;
@@ -402,6 +437,7 @@ body {
     font-size: 1.2rem;
   }
 
+  /* Grid no PC com os novos cards */
   .providers-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

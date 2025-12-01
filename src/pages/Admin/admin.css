@@ -1,0 +1,118 @@
+:root {
+    --admin-bg: #1f2937;
+    --card-bg: #ffffff;
+    --success: #28a745;
+    --danger: #dc3545;
+    --primary: #1A8BF0;
+}
+
+.admin-container {
+    min-height: 100vh;
+    background-color: #f4f6f8;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-header {
+    background-color: var(--admin-bg);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.admin-header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.admin-content {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 50px;
+    background: white;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: #666;
+}
+
+.pending-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.request-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-left: 5px solid orange; /* Laranja indica pendente */
+}
+
+.request-info h3 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.badge-category {
+    background: #eef4ff;
+    color: var(--primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.request-actions {
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.request-actions button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: 0.2s;
+}
+
+.btn-doc { background: #6c757d; color: white; }
+.btn-doc:hover { background: #5a6268; }
+
+.btn-approve { background: var(--success); color: white; }
+.btn-approve:hover { background: #218838; }
+
+.btn-reject { background: white; border: 1px solid var(--danger) !important; color: var(--danger); }
+.btn-reject:hover { background: #fff5f5; }
+
+@media (min-width: 768px) {
+    .request-card {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .request-actions {
+        border-top: none;
+        padding-top: 0;
+    }
+}

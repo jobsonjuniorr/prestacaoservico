@@ -1,6 +1,5 @@
-/* prestadorRegister.css - Versão Otimizada */
+/* prestadorRegister.css Atualizado */
 
-/* Definições de Cores e Tipografia */
 :root {
     --primary-blue: #1A8BF0;
     --header-blue: #2d8cff;
@@ -10,352 +9,275 @@
     --text-dark: #333;
     --text-gray: #666;
     --border-color: #e0e0e0;
+    --danger-red: #ff4d4d;
     --success-green: #28a745;
-    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Container principal */
 .register-page-container {
     background-color: var(--bg-gray);
     min-height: 100vh;
-    padding: 20px 10px;
+    padding: 30px 15px;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
 }
 
-/* Card do Formulário - Mais compacto */
 .register-form-card {
     background-color: var(--white);
-    padding: 25px 20px;
-    border-radius: 12px;
-    box-shadow: var(--shadow-light);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     width: 100%;
-    max-width: 700px; /* Largura aumentada para acomodar colunas */
-    margin: 0 auto;
+    max-width: 800px;
 }
 
-/* Título e Subtítulo */
 .card-title {
     color: var(--provider-blue);
-    font-size: 1.6rem;
-    margin-bottom: 5px;
-    font-weight: 700;
     text-align: center;
+    margin-bottom: 5px;
 }
 
 .card-subtitle {
-    color: var(--text-gray);
-    font-size: 0.9rem;
-    margin-bottom: 20px;
     text-align: center;
+    color: var(--text-gray);
+    margin-bottom: 30px;
     padding-bottom: 15px;
     border-bottom: 1px solid var(--border-color);
 }
 
-/* Seções do Formulário - Mais compactas */
 .form-section {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-left: 4px solid var(--primary-blue);
-    background-color: #f7f9fc;
-    border-radius: 4px;
+    margin-bottom: 25px;
+    background-color: #fcfcfc;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
 }
 
 .section-title {
-    color: var(--provider-blue);
     font-size: 1.1rem;
-    margin-top: 0;
+    color: var(--primary-blue);
     margin-bottom: 15px;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-weight: 600;
 }
 
-/* LAYOUT EM LINHA - PRINCIPAL MELHORIA */
+.section-hint {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-bottom: 15px;
+    font-style: italic;
+}
 
-/* Container para inputs lado a lado */
 .input-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 20px;
     margin-bottom: 15px;
 }
 
-/* Container para opções lado a lado */
-.options-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-/* Container individual para cada opção e seu input extra */
-.option-container {
+.input-group {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
-
-/* Agrupamento de Input */
-.input-group {
-    margin-bottom: 15px;
+    gap: 5px;
+    width: 100%;
 }
 
 .input-label {
-    display: block;
-    margin-bottom: 6px;
-    color: var(--text-dark);
-    font-weight: 500;
     font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
 }
 
 .input-label.required::after {
     content: " *";
-    color: var(--primary-blue);
-    font-weight: bold;
+    color: var(--danger-red);
 }
 
-/* Estilo dos Inputs e Select */
-.input-field,
-.textarea-field,
-.select-field {
-    width: 100%;
-    padding: 10px 12px;
+.input-field, .select-field, .textarea-field {
+    padding: 12px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     font-size: 0.95rem;
-    color: var(--text-dark);
-    box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    background-color: var(--white);
 }
 
-.input-field:focus,
-.textarea-field:focus,
-.select-field:focus {
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(26, 139, 240, 0.2);
-    outline: none;
+/* --- ESTILOS DE UPLOAD --- */
+.file-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.input-field:disabled {
-    background-color: var(--bg-gray);
-    color: var(--text-gray);
+.file-input-hidden {
+    display: none;
+}
+
+.file-input-btn {
+    background-color: #e9f2ff;
+    color: var(--primary-blue);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px dashed var(--primary-blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.file-input-btn:hover {
+    background-color: #d1e4ff;
+}
+
+.file-name {
+    font-size: 0.85rem;
+    color: var(--success-green);
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- ESTILOS DA LISTA DE SERVIÇOS --- */
+.add-service-box {
+    background-color: #eee;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.input-row.compact {
+    grid-template-columns: 2fr 1fr 50px;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.add-btn {
+    background-color: var(--success-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-btn:disabled {
+    background-color: #ccc;
     cursor: not-allowed;
-    border-style: dashed;
 }
 
-.textarea-field {
-    resize: vertical;
-    min-height: 80px; /* Reduzido para economizar espaço */
-}
-
-/* ===== NOVOS ESTILOS PARA OPÇÕES DE RÁDIO ===== */
-
-/* Container para grupo de opções */
-.option-group {
+.services-list-display {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    background-color: var(--bg-gray);
-    padding: 15px;
-    border-radius: 8px;
 }
 
-/* Estilo dos botões de opção (radio buttons) */
-.option-label {
+.service-item-row {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    padding: 8px 12px;
-    transition: background-color 0.2s;
+    background: white;
+    padding: 10px 15px;
     border-radius: 6px;
+    border: 1px solid #ddd;
 }
 
-.option-label:hover {
-    background-color: rgba(26, 139, 240, 0.05);
+.svc-name { font-weight: 500; }
+.svc-price { color: var(--success-green); font-weight: bold; }
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: var(--danger-red);
+    cursor: pointer;
 }
 
-.option-label input[type="radio"] {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    margin: 0;
+.error-text {
+    color: var(--danger-red);
+    font-size: 0.85rem;
+    margin-top: 5px;
 }
 
-.option-checkmark {
-    position: relative;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
+/* --- ESTILOS DE DISPONIBILIDADE (CHECKBOX CARDS) --- */
+.availability-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.check-box-card {
     border: 2px solid var(--border-color);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    transition: 0.2s;
+    background: white;
 }
 
-.option-label:hover .option-checkmark {
+.check-box-card.active {
     border-color: var(--primary-blue);
+    background-color: #f0f8ff;
 }
 
-.option-label input[type="radio"]:checked + .option-checkmark {
-    border-color: var(--primary-blue);
-    background-color: var(--primary-blue);
+.check-content {
+    display: flex;
+    flex-direction: column;
 }
 
-.option-label input[type="radio"]:checked + .option-checkmark::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    background-color: white;
-    border-radius: 50%;
+.check-content strong { font-size: 0.95rem; }
+.check-content span { font-size: 0.8rem; color: var(--text-gray); }
+
+.agenda-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+    animation: fadeIn 0.3s;
 }
 
-.option-text {
-    font-weight: 500;
-    color: var(--text-dark);
-    font-size: 0.95rem;
-    flex-grow: 1;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.option-label input[type="radio"]:checked ~ .option-text {
-    color: var(--primary-blue);
-    font-weight: 600;
-}
-
-/* Dica para o campo extra */
-.option-hint {
-    color: var(--text-gray);
-    font-size: 0.8rem;
-    margin-top: 5px;
-    display: block;
-}
-
-/* ===== FIM DOS NOVOS ESTILOS ===== */
-
-/* Estilo para Inputs Extras */
-.extra-info-group {
-    padding: 8px;
-    border: 1px dashed var(--border-color);
-    border-radius: 8px;
-    background-color: #fff;
-    margin-top: 5px;
-}
-
-.extra-info-group .input-field {
-    padding: 8px 10px;
-    font-size: 0.9rem;
-}
-
-/* Botão de Envio */
+/* --- BOTÃO SUBMIT --- */
 .submit-btn {
     width: 100%;
-    padding: 14px;
+    padding: 16px;
     background-color: var(--primary-blue);
-    color: var(--white);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
-    margin-top: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    transition: 0.3s;
 }
 
 .submit-btn:hover {
     background-color: #1670cc;
 }
 
-.submit-btn:active {
-    transform: translateY(1px);
-}
-
-/* RESPONSIVIDADE */
-
-/* Tablets */
+/* RESPONSIVO */
 @media (max-width: 768px) {
-    .input-row,
-    .options-row {
+    .input-row, .availability-options {
         grid-template-columns: 1fr;
-        gap: 10px;
     }
     
-    .register-form-card {
-        padding: 20px 15px;
-        max-width: 95%;
+    .input-row.compact {
+        grid-template-columns: 1fr; /* Em mobile, inputs de serviço empilham */
     }
     
-    .form-section {
-        padding: 12px;
-        margin-bottom: 15px;
-    }
-    
-    .option-group {
-        padding: 12px;
-    }
-    
-    .option-label {
-        padding: 6px 10px;
-    }
-    
-    .option-text {
-        font-size: 0.9rem;
-    }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-    .register-page-container {
-        padding: 10px 5px;
-    }
-    
-    .register-form-card {
-        padding: 15px 10px;
-    }
-    
-    .card-title {
-        font-size: 1.4rem;
-    }
-    
-    .section-title {
-        font-size: 1rem;
-    }
-    
-    .input-field,
-    .textarea-field,
-    .select-field {
-        padding: 8px 10px;
-        font-size: 0.9rem;
-    }
-    
-    .option-group {
+    .add-btn {
         padding: 10px;
-    }
-    
-    .option-checkmark {
-        width: 18px;
-        height: 18px;
-    }
-    
-    .option-label input[type="radio"]:checked + .option-checkmark::after {
-        width: 6px;
-        height: 6px;
-    }
-}
-
-/* Telas grandes - ajustes finos */
-@media (min-width: 1200px) {
-    .register-form-card {
-        max-width: 750px;
     }
 }

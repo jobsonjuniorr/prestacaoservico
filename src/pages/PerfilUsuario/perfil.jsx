@@ -10,6 +10,7 @@ import {
   LuClipboardList 
 } from "react-icons/lu";
 import "../../styles/perfil.css";
+import "../../styles/global.css";
 
 const placeholderUserImg = "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector"; 
 

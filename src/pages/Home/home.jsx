@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import "../../styles/Home.css";
+import "../../styles/global.css";
+// import "../../styles/global.css"; // Se necessário
 import { useNavigate } from "react-router-dom";
 import { ServiceContext } from "../Context/serviceContext.jsx";
 import { Link } from "react-router-dom";  
@@ -22,6 +24,7 @@ const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const { prestadores } = useContext(ServiceContext);
   const navigate = useNavigate();
+  
   const banners = [
     { id: 1, title: "TODOS OS SERVIÇOS EM UM SÓ LUGAR!", sub: "Encontre profissionais confiáveis.", color: "#2d8cff", img: equipe },
     { id: 2, title: "PRECISA DE UM PEDREIRO?", sub: "Reformas rápidas e baratas.", color: "#4cc38a", img: pedreiro },
@@ -45,7 +48,6 @@ const HomeScreen = () => {
     { name: "Aulas", icon: <LuBookOpen /> },
   ];
 
-
   const normalizedProviders = prestadores.map(p => ({
     id: p.id,
     name: p.nomeProfissional,
@@ -64,7 +66,6 @@ const HomeScreen = () => {
     ? normalizedProviders
     : normalizedProviders.filter(provider => provider.category === selectedCategory);
 
-
   const renderStars = (rating) => {
     return (
       <div className="stars">
@@ -76,10 +77,10 @@ const HomeScreen = () => {
       </div>
     );
   };
+
   const user = JSON.parse(localStorage.getItem("loggedUser"));
-  if(!user){
-    navigate("/login")
-  }
+//   if(!user){ navigate("/login") } // Comentado para evitar loop se nao tiver login no teste
+
   return (
     <div className="home-container">
 
@@ -87,8 +88,8 @@ const HomeScreen = () => {
         <div className="header-top">
           <img src={logoImg} alt="Local Logo" className="header-logo" />
           <Link to="/ContaUsuario"  className="user-profile-chip">
-                   <LuUser className="user-icon" />
-            <span> {user?.nome}</span>
+             <LuUser className="user-icon" />
+             <span> {user?.nome || "Visitante"}</span>
           </Link>
         </div>
 
@@ -114,15 +115,12 @@ const HomeScreen = () => {
             </div>
           ))}
         </div>
-
       </section>
 
-      {/* --- BANNER (CORRIGIDO AQUI) --- */}
+      {/* --- BANNER --- */}
       <section className="banner-section">
         <div className="banner-card" style={{ backgroundColor: banners[currentBanner].color }}>
           <div className="banner-content">
-
-            {/* --- ADICIONEI ESTE BLOCO DA IMAGEM QUE FALTAVA --- */}
             <div className="banner-img-container">
               <img
                 src={banners[currentBanner].img}
@@ -130,8 +128,6 @@ const HomeScreen = () => {
                 className="banner-image"
               />
             </div>
-            {/* -------------------------------------------------- */}
-
             <div className="banner-text">
               <h3>{banners[currentBanner].title}</h3>
               <p>{banners[currentBanner].sub}</p>
@@ -155,36 +151,45 @@ const HomeScreen = () => {
         </button>
       </section>
 
-      {/* --- LISTA DE PRESTADORES --- */}
+      {/* --- LISTA DE PRESTADORES (CARDS NOVOS) --- */}
       <section className="providers-list">
         {filteredProviders.length > 0 ? (
           filteredProviders.map((provider) => (
+            
+            // 1. O PAI (Fundo Gradiente / Borda Colorida)
             <div key={provider.id} className="provider-card">
-              <div className="card-left">
-                <div className="provider-avatar-wrapper">
-                  <img src={provider.img} alt={provider.name} className="provider-avatar" />
-                  {provider.verified && <span className="verified-badge">✔</span>}
-                </div>
-              </div>
-              <div className="card-right">
-                <div className="card-header">
-                  <h3 className="role-title">{provider.role}</h3>
-                  {renderStars(provider.rating)}
-                </div>
-                <div className="provider-info">
-                  <p className="p-name"><LuUser /> {provider.name}</p>
+              
+              {/* 2. O FILHO (Conteúdo Branco) */}
+              <div className="provider-card-content">
+                  
+                  <div className="card-left">
+                    <div className="provider-avatar-wrapper">
+                      <img src={provider.img} alt={provider.name} className="provider-avatar" />
+                      {provider.verified && <span className="verified-badge">✔</span>}
+                    </div>
+                  </div>
 
-                  {Object.entries(provider.extraInfo).map(([key, text]) => (
-                    <p key={key} className="p-detail">
-                      {key === "calendar" && <LuCalendar />}
-                      {key === "urgent" && <LuClock />}
-                      {text}
-                    </p>
-                  ))}
-                </div>
-               
-                  <Link to={`/prestador/${provider.id}`}> <button className="orcamento-btn">Solicitar</button></Link>
-               
+                  <div className="card-right">
+                    <div className="card-header">
+                      <h3 className="role-title">{provider.role}</h3>
+                      {renderStars(provider.rating)}
+                    </div>
+                    <div className="provider-info">
+                      <p className="p-name"><LuUser /> {provider.name}</p>
+                      {Object.entries(provider.extraInfo).map(([key, text]) => (
+                        <p key={key} className="p-detail">
+                          {key === "calendar" && <LuCalendar />}
+                          {key === "urgent" && <LuClock />}
+                          {text}
+                        </p>
+                      ))}
+                    </div>
+                    
+                    <Link to={`/prestador/${provider.id}`}> 
+                        <button className="orcamento-btn">Solicitar</button>
+                    </Link>
+                  </div>
+
               </div>
             </div>
           ))

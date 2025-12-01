@@ -1,362 +1,306 @@
+
 :root {
-    --header-blue: #2d8cff;
-    --provider-blue: #1f3a57;
-    --bg-light-gray: #f8f9fa;
-    --bg-dark-gray: #e9ecef;
-    --text-dark: #333;
-    --text-gray: #666;
-    --icon-blue: #1f5996;
-    --icon-gray: #999;
-    --border-color: #eee;
+  --primary-blue: #2d8cff;
+  --header-blue: #2d8cff;
+  --provider-blue: #1b3f66;
+  --bg-gray: #f2f4f7;
+  --white: #ffffff;
+  --text-dark: #333;
+  --text-gray: #666;
+  --border-color: #eee;
 }
 
+/* Reset básico de lista */
 ul.menu-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
+/* CONTAINER PRINCIPAL */
 .conta-container {
-    background-color: var(--bg-light-gray);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  background-color: var(--bg-gray);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+}
+
+/* CABEÇALHO COM BOTÃO VOLTAR */
+.page-header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o título */
+  position: relative;      /* Permite o botão absoluto */
+  padding: 15px 20px;
+  background-color: var(--bg-gray);
+  margin-bottom: 10px;
+}
+
+.back-btn {
+  position: absolute; /* Tira ele do fluxo para não empurrar o texto */
+  left: 20px;         /* Cola na esquerda */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  z-index: 10;
 }
 
 .page-header-title {
-    text-align: center;
-    font-size: 1rem;
-    color: var(--text-gray);
-    margin: 15px 0;
-    font-weight: 500;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-gray);
+  margin: 0;
+  font-weight: 500;
+  width: 100%;
 }
 
+/* --- HERO SECTION (TOPO AZUL) --- */
 .user-hero {
-    background-color: var(--header-blue);
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    color: white;
+  background-color: var(--header-blue);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alinha verticalmente */
+  color: var(--white);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .user-hero-content {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .hero-profile-img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.2);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 .hero-user-details h3 {
-    margin: 0;
-    font-size: 1.4rem;
-    font-weight: 700;
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
 .hero-user-details p {
-    margin: 5px 0 0 0;
-    font-size: 0.9rem;
-    opacity: 0.9;
+  margin: 5px 0 0 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
 }
 
 .notification-btn {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 5px;
-    position: relative;
-}
-
-.menu-list li {
-    background-color: white;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.menu-list li a,
-.logout-btn-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px;
-    text-decoration: none;
-    color: var(--text-dark);
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.menu-list li a:hover,
-.logout-btn-link:hover {
-    background-color: #f0f5ff;
-}
-
-.logout-btn-link {
-    background: none;
-    border: none;
-    font-family: inherit;
-    font-size: inherit;
-}
-
-.menu-item-left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.menu-item-left span {
-    font-size: 1.05rem;
-    font-weight: 500;
-}
-
-.chevron-icon {
-    color: #ccc;
-}
-
-.menu-icon-blue {
-    color: var(--icon-blue);
-}
-
-.menu-icon-gray {
-    color: var(--icon-gray);
-}
-
-.provider-banner-link {
-    background-color: var(--provider-blue);
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 25px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: opacity 0.2s;
-}
-
-.provider-banner-link:hover {
-    opacity: 0.9;
-}
-
-.legal-menu {
-    background-color: var(--bg-dark-gray);
-    flex-grow: 1;
-}
-
-.legal-menu li {
-    background-color: transparent;
-    border-color: #ddd;
-}
-
-.legal-menu li a {
-    color: var(--text-gray);
-    padding: 15px 20px;
-}
-
-.legal-menu .menu-item-left span {
-    font-size: 0.95rem;
-    font-weight: 400;
-}
-
-:root {
-    --primary-blue: #1A8BF0;
-    --header-blue: #2d8cff;
-    --provider-blue: #1f3a57;
-    --bg-gray: #f2f4f7;
-    --white: #ffffff;
-    --text-dark: #333;
-    --text-gray: #666;
-    --border-color: #eee;
-}
-
-ul.menu-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.conta-container {
-    background-color: var(--bg-gray);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 50px;
-}
-
-.page-header-title {
-    text-align: center;
-    font-size: 1rem;
-    color: var(--text-gray);
-    margin: 15px 0;
-    font-weight: 500;
-}
-
-.user-hero {
-    background-color: var(--header-blue);
-    padding: 25px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--white);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.user-hero-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.hero-profile-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-}
-
-.hero-user-details h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.hero-user-details p {
-    margin: 5px 0 0 0;
-    font-size: 0.95rem;
-    opacity: 0.9;
-}
-
-.notification-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
 }
 
 .notification-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.4);
 }
 
+/* --- LISTAS DE MENU --- */
 .main-menu, .legal-menu {
-    background-color: var(--white);
-    margin-top: 0;
+  background-color: var(--white);
+  margin-top: 0;
 }
 
 .menu-list li {
-    border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .menu-list li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .menu-list li a,
 .logout-btn-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    text-decoration: none;
-    color: var(--text-dark);
-    width: 100%;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-size: 1rem;
-    transition: background-color 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  text-decoration: none;
+  color: var(--text-dark);
+  width: 100%;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  transition: background-color 0.2s;
 }
 
 .menu-list li a:hover,
 .logout-btn-link:hover {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 .menu-item-left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.menu-icon-blue { color: #1f5996; }
-.menu-icon-gray { color: #999; }
+.menu-item-left span {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
 .chevron-icon { color: #ccc; }
+.menu-icon-blue { color: #2d8cff; }
+.menu-icon-gray { color: #999; }
 
 .provider-banner-link {
-    background-color: var(--provider-blue);
-    color: var(--white);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 20px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin: 0;
+  /* Layout Básico */
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  
+  /* Estilo Visual Roxo */
+  background: var(--provider-blue);
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border: none;
+  
+  /* Sombra interna para profundidade */
+  box-shadow: inset 0 0 1.6em -0.6em #0f2944;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  
+  /* Altura e Padding ajustados para o layout */
+  height: 3.8em; /* Altura confortável */
+  padding-left: 1.5em; /* Espaço para o texto */
+  padding-right: 3.5em; /* Espaço para o ícone na direita */
 }
 
-.provider-banner-link:hover {
-    opacity: 0.95;
+/* O quadrado branco do ícone */
+.provider-banner-link .icon {
+  background: white;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Tamanho e Posição */
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  right: 0.8em; /* Posicionado na direita */
+  
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #0f2944;
+  transition: all 0.3s;
 }
 
+/* O ícone SVG (ou Lucide) dentro do quadrado branco */
+.provider-banner-link .icon svg {
+  width: 1.1em;
+  height: 1.1em;
+  transition: transform 0.3s;
+  color: var(--header-blue); /* Cor roxa do ícone */
+}
+
+/* --- ANIMAÇÕES DE HOVER --- */
+
+/* Estica o quadrado branco */
+.provider-banner-link:hover .icon {
+  width: calc(100% - 1.6em);
+}
+
+/* Move o ícone levemente */
+.provider-banner-link:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+/* Efeito de clique */
+.provider-banner-link:active .icon {
+  transform: scale(0.95);
+}
+/* ====================================================== */
+
+
+/* --- MENU LEGAL --- */
 .legal-menu {
-    background-color: #e9ecef;
-    margin-top: 0;
+  background-color: #e9ecef;
+  margin-top: 0;
 }
 
-.legal-menu li {
-    border-color: #ddd;
+.legal-menu li { border-color: #ddd; }
+.legal-menu li a { color: var(--text-gray); }
+.legal-menu .menu-item-left span {
+  font-size: 0.95rem;
+  font-weight: 400;
 }
 
-.legal-menu li a {
-    color: var(--text-gray);
-}
 
+/* --- VERSÃO PC / NOTEBOOK --- */
 @media (min-width: 768px) {
-    .conta-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 20px;
-        width: 100%;
-    }
+  
+  .conta-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+  }
 
-    .user-hero,
-    .main-menu,
-    .provider-banner-link,
-    .legal-menu {
-        border-radius: 15px;
-        margin-bottom: 1px;
-        overflow: hidden;
-    }
+  /* Blocos separados e arredondados no PC */
+  .user-hero,
+  .main-menu,
+  .provider-banner-link,
+  .legal-menu {
+    border-radius: 15px;
+    margin-bottom: 20px; /* Espaço entre os blocos */
+    overflow: hidden;
+  }
 
-    .page-header-title {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-        text-align: left;
-        padding-left: 10px;
-    }
+  /* Ajuste específico para o novo botão no PC */
+  .provider-banner-link {
+      margin-bottom: 20px; /* Garante o espaço embaixo */
+      border-radius: 15px; /* Mantém arredondado igual aos outros blocos */
+  }
 
-    .menu-list li a {
-        font-size: 1.1rem;
-        padding: 25px;
-    }
+  /* Ajuste Header PC */
+  .page-header-nav {
+    justify-content: flex-start;
+    padding-left: 0;
+  }
 
-    .user-hero {
-        padding: 40px;
-    }
+  .back-btn {
+    position: static;
+    margin-right: 15px;
+  }
+
+  .page-header-title {
+    text-align: left;
+    width: auto;
+    font-size: 1.5rem;
+  }
+
+  /* Itens maiores no PC */
+  .menu-list li a {
+    font-size: 1.1rem;
+    padding: 25px;
+  }
+
+  .user-hero {
+    padding: 40px;
+  }
 }

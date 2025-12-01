@@ -6,11 +6,13 @@ import {
   LuBadgeCheck, 
   LuMessageSquare, 
   LuLogOut, 
-  LuBriefcase, 
+  LuBriefcase, // Usaremos a maleta dentro do botão novo
   LuFileText,
-  LuChevronRight 
+  LuChevronRight,
+  LuChevronLeft 
 } from "react-icons/lu";
 import "../../styles/contaUsuario.css";
+import "../../styles/global.css";
 
 const placeholderUserImg = "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector";
 
@@ -39,7 +41,13 @@ export default function ContaUsuario() {
   return (
     <div className="conta-container">
       
-      <h2 className="page-header-title">Sua conta</h2>
+      {/* Header com botão voltar */}
+      <header className="page-header-nav">
+        <button onClick={() => navigate('/home')} className="back-btn">
+            <LuChevronLeft size={30} />
+        </button>
+        <h2 className="page-header-title">Sua conta</h2>
+      </header>
 
       <section className="user-hero">
         <div className="user-hero-content">
@@ -98,10 +106,15 @@ export default function ContaUsuario() {
         </li>
       </ul>
 
+      {/* --- BOTÃO NOVO (ESTILO UIVERSE INTEGRADO) --- */}
       <Link to="/prestador/register" className="provider-banner-link">
-        <LuBriefcase size={24} />
         <span>Começar a prestar serviços</span>
+        <div className="icon">
+            {/* Usando o ícone da maleta para manter contexto */}
+            <LuBriefcase /> 
+        </div>
       </Link>
+      {/* --------------------------------------------- */}
 
       <ul className="menu-list legal-menu">
         <li>

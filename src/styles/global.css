@@ -13,7 +13,11 @@
   font-family: "Inter", sans-serif;
 }
 
-body {
+html, body {
+  overflow-x: hidden; /* Proíbe rolagem horizontal indesejada */
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif; /* Fonte padrão bonita */
+  -webkit-font-smoothing: antialiased; /* Deixa a fonte mais nítida */
   background: var(--cinza-claro);
 }
 

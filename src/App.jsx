@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/home.jsx";
 import Login from "./pages/Login/login.jsx";
 import Register from "./pages/Register/register.jsx";
-import PrestadorRegister from "./pages/Prestador/PrestadorRegister.jsx";
+import PrestadorRegister from "./pages/Prestador/prestadorRegister.jsx";
 import Catalog from "./pages/Catalog/catalog.jsx";
 import PrestadorProfile from "./pages/Prestador/PrestadorProfile.jsx";
 import { ServiceProvider } from "./pages/Context/serviceContext.jsx";
@@ -12,7 +12,6 @@ import Perfil from "./pages/PerfilUsuario/perfil.jsx";
 import FirstScreen from "./pages/First Screen/FirstScreen.jsx";
 import Help from "./pages/Help/Help.jsx";
 import AutoLoginScreen from "./pages/Login/autoLoginScreen.jsx";
-// --- NOVO IMPORT ---
 import ContaUsuario from "./pages/ContaUsuario/ContaUsuario.jsx"; 
 
 export default function App() {
