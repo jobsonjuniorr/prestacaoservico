@@ -13,6 +13,8 @@ import FirstScreen from "./pages/First Screen/FirstScreen.jsx";
 import Help from "./pages/Help/Help.jsx";
 import AutoLoginScreen from "./pages/Login/autoLoginScreen.jsx";
 import ContaUsuario from "./pages/ContaUsuario/ContaUsuario.jsx"; 
+import AdminPanel from "./pages/Admin/admin.jsx";
+import AdminRoute from "./components/AdminRoute.jsx";
 
 export default function App() {
   return (
@@ -31,8 +33,8 @@ export default function App() {
           <Route path="/ContaUsuario" element={<ContaUsuario />} /> 
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/auto-login" element={<AutoLoginScreen />} />
-          
           <Route path="/ajuda" element={<Help />} />            
+          <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
         </Routes>
       </BrowserRouter>
     </ServiceProvider>

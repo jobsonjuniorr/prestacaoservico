@@ -2,16 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/prestadorRegister.css"; 
 import { 
-  FaClipboardList, 
-  FaMoneyBillWave, 
-  FaClock, 
-  FaCheckCircle, 
-  FaUser, 
-  FaIdCard, 
-  FaFileUpload,
-  FaTrash,
-  FaPlusCircle,
-  FaBriefcase
+  FaClipboardList, FaMoneyBillWave, FaClock, FaCheckCircle, FaUser, 
+  FaIdCard, FaFileUpload, FaTrash, FaPlusCircle, FaBriefcase, FaSpinner
 } from 'react-icons/fa';
 import { ServiceContext } from "../Context/serviceContext.jsx";
 
@@ -20,28 +12,24 @@ export default function PrestadorRegister() {
   const { adicionarPrestador } = useContext(ServiceContext);
   const navigate = useNavigate();
 
-  // --- Estados do Formulário ---
+  const CLOUD_NAME = "dxwnikpx6";
+  const UPLOAD_PRESET = "local-plus";
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  
-  // Novos campos obrigatórios
   const [cpf, setCpf] = useState("");
-  const [documentoFoto, setDocumentoFoto] = useState(null); // Para o arquivo
-  
-  // Profissão
-  const [categoria, setCategoria] = useState("");
-  const [cargo, setCargo] = useState(""); // Ex: "Programador Fullstack"
-  const [descricao, setDescricao] = useState("");
+  const [documentoFile, setDocumentoFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
-  // Serviços (Lista)
+  const [categoria, setCategoria] = useState("");
+  const [cargo, setCargo] = useState("");
+  const [descricao, setDescricao] = useState("");
   const [servicos, setServicos] = useState([]);
   const [tempServicoNome, setTempServicoNome] = useState("");
   const [tempServicoPreco, setTempServicoPreco] = useState("");
-
-  // Disponibilidade
   const [atendeImediato, setAtendeImediato] = useState(false);
   const [atendeAgenda, setAtendeAgenda] = useState(false);
-  const [tipoAgenda, setTipoAgenda] = useState(""); // "link" ou "contato"
+  const [tipoAgenda, setTipoAgenda] = useState("");
   const [linkAgenda, setLinkAgenda] = useState("");
 
   useEffect(() => {
@@ -49,13 +37,10 @@ export default function PrestadorRegister() {
       setNome(usuarioLogado.nome);
       setEmail(usuarioLogado.email);
     } else {
-        navigate("/login");
+      navigate("/login");
     }
   }, [usuarioLogado, navigate]);
 
-  // --- Funções Auxiliares ---
-
-  // Formata CPF visualmente
   const handleCpfChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
     if (value.length > 11) value = value.slice(0, 11);
@@ -65,101 +50,83 @@ export default function PrestadorRegister() {
     setCpf(value);
   };
 
-  // Upload de arquivo simulado
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-        setDocumentoFoto(file);
-    }
+    if (file) setDocumentoFile(file);
   };
 
-  // Adicionar Serviço na Lista
   const adicionarServico = () => {
-    if (!tempServicoNome || !tempServicoPreco) {
-        alert("Preencha o nome e o preço do serviço.");
-        return;
-    }
-    if (servicos.length >= 5) {
-        alert("Máximo de 5 serviços permitidos.");
-        return;
-    }
-
-    const novoServico = {
-        id: Date.now(),
-        nome: tempServicoNome,
-        preco: parseFloat(tempServicoPreco).toFixed(2)
-    };
-
-    setServicos([...servicos, novoServico]);
-    setTempServicoNome("");
+    if (!tempServicoNome || !tempServicoPreco) return alert("Preencha nome e preço.");
+    if (servicos.length >= 5) return alert("Máximo de 5 serviços.");
+    setServicos([...servicos, { id: Date.now(), nome: tempServicoNome, preco: parseFloat(tempServicoPreco).toFixed(2) }]);
+    setTempServicoNome(""); 
     setTempServicoPreco("");
   };
 
-  // Remover Serviço
-  const removerServico = (id) => {
-    setServicos(servicos.filter(s => s.id !== id));
+  const removerServico = (id) => setServicos(servicos.filter(s => s.id !== id));
+
+  const uploadImageToCloudinary = async () => {
+    const formData = new FormData();
+    formData.append("file", documentoFile);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    try {
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+        method: "POST",
+        body: formData
+      });
+      const data = await response.json();
+      return data.secure_url;
+    } catch (error) {
+      console.error("Erro no upload", error);
+      alert("Erro ao enviar documento. Tente novamente.");
+      return null;
+    }
   };
 
-  // --- Envio do Formulário ---
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    // Validações
-    if (!cpf || !documentoFoto) {
-        alert("CPF e Foto do Documento são obrigatórios.");
-        return;
-    }
-    if (!categoria || !cargo || !descricao) {
-        alert("Preencha os dados profissionais.");
-        return;
-    }
-    if (servicos.length < 3) {
-        alert("Você precisa adicionar pelo menos 3 serviços com preço-base.");
-        return;
-    }
-    if (!atendeImediato && !atendeAgenda) {
-        alert("Selecione pelo menos um tipo de disponibilidade (Imediato ou Agenda).");
-        return;
+    if (!cpf || !documentoFile) return alert("CPF e Documento são obrigatórios.");
+    if (!categoria || !cargo || !descricao) return alert("Preencha os dados profissionais.");
+    if (servicos.length < 3) return alert("Adicione pelo menos 3 serviços.");
+    if (!atendeImediato && !atendeAgenda) return alert("Selecione a disponibilidade.");
+
+    setUploading(true);
+
+    const docUrl = await uploadImageToCloudinary();
+    
+    if (!docUrl) {
+      setUploading(false);
+      return;
     }
 
-    // Cria o objeto do prestador
     const novoPrestador = {
       id: Date.now(),
       usuarioId: usuarioLogado.id,
       nomeProfissional: nome,
       email,
-      cpf, // Novo
-      
-      // Mapeando para o sistema existente
-      area: cargo, // O "Cargo" vira a área exibida no card
-      category: categoria, // A categoria para filtros
+      cpf,
+      docUrl: docUrl,
+      area: cargo,
+      category: categoria,
       descricao,
-      
-      // O preço exibido no card será "A partir de R$ X" (o menor da lista)
-      preco: Math.min(...servicos.map(s => parseFloat(s.preco))).toFixed(2), 
-      
+      preco: Math.min(...servicos.map(s => parseFloat(s.preco))).toFixed(2),
       img: "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector",
-      verified: false, // Começa não verificado até checarem o documento
-      
-      // Infos de disponibilidade
+      verified: false,
       urgent: atendeImediato,
       calendar: atendeAgenda,
-      
-      // Dados Extras complexos salvos aqui
       listaServicos: servicos,
-      dadosAgenda: {
-          tipo: tipoAgenda,
-          link: linkAgenda
-      },
-      
+      dadosAgenda: { tipo: tipoAgenda, link: linkAgenda },
       extraInfo: {
-        "Serviços": `${servicos.length} opções disponíveis`,
-        "Disponibilidade": atendeImediato ? "Atende Imediato" : "Apenas Agendado"
+        "Serviços": `${servicos.length} opções`,
+        "Disponibilidade": atendeImediato ? "Imediato" : "Agendado"
       }
     };
 
     adicionarPrestador(novoPrestador);
-    alert("Solicitação enviada! Analisaremos seu documento e liberaremos seu perfil em breve.");
+    setUploading(false);
+    alert("Cadastro enviado para análise!");
     navigate("/home");
   }
 
@@ -167,9 +134,8 @@ export default function PrestadorRegister() {
     <div className="register-page-container">
       <form onSubmit={handleSubmit} className="register-form-card">
         <h2 className="card-title">Torne-se um Prestador</h2>
-        <p className="card-subtitle">Faça seu cadastro profissional para aparecer como prestador de serviços no Local+.</p>
+        <p className="card-subtitle">Complete seu cadastro profissional para começar.</p>
 
-        {/* 1. DADOS PESSOAIS E DOCUMENTOS */}
         <div className="form-section">
           <h3 className="section-title"><FaIdCard /> Documentação Obrigatória</h3>
           <div className="input-row">
@@ -185,25 +151,18 @@ export default function PrestadorRegister() {
             </div>
             
             <div className="input-group">
-                <label className="input-label required">Documento com Foto (Frente)</label>
-                <div className="file-input-wrapper">
-                    <input 
-                        type="file" 
-                        id="doc-upload" 
-                        accept="image/*,.pdf" 
-                        onChange={handleFileChange}
-                        className="file-input-hidden"
-                    />
-                    <label htmlFor="doc-upload" className="file-input-btn">
-                        <FaFileUpload /> {documentoFoto ? "Arquivo Selecionado" : "Anexar RG/CNH"}
-                    </label>
-                    {documentoFoto && <span className="file-name">{documentoFoto.name}</span>}
-                </div>
+              <label className="input-label required">Documento com Foto (Frente)</label>
+              <div className="file-input-wrapper">
+                <input type="file" id="doc-upload" accept="image/*" onChange={handleFileChange} className="file-input-hidden" />
+                <label htmlFor="doc-upload" className="file-input-btn">
+                  <FaFileUpload /> {documentoFile ? "Arquivo Pronto" : "Anexar Foto"}
+                </label>
+                {documentoFile && <span className="file-name">{documentoFile.name}</span>}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* 2. DADOS PROFISSIONAIS */}
         <div className="form-section">
           <h3 className="section-title"><FaBriefcase /> Perfil Profissional</h3>
           
@@ -248,111 +207,109 @@ export default function PrestadorRegister() {
           </div>
         </div>
 
-        {/* 3. LISTA DE SERVIÇOS */}
         <div className="form-section">
-            <h3 className="section-title"><FaMoneyBillWave /> Tabela de Serviços (Mín. 3)</h3>
-            <p className="section-hint">Adicione entre 3 e 5 serviços com preço base.</p>
-            
-            <div className="add-service-box">
-                <div className="input-row compact">
-                    <input 
-                        className="input-field" 
-                        placeholder="Nome do serviço (ex: Corte Simples)"
-                        value={tempServicoNome}
-                        onChange={(e) => setTempServicoNome(e.target.value)}
-                    />
-                    <input 
-                        type="number"
-                        className="input-field" 
-                        placeholder="Preço R$"
-                        value={tempServicoPreco}
-                        onChange={(e) => setTempServicoPreco(e.target.value)}
-                    />
-                    <button type="button" className="add-btn" onClick={adicionarServico} disabled={servicos.length >= 5}>
-                        <FaPlusCircle />
-                    </button>
-                </div>
+          <h3 className="section-title"><FaMoneyBillWave /> Tabela de Serviços (Mín. 3)</h3>
+          <p className="section-hint">Adicione entre 3 e 5 serviços com preço base.</p>
+          
+          <div className="add-service-box">
+            <div className="input-row compact">
+              <input 
+                className="input-field" 
+                placeholder="Nome do serviço (ex: Corte Simples)"
+                value={tempServicoNome}
+                onChange={(e) => setTempServicoNome(e.target.value)}
+              />
+              <input 
+                type="number"
+                className="input-field" 
+                placeholder="Preço R$"
+                value={tempServicoPreco}
+                onChange={(e) => setTempServicoPreco(e.target.value)}
+              />
+              <button type="button" className="add-btn" onClick={adicionarServico} disabled={servicos.length >= 5}>
+                <FaPlusCircle />
+              </button>
             </div>
+          </div>
 
-            {/* Lista visual dos serviços adicionados */}
-            <div className="services-list-display">
-                {servicos.length === 0 && <span className="empty-msg">Nenhum serviço adicionado ainda.</span>}
-                
-                {servicos.map((servico) => (
-                    <div key={servico.id} className="service-item-row">
-                        <span className="svc-name">{servico.nome}</span>
-                        <span className="svc-price">R$ {servico.preco}</span>
-                        <button type="button" className="remove-btn" onClick={() => removerServico(servico.id)}>
-                            <FaTrash />
-                        </button>
-                    </div>
-                ))}
-            </div>
-            {servicos.length > 0 && servicos.length < 3 && (
-                <p className="error-text">Adicione mais {3 - servicos.length} serviços para continuar.</p>
-            )}
+          <div className="services-list-display">
+            {servicos.length === 0 && <span className="empty-msg">Nenhum serviço adicionado ainda.</span>}
+            
+            {servicos.map((servico) => (
+              <div key={servico.id} className="service-item-row">
+                <span className="svc-name">{servico.nome}</span>
+                <span className="svc-price">R$ {servico.preco}</span>
+                <button type="button" className="remove-btn" onClick={() => removerServico(servico.id)}>
+                  <FaTrash />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {servicos.length > 0 && servicos.length < 3 && (
+            <p className="error-text">Adicione mais {3 - servicos.length} serviços para continuar.</p>
+          )}
         </div>
         
-        {/* 4. DISPONIBILIDADE */}
         <div className="form-section">
-            <h3 className="section-title"><FaClock /> Disponibilidade(você pode marcar os dois)</h3>
-            
-            <div className="availability-options">
-                <label className={`check-box-card ${atendeImediato ? 'active' : ''}`}>
-                    <input 
-                        type="checkbox" 
-                        checked={atendeImediato}
-                        onChange={(e) => setAtendeImediato(e.target.checked)}
-                    />
-                    <div className="check-content">
-                        <strong>Atendimento Imediato</strong>
-                        <span>Posso atender chamados de urgência agora.</span>
-                    </div>
-                </label>
+          <h3 className="section-title"><FaClock /> Disponibilidade</h3>
+          
+          <div className="availability-options">
+            <label className={`check-box-card ${atendeImediato ? 'active' : ''}`}>
+              <input 
+                type="checkbox" 
+                checked={atendeImediato}
+                onChange={(e) => setAtendeImediato(e.target.checked)}
+              />
+              <div className="check-content">
+                <strong>Atendimento Imediato</strong>
+                <span>Posso atender chamados de urgência agora.</span>
+              </div>
+            </label>
 
-                <label className={`check-box-card ${atendeAgenda ? 'active' : ''}`}>
-                    <input 
-                        type="checkbox" 
-                        checked={atendeAgenda}
-                        onChange={(e) => setAtendeAgenda(e.target.checked)}
-                    />
-                    <div className="check-content">
-                        <strong>Trabalho com Agenda</strong>
-                        <span>O cliente marca um horário futuro.</span>
-                    </div>
-                </label>
+            <label className={`check-box-card ${atendeAgenda ? 'active' : ''}`}>
+              <input 
+                type="checkbox" 
+                checked={atendeAgenda}
+                onChange={(e) => setAtendeAgenda(e.target.checked)}
+              />
+              <div className="check-content">
+                <strong>Trabalho com Agenda</strong>
+                <span>O cliente marca um horário futuro.</span>
+              </div>
+            </label>
+          </div>
+
+          {atendeAgenda && (
+            <div className="agenda-details fade-in">
+              <label className="input-label">Como o cliente agenda?</label>
+              <div className="input-row">
+                <select 
+                  className="select-field"
+                  value={tipoAgenda}
+                  onChange={(e) => setTipoAgenda(e.target.value)}
+                >
+                  <option value="">Selecione...</option>
+                  <option value="contato">Entrar em contato para combinar</option>
+                  <option value="link">Link externo (Calendly, Google Agenda...)</option>
+                </select>
+                
+                {tipoAgenda === 'link' && (
+                  <input 
+                    className="input-field" 
+                    placeholder="Cole o link da sua agenda aqui"
+                    value={linkAgenda}
+                    onChange={(e) => setLinkAgenda(e.target.value)}
+                  />
+                )}
+              </div>
             </div>
-
-            {/* Configuração extra se marcar agenda */}
-            {atendeAgenda && (
-                <div className="agenda-details fade-in">
-                    <label className="input-label">Como o cliente agenda?</label>
-                    <div className="input-row">
-                        <select 
-                            className="select-field"
-                            value={tipoAgenda}
-                            onChange={(e) => setTipoAgenda(e.target.value)}
-                        >
-                            <option value="">Selecione...</option>
-                            <option value="contato">Entrar em contato para combinar</option>
-                            <option value="link">Link externo (Calendly, Google Agenda...)</option>
-                        </select>
-                        
-                        {tipoAgenda === 'link' && (
-                            <input 
-                                className="input-field" 
-                                placeholder="Cole o link da sua agenda aqui"
-                                value={linkAgenda}
-                                onChange={(e) => setLinkAgenda(e.target.value)}
-                            />
-                        )}
-                    </div>
-                </div>
-            )}
+          )}
         </div>
 
-        <button type="submit" className="submit-btn">
-          Finalizar Cadastro <FaCheckCircle style={{marginLeft: '8px'}} />
+        <button type="submit" className="submit-btn" disabled={uploading}>
+          {uploading ? "Enviando documento..." : "Finalizar Cadastro"} 
+          {!uploading && <FaCheckCircle style={{marginLeft: '8px'}} />}
         </button>
       </form>
     </div>

@@ -26,7 +26,7 @@ html, body, .container {
   overflow-x: hidden;
 }
 
-/* HEADER COM LOGO IMAGEM */
+
 .header {
   text-align: center;
   margin-top: 20px;
@@ -40,7 +40,7 @@ html, body, .container {
   margin-bottom: 5px;
 }
 
-/* Controla o tamanho da logo */
+
 .app-logo {
   max-width: 200px;
   height: auto;
@@ -54,7 +54,7 @@ html, body, .container {
   margin-top: 5px;
 }
 
-/* MAIN CONTENT */
+
 .main-content {
   flex: 1;
   display: flex;
@@ -162,16 +162,15 @@ html, body, .container {
 }
 
 /* VERSÃO PC */
-/* --- VERSÃO PC / NOTEBOOK (CORRIGIDA) --- */
-/* --- VERSÃO PC / NOTEBOOK (CORRIGIDA) --- */
+
 @media (min-width: 768px) {
   .container {
     flex-direction: row;
-    /* Alinha tudo na base (chão) para a mulher ficar em pé corretamente */
+    
     align-items: flex-end; 
     justify-content: center;
     padding: 0;
-    overflow: hidden; /* Remove barras de rolagem */
+    overflow: hidden; 
   }
 
   .header {
@@ -179,35 +178,35 @@ html, body, .container {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 20; /* Garante que o logo fique na frente da cabeça dela se encostar */
+    z-index: 20; 
     width: 100%;
   }
   
   .main-content {
     flex-direction: row;
     justify-content: center;
-    align-items: flex-end; /* Mágica: Cola a imagem e o conteúdo no chão */
+    align-items: flex-end; 
     height: 100vh;
-    gap: 80px; /* Espaço entre a mulher e o card */
+    gap: 80px; 
     padding-bottom: 0; 
   }
 
   .image-wrapper {
     position: static;
-    /* MUDANÇA PRINCIPAL: Controla pela ALTURA, não largura */
-    height: 75vh; /* Ocupa 85% da altura da tela */
-    width: auto;  /* A largura se ajusta sozinha */
+
+    height: 75vh; 
+    width: auto;  
     max-width: 600px;
     
     margin: 0;
-    margin-bottom: -4px; /* Remove linhazinha branca chata se houver */
+    margin-bottom: -4px; 
     
     display: flex;
     align-items: flex-end; 
     z-index: 1;
   }
 
-  /* Importante: A imagem segue a altura do wrapper */
+
   .person-image {
     height: 100%; 
     width: auto;
@@ -217,10 +216,7 @@ html, body, .container {
   .login-card {
     position: static;
     width: 320px;
-    
-    /* Levanta o card para ele não ficar no chão (já que o pai é flex-end) */
-    margin-bottom: 35vh; /* Sobe o card 20% da tela */
-    
+    margin-bottom: 35vh;
     padding: 40px 30px;
     z-index: 10;
   }
@@ -234,6 +230,6 @@ html, body, .container {
   }
 
   .app-logo {
-    max-width: 250px; /* Logo um pouco menor no PC para não brigar com a imagem */
+    max-width: 250px; 
   }
 }

@@ -5,7 +5,7 @@ export const ServiceContext = createContext();
 export function ServiceProvider({ children }) {
   const [prestadores, setPrestadores] = useState([]);
 
-  // Prestadores fixos
+  // Prestadores fixos (Exemplos)
   const fakeData = [
     {
       id: 1,
@@ -65,23 +65,39 @@ export function ServiceProvider({ children }) {
   ];
 
   useEffect(() => {
+    // 1. Pega os dados salvos no navegador
     const localPrestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
 
-    setPrestadores([...fakeData, ...localPrestadores]);
+    // 2. Junta os fixos com os salvos
+    const listaCompleta = [...fakeData, ...localPrestadores];
+
+    // 3. REMOVE DUPLICATAS (A Correção Mágica) 🛠️
+    // Filtramos para garantir que não existam dois prestadores com o mesmo ID
+    const listaUnica = listaCompleta.filter((item, index, self) =>
+      index === self.findIndex((t) => (
+        t.id === item.id
+      ))
+    );
+
+    setPrestadores(listaUnica);
   }, []);
 
   const adicionarPrestador = (novoPrestador) => {
-
+    // Pega o que já tem salvo
     const localPrestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
+    
+    // Adiciona o novo na lista do LocalStorage
     const atualizadoLocal = [...localPrestadores, novoPrestador];
 
+    // Salva no navegador
     localStorage.setItem("prestadores", JSON.stringify(atualizadoLocal));
 
+    // Atualiza a tela (Estado)
     setPrestadores(prev => [...prev, novoPrestador]);
   };
 
   return (
-    <ServiceContext.Provider value={{ prestadores, adicionarPrestador }}>
+    <ServiceContext.Provider value={{ prestadores, adicionarPrestador, setPrestadores }}>
       {children}
     </ServiceContext.Provider>
   );

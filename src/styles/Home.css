@@ -245,45 +245,43 @@ body {
   cursor: pointer;
 }
 
-/* --- LISTA DE PRESTADORES (NOVO DESIGN "NEON") --- */
+
 .providers-list {
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 25px; /* Espaço maior entre os cards */
+  gap: 25px; 
 }
 
-/* 1. O CARD PAI (A Borda Colorida) */
+
 .provider-card {
   position: relative;
   width: 100%;
   border-radius: 20px;
-  /* Espessura da borda colorida */
   padding: 3px; 
-  /* Gradiente Azul Local+ (Borda) */
   background-image: linear-gradient(144deg,#1A8BF0,#2368E8 50%, #00C4FF);
-  /* Sombra azulada suave */
+
   box-shadow: 0 10px 20px rgba(26, 139, 240, 0.15);
   transition: transform 0.2s;
 }
 
 .provider-card:active {
-    transform: scale(0.98); /* Efeito de clique */
+    transform: scale(0.98); 
 }
 
-/* 2. O CARD FILHO (O Conteúdo Branco) */
+
 .provider-card-content {
   background: #ffffff;;
- /* Fundo branco */
-  border-radius: 17px; /* 20px (pai) - 3px (padding) */
+
+  border-radius: 17px; 
   width: 100%;
   height: 100%;
   padding: 20px;
-  display: flex; /* Layout Flex para organizar foto e texto */
+  display: flex; 
   gap: 15px;
 }
 
-/* Elementos internos do card */
+
 .card-left {
   display: flex;
   align-items: flex-start;
@@ -369,11 +367,11 @@ body {
 
 .orcamento-btn {
   align-self: flex-end;
-  background-color: var(--primary-blue); /* Botão combinando */
+  background-color: var(--primary-blue); 
   color: white;
   border: none;
   padding: 8px 20px;
-  border-radius: 20px; /* Mais arredondado */
+  border-radius: 20px; 
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
@@ -385,7 +383,7 @@ body {
   background-color: #1570c4;
 }
 
-/* --- VERSÃO PC (Grid e Ajustes) --- */
+
 @media (min-width: 768px) {
   .home-container {
     padding: 0 5%;
@@ -437,7 +435,7 @@ body {
     font-size: 1.2rem;
   }
 
-  /* Grid no PC com os novos cards */
+
   .providers-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

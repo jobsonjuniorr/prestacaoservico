@@ -1,4 +1,3 @@
-
 :root {
   --primary-blue: #2d8cff;
   --header-blue: #2d8cff;
@@ -10,14 +9,12 @@
   --border-color: #eee;
 }
 
-/* Reset básico de lista */
 ul.menu-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* CONTAINER PRINCIPAL */
 .conta-container {
   background-color: var(--bg-gray);
   min-height: 100vh;
@@ -26,20 +23,19 @@ ul.menu-list {
   padding-bottom: 50px;
 }
 
-/* CABEÇALHO COM BOTÃO VOLTAR */
 .page-header-nav {
   display: flex;
   align-items: center;
-  justify-content: center; /* Centraliza o título */
-  position: relative;      /* Permite o botão absoluto */
+  justify-content: center;
+  position: relative;
   padding: 15px 20px;
   background-color: var(--bg-gray);
   margin-bottom: 10px;
 }
 
 .back-btn {
-  position: absolute; /* Tira ele do fluxo para não empurrar o texto */
-  left: 20px;         /* Cola na esquerda */
+  position: absolute;
+  left: 20px;
   background: none;
   border: none;
   cursor: pointer;
@@ -59,13 +55,12 @@ ul.menu-list {
   width: 100%;
 }
 
-/* --- HERO SECTION (TOPO AZUL) --- */
 .user-hero {
   background-color: var(--header-blue);
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Alinha verticalmente */
+  align-items: center;
   color: var(--white);
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
@@ -113,7 +108,6 @@ ul.menu-list {
   background: rgba(255, 255, 255, 0.4);
 }
 
-/* --- LISTAS DE MENU --- */
 .main-menu, .legal-menu {
   background-color: var(--white);
   margin-top: 0;
@@ -164,14 +158,11 @@ ul.menu-list {
 .menu-icon-gray { color: #999; }
 
 .provider-banner-link {
-  /* Layout Básico */
   width: 100%;
   margin: 0;
   display: flex;
   align-items: center;
   text-decoration: none;
-  
-  /* Estilo Visual Roxo */
   background: var(--provider-blue);
   color: white;
   font-family: "Inter", sans-serif;
@@ -179,81 +170,63 @@ ul.menu-list {
   font-weight: 500;
   letter-spacing: 0.05em;
   border: none;
-  
-  /* Sombra interna para profundidade */
   box-shadow: inset 0 0 1.6em -0.6em #0f2944;
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  
-  /* Altura e Padding ajustados para o layout */
-  height: 3.8em; /* Altura confortável */
-  padding-left: 1.5em; /* Espaço para o texto */
-  padding-right: 3.5em; /* Espaço para o ícone na direita */
+  height: 3.8em;
+  padding-left: 1.5em;
+  padding-right: 3.5em;
 }
 
-/* O quadrado branco do ícone */
 .provider-banner-link .icon {
   background: white;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Tamanho e Posição */
   height: 2.2em;
   width: 2.2em;
   border-radius: 0.7em;
-  right: 0.8em; /* Posicionado na direita */
-  
+  right: 0.8em;
   box-shadow: 0.1em 0.1em 0.6em 0.2em #0f2944;
   transition: all 0.3s;
 }
 
-/* O ícone SVG (ou Lucide) dentro do quadrado branco */
 .provider-banner-link .icon svg {
   width: 1.1em;
   height: 1.1em;
   transition: transform 0.3s;
-  color: var(--header-blue); /* Cor roxa do ícone */
+  color: var(--header-blue);
 }
 
-/* --- ANIMAÇÕES DE HOVER --- */
-
-/* Estica o quadrado branco */
 .provider-banner-link:hover .icon {
   width: calc(100% - 1.6em);
 }
 
-/* Move o ícone levemente */
 .provider-banner-link:hover .icon svg {
   transform: translateX(0.1em);
 }
 
-/* Efeito de clique */
 .provider-banner-link:active .icon {
   transform: scale(0.95);
 }
-/* ====================================================== */
 
-
-/* --- MENU LEGAL --- */
 .legal-menu {
   background-color: #e9ecef;
   margin-top: 0;
 }
 
 .legal-menu li { border-color: #ddd; }
+
 .legal-menu li a { color: var(--text-gray); }
+
 .legal-menu .menu-item-left span {
   font-size: 0.95rem;
   font-weight: 400;
 }
 
-
-/* --- VERSÃO PC / NOTEBOOK --- */
 @media (min-width: 768px) {
-  
   .conta-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -261,23 +234,20 @@ ul.menu-list {
     width: 100%;
   }
 
-  /* Blocos separados e arredondados no PC */
   .user-hero,
   .main-menu,
   .provider-banner-link,
   .legal-menu {
     border-radius: 15px;
-    margin-bottom: 20px; /* Espaço entre os blocos */
+    margin-bottom: 20px;
     overflow: hidden;
   }
 
-  /* Ajuste específico para o novo botão no PC */
   .provider-banner-link {
-      margin-bottom: 20px; /* Garante o espaço embaixo */
-      border-radius: 15px; /* Mantém arredondado igual aos outros blocos */
+    margin-bottom: 20px;
+    border-radius: 15px;
   }
 
-  /* Ajuste Header PC */
   .page-header-nav {
     justify-content: flex-start;
     padding-left: 0;
@@ -294,7 +264,6 @@ ul.menu-list {
     font-size: 1.5rem;
   }
 
-  /* Itens maiores no PC */
   .menu-list li a {
     font-size: 1.1rem;
     padding: 25px;

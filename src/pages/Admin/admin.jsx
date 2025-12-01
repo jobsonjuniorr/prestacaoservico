@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { FaCheckCircle, FaTimesCircle, FaIdCard, FaUserShield } from 'react-icons/fa';
 import { ServiceContext } from "../Context/serviceContext.jsx";
+import "../../styles/admin.css";
+import "../../styles/global.css";
 
 export default function AdminPanel() {
   const { prestadores, setPrestadores } = useContext(ServiceContext);
@@ -34,10 +36,13 @@ export default function AdminPanel() {
     alert("Prestador aprovado com sucesso!");
   };
 
-  const verDocumento = (nome) => {
-    // Como não temos upload real, apenas simulamos
-    alert(`Abrindo documento (CNH/RG) de ${nome}... \n\n[Simulação: Documento Válido]`);
-  };
+ const verDocumento = (url) => {
+    if (url) {
+        window.open(url, "_blank"); // Abre a foto numa nova aba
+    } else {
+        alert("Este prestador não anexou documento (Cadastro antigo ou erro).");
+    }
+};
 
   return (
     <div className="admin-container">
@@ -66,9 +71,9 @@ export default function AdminPanel() {
                 </div>
                 
                 <div className="request-actions">
-                  <button className="btn-doc" onClick={() => verDocumento(p.nomeProfissional)}>
-                    <FaIdCard /> Ver Doc
-                  </button>
+                  <button className="btn-doc" onClick={() => verDocumento(p.docUrl)}>
+                   <FaIdCard /> Ver Doc
+                   </button>
                   <button className="btn-approve" onClick={() => aprovarPrestador(p.id)}>
                     <FaCheckCircle /> Aprovar
                   </button>

@@ -1,4 +1,3 @@
-/* prestadorRegister.css Atualizado */
 
 :root {
     --primary-blue: #1A8BF0;
@@ -100,7 +99,7 @@
     font-size: 0.95rem;
 }
 
-/* --- ESTILOS DE UPLOAD --- */
+
 .file-input-wrapper {
     display: flex;
     align-items: center;
@@ -202,7 +201,7 @@
     margin-top: 5px;
 }
 
-/* --- ESTILOS DE DISPONIBILIDADE (CHECKBOX CARDS) --- */
+
 .availability-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -274,7 +273,7 @@
     }
     
     .input-row.compact {
-        grid-template-columns: 1fr; /* Em mobile, inputs de serviço empilham */
+        grid-template-columns: 1fr; 
     }
     
     .add-btn {

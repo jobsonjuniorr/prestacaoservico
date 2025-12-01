@@ -14,10 +14,10 @@
 }
 
 html, body {
-  overflow-x: hidden; /* Proíbe rolagem horizontal indesejada */
+  overflow-x: hidden; 
   width: 100%;
-  font-family: 'Segoe UI', sans-serif; /* Fonte padrão bonita */
-  -webkit-font-smoothing: antialiased; /* Deixa a fonte mais nítida */
+  font-family: 'Segoe UI', sans-serif; 
+  -webkit-font-smoothing: antialiased; 
   background: var(--cinza-claro);
 }
 
