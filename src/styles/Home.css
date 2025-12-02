@@ -260,7 +260,6 @@ body {
   border-radius: 20px;
   padding: 3px; 
   background-image: linear-gradient(144deg,#1A8BF0,#2368E8 50%, #00C4FF);
-
   box-shadow: 0 10px 20px rgba(26, 139, 240, 0.15);
   transition: transform 0.2s;
 }
@@ -367,11 +366,11 @@ body {
 
 .orcamento-btn {
   align-self: flex-end;
-  background-color: var(--primary-blue); 
+  background-image: linear-gradient(144deg,#1A8BF0,#2368E8 50%, #00C4FF);
   color: white;
   border: none;
   padding: 8px 20px;
-  border-radius: 20px; 
+  border-radius: 20px;
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
@@ -380,16 +379,20 @@ body {
 }
 
 .orcamento-btn:hover {
-  background-color: #1570c4;
+  filter: brightness(1.2);
 }
 
-
+.desktop-footer {
+  display: none;
+}
+/* --- VERSÃO PC (Grid e Ajustes) --- */
 @media (min-width: 768px) {
   .home-container {
-    padding: 0 5%;
-    max-width: 1200px;
+    padding: 0 2%; /* Reduced side padding to fill more space */
+    max-width: 1400px; /* Increased max-width for wider screens */
     margin: 0 auto;
     padding-bottom: 50px;
+    padding-bottom: 0; /* Remove o espaço branco embaixo do footer */
   }
 
   .home-header {
@@ -435,10 +438,88 @@ body {
     font-size: 1.2rem;
   }
 
-
+  /* Grid no PC com os novos cards */
   .providers-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 30px;
   }
+
+.desktop-footer {
+    display: block; /* Agora ele aparece! */
+    background-color: #1A8BF0;
+    color: #ffffff; /* Texto cinza claro para não cansar a vista */
+    padding: 60px 0 0 0;
+    margin-top: 60px; /* Espaço para separar do conteúdo */
+    border-top-left-radius: 50px; /* Um charme visual no topo */
+    border-top-right-radius: 50px;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr; /* Coluna da marca é maior */
+    gap: 40px;
+    padding: 0 40px 50px 40px;
+  }
+
+  /* Coluna da Marca */
+  .brand-col p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 20px 0;
+    opacity: 0.8;
+    max-width: 300px;
+  }
+
+  .footer-logo {
+    max-width: 140px; 
+  }
+
+  /* Ícones Sociais */
+  .social-icons {
+    display: flex;
+    gap: 15px;
+  }
+
+  /* Links e Títulos */
+  .footer-column h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-column ul li {
+    margin-bottom: 12px;
+  }
+
+  .footer-column ul li a {
+    color: #0a2c52;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s, padding-left 0.2s;
+  }
+
+  .footer-column ul li a:hover {
+    color: white;
+    padding-left: 5px; /* Efeitinho de "andar" para a direita */
+  }
+
+  /* Rodapézinho do Copyright */
+  .footer-bottom {
+    background-color: rgba(0, 0, 0, 0.2); /* Um pouco mais escuro que o footer */
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #ffffff;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
 }

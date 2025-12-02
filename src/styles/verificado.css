@@ -1,0 +1,220 @@
+/* 
+
+:root {
+  --primary-blue: #1A8BF0;
+  --header-blue: #2d8cff;
+  --bg-gray: #f2f4f7;
+  --white: #ffffff;
+  --text-dark: #333;
+  --text-gray: #666;
+  --success-green: #28a745;
+  --warning-orange: #ffc107;
+  --border-color: #eee;
+}
+
+.verificado-container {
+  background-color: var(--bg-gray);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+}
+
+
+.page-header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 15px 20px;
+  background-color: var(--bg-gray);
+  margin-bottom: 10px;
+}
+
+.back-btn {
+  position: absolute;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  z-index: 10;
+}
+
+.page-header-title {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-gray);
+  margin: 0;
+  font-weight: 500;
+  width: 100%;
+}
+
+
+.content-card {
+  background-color: var(--white);
+  margin: 0 20px;
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.status-icon-box {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.status-approved { background-color: #d4edda; color: var(--success-green); }
+.status-pending { background-color: #fff3cd; color: #856404; }
+.status-initial { background-color: #e0f0ff; color: var(--primary-blue); }
+
+.status-title {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.status-text {
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.instruction-box {
+  background-color: #f8f9fa;
+  border: 1px dashed var(--primary-blue);
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.instruction-title {
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.instruction-list {
+  padding-left: 20px;
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.instruction-list li { margin-bottom: 8px; }
+
+
+.security-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: #888;
+  background-color: #f0f2f5;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+.upload-area {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-gray);
+}
+
+.upload-label:hover {
+  border-color: var(--primary-blue);
+  background-color: #f9fcff;
+  color: var(--primary-blue);
+}
+
+.file-name-display {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--success-green);
+  font-weight: 600;
+}
+
+
+.verify-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.verify-btn:hover { background-color: #1570c4; }
+.verify-btn:disabled { background-color: #ccc; cursor: not-allowed; }
+
+
+@media (min-width: 768px) {
+  .verificado-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .content-card {
+    max-width: 600px;
+    padding: 50px;
+  }
+
+  .page-header-nav {
+    justify-content: flex-start;
+    padding-left: 0;
+    width: 100%;
+    max-width: 600px; 
+  }
+
+  .back-btn {
+    position: static;
+    margin-right: 15px;
+  }
+
+  .page-header-title {
+    text-align: left;
+    width: auto;
+    font-size: 1.5rem;
+  }
+}*/
