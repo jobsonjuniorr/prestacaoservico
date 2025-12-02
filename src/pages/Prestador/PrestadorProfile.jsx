@@ -129,7 +129,7 @@ export default function PrestadorProfile() {
                             className="contract-btn" 
                             onClick={() => navigate(`/solicitar/${prestador.id}`)}
                         >
-                            Contratar Serviço
+                            Solicitar o Serviço
                         </button>
                     </div>
                 </div>

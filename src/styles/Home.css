@@ -244,6 +244,51 @@ body {
   color: var(--text-dark);
   cursor: pointer;
 }
+.filters-box {
+  background: white;
+  padding: 15px 20px;
+  margin: 0 20px 20px 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  animation: fadeDown 0.25s ease;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.filter-option:hover {
+  background-color: #f4f8ff;
+}
+
+.filter-option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-blue);
+}
+
+.filter-option.active {
+  background-color: #dbeafe;
+  border: 1px solid var(--primary-blue);
+  color: var(--primary-blue);
+}
 
 
 .providers-list {
