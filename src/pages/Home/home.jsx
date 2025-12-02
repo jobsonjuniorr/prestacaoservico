@@ -24,6 +24,12 @@ const HomeScreen = () => {
   const { prestadores } = useContext(ServiceContext);
 
   const [searchText, setSearchText] = useState("");
+
+  const [showFilterMenu, setShowFilterMenu] = useState(false);
+  const [filterUrgent, setFilterUrgent] = useState(false);
+  const [filterSchedule, setFilterSchedule] = useState(false);
+  const [filterVerified, setFilterVerified] = useState(false);
+
   const navigate = useNavigate();
 
   const banners = [
@@ -63,16 +69,24 @@ const HomeScreen = () => {
     
   }));
 
-  const filteredProviders = normalizedProviders.filter(provider => {
-    const matchCategory =
-      selectedCategory === "Todos" || provider.category === selectedCategory;
+  const applyFilters = () => {
+    return normalizedProviders.filter(provider => {
 
-    const matchSearch =
-      provider.role.toLowerCase().includes(searchText.toLowerCase()) ||
-      provider.name.toLowerCase().includes(searchText.toLowerCase());
+      const matchCategory =
+        selectedCategory === "Todos" || provider.category === selectedCategory;
 
-    return matchCategory && matchSearch;
-  });
+      const matchSearch =
+        provider.role?.toLowerCase().includes(searchText.toLowerCase()) ||
+        provider.name?.toLowerCase().includes(searchText.toLowerCase());
+
+      if (filterUrgent && !provider.urgent) return false;
+      if (filterSchedule && !provider.calendar) return false;
+      if (filterVerified && !provider.verified) return false;
+
+      return matchCategory && matchSearch;
+    });
+  };
+  const filteredProviders = applyFilters();
 
   const renderStars = (rating) => {
     return (
@@ -156,11 +170,52 @@ const HomeScreen = () => {
 
       {/* --- FILTROS --- */}
       <section className="filters-section">
-        <button className="filter-btn">
+        <button
+          className="filter-btn"
+          onClick={() => setShowFilterMenu(!showFilterMenu)}
+        >
           <LuFilter className="icon-btn" /> Filtrar
         </button>
       </section>
 
+      {showFilterMenu && (
+        <div className="filters-box">
+
+          <label className="filter-option">
+            <input
+              type="checkbox"
+              checked={filterUrgent}
+              onChange={() => {
+                setFilterUrgent(!filterUrgent);
+                setFilterSchedule(false);
+              }}
+            />
+            Disponível imediato
+          </label>
+
+          <label className="filter-option">
+            <input
+              type="checkbox"
+              checked={filterSchedule}
+              onChange={() => {
+                setFilterSchedule(!filterSchedule);
+                setFilterUrgent(false);
+              }}
+            />
+            Disponível com agenda
+          </label>
+
+          <label className="filter-option">
+            <input
+              type="checkbox"
+              checked={filterVerified}
+              onChange={() => setFilterVerified(!filterVerified)}
+            />
+            Verificado
+          </label>
+
+        </div>
+      )}
       {/* --- LISTA DE PRESTADORES --- */}
       <section className="providers-list">
         {filteredProviders.length > 0 ? (
@@ -226,7 +281,8 @@ const HomeScreen = () => {
 
       <footer className="desktop-footer">
         <div className="footer-content">
-          
+
+          {/* Coluna 1 */}
           <div className="footer-column brand-col">
             <img src={logoImg} alt="Local+ Logo" className="footer-logo" />
             <p>Conectando você aos melhores profissionais da sua cidade de forma rápida, segura e eficiente.</p>
