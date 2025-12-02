@@ -5,14 +5,13 @@ export default function SolicitacoesRecebidas() {
   const solicitacoes = JSON.parse(localStorage.getItem("solicitacoes")) || [];
   const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-  // Verifica se esse usuário é um prestador
   const meuPrestador = prestadores.find(p => p.usuarioId === loggedUser.id);
 
   if (!meuPrestador) {
     return <p>Você não é um prestador, portanto não tem solicitações recebidas.</p>;
   }
 
-  // Solicitações para esse prestador
+
   const minhasSolicitacoes = solicitacoes.filter(
     s => s.prestadorId === meuPrestador.id
   );

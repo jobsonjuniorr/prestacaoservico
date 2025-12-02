@@ -6,7 +6,7 @@ import {
   LuBadgeCheck, 
   LuMessageSquare, 
   LuLogOut, 
-  LuBriefcase, // Usaremos a maleta dentro do botão novo
+  LuBriefcase, 
   LuFileText,
   LuChevronRight,
   LuChevronLeft 
@@ -106,41 +106,16 @@ export default function ContaUsuario() {
         </li>
       </ul>
 
-      {/* --- BOTÃO NOVO (ESTILO UIVERSE INTEGRADO) --- */}
       <Link to="/prestador/register" className="provider-banner-link">
         <span>Começar a prestar serviços</span>
         <div className="icon">
-            {/* Usando o ícone da maleta para manter contexto */}
+         
             <LuBriefcase /> 
         </div>
       </Link>
-      {/* --------------------------------------------- */}
+    
 
       <ul className="menu-list legal-menu">
-        <li>
-            <a href="/pdfs/guia_de_uso.pdf" target="_blank" rel="noopener noreferrer">
-                <div className="menu-item-left">
-                    <LuFileText size={24} className="menu-icon-gray" />
-                    <span>Guia de uso</span>
-                </div>
-            </a>
-        </li>
-        <li>
-            <a href="/pdfs/termos_de_uso.pdf" target="_blank" rel="noopener noreferrer">
-                <div className="menu-item-left">
-                    <LuFileText size={24} className="menu-icon-gray" />
-                    <span>Termos de uso</span>
-                </div>
-            </a>
-        </li>
-        <li>
-            <a href="/pdfs/politica_privacidade.pdf" target="_blank" rel="noopener noreferrer">
-                <div className="menu-item-left">
-                    <LuFileText size={24} className="menu-icon-gray" />
-                    <span>Política de privacidade</span>
-                </div>
-            </a>
-        </li>
       </ul>
 
     </div>

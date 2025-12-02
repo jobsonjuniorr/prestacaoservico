@@ -380,7 +380,7 @@ body {
 }
 
 .stars {
-  color: rgb(180, 180, 180);
+  color: #FFD700;
   font-size: 0.9rem;
   display: flex; 
   gap: 2px;

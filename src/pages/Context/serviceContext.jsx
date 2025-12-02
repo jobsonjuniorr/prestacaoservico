@@ -5,77 +5,103 @@ export const ServiceContext = createContext();
 export function ServiceProvider({ children }) {
   const [prestadores, setPrestadores] = useState([]);
 
-  // Prestadores fixos (Exemplos)
   const fakeData = [
-    {
-      id: 1,
-      nomeProfissional: "João Silva",
-      email: "joao@gmail.com",
-      area: "Eletricista",
-      descricao: "Instalações elétricas em geral",
-      preco: 120,
-      img: "https://i.pravatar.cc/150?img=11",
-      category: "Reforma",
-      verified: true,
-      urgent: false,
-      calendar: true,
-      extraInfo: {
-        Agenda: "Verificar com prestador",
-        Disponibilidade: "Disponível com agenda"
-        
-      }
+  {
+    id: 1,
+    usuarioId: 0, // 0 = prestador fictício
+    nomeProfissional: "João Silva",
+    email: "joao@gmail.com",
+    area: "Eletricista",
+    descricao: "Instalações elétricas em geral",
+    preco: "120.00",
+    img: "https://i.pravatar.cc/150?img=11",
+    category: "Reforma",
+    verified: true,
+    urgent: true,
+    calendar: true,
+    cpf: "",
+    dadosAgenda: {
+      tipo: "contato",
+      link: ""
     },
-    {
-      id: 2,
-      nomeProfissional: "Maria Santos",
-      email: "maria@gmail.com",
-      area: "Diarista",
-      descricao: "Limpeza residencial e comercial",
-      preco: 150,
-      img: "https://i.pravatar.cc/150?img=5",
-      category: "Limpeza",
-      rating: 5,
-      reviews: 210,
-      verified: true,
-      urgent: true,
-      calendar: false,
-      extraInfo: {
-        Agenda: "Verificar com prestador",
-        Disponibilidade: "Disponível imediato"
-        
-      }
+    extraInfo: {
+      Serviços: "2 opções disponíveis",
+      Disponibilidade: "Disponível com agenda"
     },
-    {
-      id: 3,
-      nomeProfissional: "Carlos Andrade",
-      email: "carlos@gmail.com",
-      area: "Técnico de TI",
-      descricao: "Conserto de vazamentos e manutenção",
-      preco: 180,
-      img: "https://i.pravatar.cc/150?img=3",
-      category: "Tecnologia",
-      rating: 5,
-      reviews: 89,
-      verified: true,
-      urgent: true,
-      calendar: false,
-      extraInfo: {
-         Agenda: "Verificar com prestador",
-        Disponibilidade: "Disponível imediato"
-       
-      }
+    listaServicos: [
+      { id: 101, nome: "Instalação simples", preco: "120.00" },
+      { id: 102, nome: "Reparo elétrico", preco: "180.00" }
+    ]
+  },
+
+  {
+    id: 2,
+    usuarioId: 0,
+    nomeProfissional: "Maria Santos",
+    email: "maria@gmail.com",
+    area: "Diarista",
+    descricao: "Limpeza residencial e comercial",
+    preco: "150.00",
+    img: "https://i.pravatar.cc/150?img=5",
+    category: "Limpeza",
+    verified: true,
+    urgent: false,
+    calendar: true,
+    cpf: "",
+    dadosAgenda: {
+      tipo: "contato",
+      link: ""
     },
-  ];
+    extraInfo: {
+      Serviços: "3 opções disponíveis",
+      Disponibilidade: "Atende Imediato"
+    },
+    listaServicos: [
+      { id: 201, nome: "Limpeza básica", preco: "150.00" },
+      { id: 202, nome: "Limpeza pesada", preco: "250.00" },
+      { id: 203, nome: "Limpeza pós-obra", preco: "350.00" }
+    ]
+  },
+
+  {
+    id: 3,
+    usuarioId: 0,
+    nomeProfissional: "Carlos Andrade",
+    email: "carlos@gmail.com",
+    area: "Técnico de TI",
+    descricao: "Conserto de computadores e suporte técnico",
+    preco: "180.00",
+    img: "https://i.pravatar.cc/150?img=3",
+    category: "Tecnologia",
+    verified: true,
+    urgent: true,
+    calendar: true,
+    cpf: "",
+    dadosAgenda: {
+      tipo: "contato",
+      link: ""
+    },
+    extraInfo: {
+      Serviços: "3 opções disponíveis",
+      Disponibilidade: "Atende Imediato"
+    },
+    listaServicos: [
+      { id: 301, nome: "Formatação", preco: "120.00" },
+      { id: 302, nome: "Limpeza interna", preco: "150.00" },
+      { id: 303, nome: "Troca de peças", preco: "180.00" }
+    ]
+  }
+];
+
 
   useEffect(() => {
-    // 1. Pega os dados salvos no navegador
+    // pega os dados salvos no navegador
     const localPrestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
 
-    // 2. Junta os fixos com os salvos
+    // junta os fixos com os salvos
     const listaCompleta = [...fakeData, ...localPrestadores];
 
-    // 3. REMOVE DUPLICATAS (A Correção Mágica) 🛠️
-    // Filtramos para garantir que não existam dois prestadores com o mesmo ID
+    //  garantir que não existam dois prestadores com o mesmo ID
     const listaUnica = listaCompleta.filter((item, index, self) =>
       index === self.findIndex((t) => (
         t.id === item.id

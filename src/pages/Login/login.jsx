@@ -37,7 +37,7 @@ export default function Login() {
     <div className="login-page">
       <form className="form" onSubmit={handleLogin}>
         
-        {/* LOGO NO TOPO DO FORM */}
+  
         <img src={logo} alt="Logo" className="logo" />
 
         <div className="flex-column">

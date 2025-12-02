@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import "../../styles/Home.css";
-// import "../../styles/global.css"; 
+import "../../styles/global.css"; 
 import { useNavigate } from "react-router-dom";
 import { ServiceContext } from "../Context/serviceContext.jsx";
 import { Link } from "react-router-dom";
@@ -63,10 +63,10 @@ const HomeScreen = () => {
     rating: p.rating || 5,
     reviews: p.reviews || 0,
     verified: p.verified,
-    urgent: p.urgent,
-    calendar: p.calendar,
+    urgent: p.urgent,     
+    calendar: p.calendar,  
     img: p.img,
-    extraInfo: p.extraInfo || {}
+    
   }));
 
   const applyFilters = () => {
@@ -101,7 +101,6 @@ const HomeScreen = () => {
   };
 
   const user = JSON.parse(localStorage.getItem("loggedUser"));
-  //   if(!user){ navigate("/login") } // Comentado para evitar loop se nao tiver login no teste
 
   return (
     <div className="home-container">
@@ -222,10 +221,9 @@ const HomeScreen = () => {
         {filteredProviders.length > 0 ? (
           filteredProviders.map((provider) => (
 
-            // 1. O PAI (Fundo Gradiente / Borda Colorida)
+            // 1. O CARD
             <div key={provider.id} className="provider-card">
 
-              {/* 2. O FILHO (Conteúdo Branco) */}
               <div className="provider-card-content">
 
                 <div className="card-left">
@@ -240,16 +238,31 @@ const HomeScreen = () => {
                     <h3 className="role-title">{provider.role}</h3>
                     {renderStars(provider.rating)}
                   </div>
-                  <div className="provider-info">
+                  
+                
+                 <div className="provider-info">
+                   
                     <p className="p-name"><LuUser /> {provider.name}</p>
-                    {Object.entries(provider.extraInfo).map(([key, text]) => (
-                      <p key={key} className="p-detail">
-                        {key === "calendar" && <LuCalendar />}
-                        {key === "urgent" && <LuClock />}
-                        {text}
-                      </p>
-                    ))}
+
+                    
+                    {provider.urgent && (
+                       <p className="p-detail" style={{color: '#d32f2f', fontWeight: '500'}}>
+                          <LuClock style={{marginRight: 5}}/> Atende Imediato
+                       </p>
+                    )}
+
+                   
+                    {provider.calendar ? (
+                       <p className="p-detail" style={{color: '#1976d2'}}>
+                          <LuCalendar style={{marginRight: 5}}/> Trabalha com Agenda
+                       </p>
+                    ) : (
+                       <p className="p-detail" style={{color: '#777'}}>
+                          <LuCalendar style={{marginRight: 5}}/> Não trabalha com agenda
+                       </p>
+                    )}
                   </div>
+                
 
                   <Link to={`/prestador/${provider.id}`}>
                     <button className="orcamento-btn">Solicitar</button>
@@ -275,7 +288,6 @@ const HomeScreen = () => {
             <p>Conectando você aos melhores profissionais da sua cidade de forma rápida, segura e eficiente.</p>
           </div>
 
-          {/* Coluna 2 */}
           <div className="footer-column">
             <h4>Empresa</h4>
             <ul>
@@ -284,7 +296,6 @@ const HomeScreen = () => {
             </ul>
           </div>
 
-          {/* Coluna 3 */}
           <div className="footer-column">
             <h4>Suporte</h4>
             <ul>
@@ -295,7 +306,6 @@ const HomeScreen = () => {
             </ul>
           </div>
 
-          {/* Coluna 4: */}
           <div className="footer-column">
             <h4>Profissionais</h4>
             <ul>

@@ -153,7 +153,7 @@
   font-size: 0.95rem;
   color: var(--text-gray);
   line-height: 1.6;
-}
+}   
 
 /* Lista de Serviços */
 .services-list {
@@ -203,6 +203,7 @@
 }
 
 .contract-btn:hover { background-color: #1570c4; }
+
 
 /* --- VERSÃO PC --- */
 @media (min-width: 768px) {

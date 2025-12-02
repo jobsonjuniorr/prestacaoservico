@@ -1,0 +1,183 @@
+/* --- src/styles/minhasSolicitacoes.css --- */
+
+:root {
+  --primary-blue: #1A8BF0;
+  --bg-gray: #f2f4f7;
+  --white: #ffffff;
+  --text-dark: #333;
+  --text-gray: #666;
+  --success-green: #28a745;
+  --warning-yellow: #ffc107;
+  --danger-red: #dc3545;
+}
+
+.requests-container {
+  background-color: var(--bg-gray);
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+.requests-header {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.requests-title {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+/* Lista de Cards */
+.requests-list {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-gray);
+  margin-top: 50px;
+  font-size: 1.1rem;
+}
+
+/* O CARD DA SOLICITAÇÃO */
+.request-card {
+  background-color: var(--white);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border-left: 5px solid #ccc; /* Cor padrão */
+  transition: transform 0.2s;
+}
+
+.request-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Cores da borda lateral conforme status */
+.status-pendente { border-left-color: var(--warning-yellow); }
+.status-aceito { border-left-color: var(--primary-blue); }
+.status-andamento { border-left-color: #17a2b8; } /* Azul turquesa */
+.status-concluido-prestador { border-left-color: orange; } /* Laranja atenção */
+.status-finalizado { border-left-color: var(--success-green); }
+.status-cancelado { border-left-color: var(--danger-red); opacity: 0.7; }
+
+/* Cabeçalho do Card */
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.service-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.provider-name {
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  margin: 2px 0 0 0;
+}
+
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Cores das Badges */
+.badge-pendente { background-color: #fff3cd; color: #856404; }
+.badge-aceito { background-color: #cce5ff; color: #004085; }
+.badge-andamento { background-color: #d1ecf1; color: #0c5460; }
+.badge-finalizado { background-color: #d4edda; color: #155724; }
+.badge-cancelado { background-color: #f8d7da; color: #721c24; }
+
+/* Corpo do Card */
+.card-body-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.info-item label { font-size: 0.8rem; color: #999; display: block; }
+.info-item span { font-size: 1rem; color: #333; font-weight: 500; }
+
+.observation-box {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+/* Área de Ação (Mensagens e Botões) */
+.action-area {
+  background-color: #f0f8ff;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+}
+
+.status-message {
+  font-size: 0.9rem;
+  color: var(--primary-blue);
+  font-weight: 500;
+}
+
+.btn-cancel {
+  background: none;
+  border: 1px solid var(--danger-red);
+  color: var(--danger-red);
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.btn-cancel:hover { background-color: #fff5f5; }
+
+.btn-finish {
+  background-color: var(--success-green);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-finish:hover { background-color: #218838; }
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .card-body-row { grid-template-columns: 1fr; }
+}
