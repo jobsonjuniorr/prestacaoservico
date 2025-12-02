@@ -9,7 +9,7 @@ import diarista from "../../assets/diarista.png";
 import equipe from "../../assets/equipe.png";
 import pedreiro from "../../assets/pedreiro.png";
 import logoImg from '../../assets/logobranca.png';
-import logoImgg from '../../assets/logolocal.png';
+
 // Ícones do sistema
 import {
   LuSearch, LuUser, LuFilter, LuArrowUpDown,
@@ -218,7 +218,7 @@ const HomeScreen = () => {
           
           {/* Coluna 1 */}
           <div className="footer-column brand-col">
-            <img src={logoImgg} alt="Local+ Logo" className="footer-logo" />
+            <img src={logoImg} alt="Local+ Logo" className="footer-logo" />
             <p>Conectando você aos melhores profissionais da sua cidade de forma rápida, segura e eficiente.</p>
           </div>
 

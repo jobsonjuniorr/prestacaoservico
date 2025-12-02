@@ -60,6 +60,7 @@
     gap: 8px;
 }
 
+
 .section-hint {
     font-size: 0.85rem;
     color: var(--text-gray);
@@ -266,6 +267,20 @@
     background-color: #1670cc;
 }
 
+/* ... seu código existente ... */
+
+/* ADICIONE ISSO NO FINAL */
+.section-title svg {
+    color: var(--primary-blue);
+    /* Força a cor mesmo se o SVG tiver style inline */
+    fill: var(--primary-blue); 
+}
+
+/* Para o ícone de upload ficar azul */
+.file-input-btn svg {
+    color: var(--primary-blue);
+}
+
 /* RESPONSIVO */
 @media (max-width: 768px) {
     .input-row, .availability-options {
@@ -279,4 +294,5 @@
     .add-btn {
         padding: 10px;
     }
+
 }

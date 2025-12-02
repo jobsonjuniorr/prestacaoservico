@@ -1,244 +1,333 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/prestadorRegister.css";
-import { FaClipboardList, FaMoneyBillWave, FaClock, FaCheckCircle, FaCalendarAlt, FaUser, FaEnvelope } from 'react-icons/fa';
-
+import "../../styles/prestadorRegister.css"; 
+import { 
+  FaMoneyBillWave, 
+  FaClock, 
+  FaCheckCircle, 
+  FaIdCard, 
+  FaFileUpload, 
+  FaTrash, 
+  FaPlusCircle, 
+  FaBriefcase 
+} from 'react-icons/fa';
 import { ServiceContext } from "../Context/serviceContext.jsx";
 
 export default function PrestadorRegister() {
+  // 1. Pega usuário logado
   const usuarioLogado = JSON.parse(localStorage.getItem("loggedUser"));
   const { adicionarPrestador } = useContext(ServiceContext);
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [area, setArea] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [preco, setPreco] = useState("");
-  const [disponibilidade, setDisponibilidade] = useState("");
-  const [urgent, setUrgent] = useState(false);
-  const [calendar, setCalendar] = useState(false);
-  const [extraUrgent, setExtraUrgent] = useState("");
-  const [extraCalendar, setExtraCalendar] = useState("");
-
   const navigate = useNavigate();
 
+  // --- ESTADOS DO FORMULÁRIO ---
+  
+  // Identificação
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [documentoFile, setDocumentoFile] = useState(null); // Simulação do arquivo
+
+  // Profissional
+  const [categoria, setCategoria] = useState(""); // Ex: Tecnologia (Para filtros)
+  const [cargo, setCargo] = useState("");         // Ex: Dev Fullstack (Para exibir no perfil)
+  const [descricao, setDescricao] = useState("");
+
+  // Lista de Serviços
+  const [servicos, setServicos] = useState([]);
+  const [tempServicoNome, setTempServicoNome] = useState("");
+  const [tempServicoPreco, setTempServicoPreco] = useState("");
+
+  // Disponibilidade
+  const [atendeImediato, setAtendeImediato] = useState(false);
+  const [atendeAgenda, setAtendeAgenda] = useState(false);
+  const [tipoAgenda, setTipoAgenda] = useState(""); // "link" ou "contato"
+  const [linkAgenda, setLinkAgenda] = useState("");
+
+  // Carrega dados iniciais
   useEffect(() => {
     if (usuarioLogado) {
       setNome(usuarioLogado.nome);
       setEmail(usuarioLogado.email);
+    } else {
+        navigate("/login");
     }
-  }, []);
+  }, [usuarioLogado, navigate]);
+
+  // --- FUNÇÕES AUXILIARES ---
+
+  const handleCpfChange = (e) => {
+    let value = e.target.value.replace(/\D/g, "");
+    if (value.length > 11) value = value.slice(0, 11);
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    setCpf(value);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) setDocumentoFile(file);
+  };
+
+  // Adicionar Serviço (Mínimo 3, Máximo 5)
+  const adicionarServico = () => {
+    if (!tempServicoNome || !tempServicoPreco) return alert("Preencha nome e preço.");
+    if (servicos.length >= 5) return alert("Máximo de 5 serviços permitidos.");
+
+    const novoServico = {
+        id: Date.now(),
+        nome: tempServicoNome,
+        preco: parseFloat(tempServicoPreco).toFixed(2)
+    };
+
+    setServicos([...servicos, novoServico]);
+    setTempServicoNome("");
+    setTempServicoPreco("");
+  };
+
+  const removerServico = (id) => {
+    setServicos(servicos.filter(s => s.id !== id));
+  };
+
+  // --- SALVAR TUDO ---
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!area || !descricao || !preco || !disponibilidade) {
-      alert("Por favor, preencha todos os campos obrigatórios.");
-      return;
-    }
+    // 1. Validações
+    if (!cpf || !documentoFile) return alert("CPF e Documento são obrigatórios.");
+    if (!categoria || !cargo || !descricao) return alert("Preencha os dados profissionais.");
+    if (servicos.length < 3) return alert("Adicione pelo menos 3 serviços na tabela.");
+    if (!atendeImediato && !atendeAgenda) return alert("Selecione sua disponibilidade.");
 
+    // 2. Cálculo do menor preço para exibir no card da Home "A partir de..."
+    const menorPreco = Math.min(...servicos.map(s => parseFloat(s.preco))).toFixed(2);
+
+    // 3. Montagem do Objeto (Compatível com PrestadorProfile.jsx)
     const novoPrestador = {
       id: Date.now(),
       usuarioId: usuarioLogado.id,
-       nomeProfissional: nome,
-      area,
-      descricao,
-      preco,
-      horarioAtendimento: disponibilidade,
-      img: "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector",
-      category: area,
-      verified: false,
-      urgent,
-      calendar,
+      nomeProfissional: nome,
+      email: email,
+      
+      // Dados para exibição na Home e Perfil
+      area: cargo,          // Ex: "Manicure"
+      category: categoria,  // Ex: "Beleza" (usado no filtro da Home)
+      descricao: descricao,
+      preco: menorPreco,    // Ex: "50.00"
+      img: "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector", // Placeholder
+      
+      // Status
+      verified: false, // Começa falso, Admin aprova depois
+      
+      // Flags lógicas para ícones
+      urgent: atendeImediato,
+      calendar: atendeAgenda,
+      
+      // Dados completos (para uso futuro ou admin)
+      cpf: cpf,
+      docNome: documentoFile.name, // Apenas simulando o arquivo
+      listaServicosCompleta: servicos, // Salvamos a lista toda aqui
+      
+      // Mapeamento para o "Informações Adicionais" do PrestadorProfile
       extraInfo: {
-        Disponibilidade: extraUrgent || "Verificar com prestador",
-        Agenda: extraCalendar || "Disponível imediato"
-      }
+        "Disponibilidade": atendeImediato ? "Atende Imediato" : "Apenas Agendado",
+        "Agenda": atendeAgenda ? (tipoAgenda === 'link' ? "Link Externo" : "Combinar via Chat") : "Não agendado",
+        "Qtd. Serviços": `${servicos.length} opções disponíveis`
+      },
+      
+      // Campo necessário para o PrestadorProfile exibir horário (adaptamos)
+      horarioAtendimento: atendeImediato ? "Plantão / Imediato" : "Horário Comercial"
     };
 
+    // 4. Envia para o Contexto
     adicionarPrestador(novoPrestador);
-    alert("Prestador cadastrado com sucesso!");
+    
+    alert("Solicitação de cadastro enviada! Aguarde a verificação do documento.");
     navigate("/home");
   }
+
   return (
     <div className="register-page-container">
       <form onSubmit={handleSubmit} className="register-form-card">
-        <h2 className="card-title">Cadastro de Prestador</h2>
-        <p className="card-subtitle">Informe os detalhes do seu serviço para começar a atender.</p>
+        <h2 className="card-title">Torne-se um Prestador</h2>
+        <p className="card-subtitle">Complete seu cadastro profissional para começar.</p>
 
-        {/* Informações Básicas em Linha */}
+        {/* 1. DADOS PESSOAIS E DOCUMENTOS */}
         <div className="form-section">
-          <h3 className="section-title"><FaUser /> Informações Pessoais</h3>
+          <h3 className="section-title"><FaIdCard /> Documentação Obrigatória</h3>
           <div className="input-row">
             <div className="input-group">
-              <label htmlFor="nome-disabled" className="input-label">Nome Completo</label>
-              <input id="nome-disabled" className="input-field" value={nome} disabled />
+              <label className="input-label required">CPF</label>
+              <input 
+                className="input-field" 
+                value={cpf} 
+                onChange={handleCpfChange} 
+                placeholder="000.000.000-00"
+                maxLength="14"
+              />
             </div>
+            
             <div className="input-group">
-              <label htmlFor="email-disabled" className="input-label">Email de Contato</label>
-              <input id="email-disabled" className="input-field" value={email} disabled />
+                <label className="input-label required">Documento com Foto (Frente)</label>
+                <div className="file-input-wrapper">
+                    <input type="file" id="doc-upload" accept="image/*" onChange={handleFileChange} className="file-input-hidden" />
+                    <label htmlFor="doc-upload" className="file-input-btn">
+                        <FaFileUpload /> {documentoFile ? "Arquivo Selecionado" : "Anexar RG/CNH"}
+                    </label>
+                    {documentoFile && <span className="file-name">{documentoFile.name}</span>}
+                </div>
             </div>
           </div>
         </div>
 
-        {/* Campos de Serviço em Linha */}
+        {/* 2. DADOS PROFISSIONAIS */}
         <div className="form-section">
-          <h3 className="section-title"><FaClipboardList /> Detalhes do Serviço</h3>
-
+          <h3 className="section-title"><FaBriefcase /> Perfil Profissional</h3>
+          
           <div className="input-row">
             <div className="input-group">
-              <label htmlFor="area-atuacao" className="input-label required">Área de Atuação</label>
-              <input
-                id="area-atuacao"
-                className="input-field"
-                placeholder="Ex: Eletricista, Programador"
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                required
-              />
+              <label className="input-label required">Categoria Principal</label>
+              <select 
+                className="select-field" 
+                value={categoria} 
+                onChange={(e) => setCategoria(e.target.value)}
+              >
+                <option value="">Selecione...</option>
+                <option value="Tecnologia">Tecnologia</option>
+                <option value="Reformas">Reformas</option>
+                <option value="Beleza">Beleza</option>
+                <option value="Limpeza">Limpeza</option>
+                <option value="Aulas">Aulas</option>
+                <option value="Saúde">Saúde</option>
+              </select>
             </div>
 
             <div className="input-group">
-              <label htmlFor="preco" className="input-label required"><FaMoneyBillWave /> Preço (R$)</label>
-              <input
-                id="preco"
-                type="number"
-                className="input-field"
-                placeholder="Ex: 50.00"
-                value={preco}
-                onChange={(e) => setPreco(e.target.value)}
-                required
+              <label className="input-label required">Seu Cargo / Especialidade</label>
+              <input 
+                className="input-field" 
+                placeholder="Ex: Programador Java, Manicure..." 
+                value={cargo}
+                onChange={(e) => setCargo(e.target.value)}
               />
             </div>
           </div>
 
           <div className="input-group">
-            <label htmlFor="descricao" className="input-label required">Descrição do Serviço</label>
+            <label className="input-label required">Descrição do Profissional</label>
             <textarea
-              id="descricao"
               className="textarea-field"
-              placeholder="Descreva seu serviço, experiência e diferenciais..."
+              placeholder="Fale sobre sua experiência, tempo de mercado e diferenciais..."
               value={descricao}
               onChange={(e) => setDescricao(e.target.value)}
               rows="3"
-              required
             />
           </div>
         </div>
 
+        {/* 3. LISTA DE SERVIÇOS */}
         <div className="form-section">
-          <h3 className="section-title"><FaClock /> Disponibilidade e Atendimento</h3>
-
-          <div className="input-row">
-            <div className="input-group">
-              <label htmlFor="disponibilidade" className="input-label required">Período Principal</label>
-              <select
-                id="disponibilidade"
-                className="select-field"
-                value={disponibilidade}
-                onChange={(e) => setDisponibilidade(e.target.value)}
-                required
-              >
-                <option value="" disabled>Selecione o período</option>
-                <option value="Manhã">Manhã (08h - 12h)</option>
-                <option value="Tarde">Tarde (12h - 18h)</option>
-                <option value="Noite">Noite (18h - 22h)</option>
-                <option value="Integral">Integral</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="options-row">
-            {/* Opções de Urgência */}
-            <div className="option-container">
-              <div className="option-group">
-                <label className="option-label">
-                  <input
-                    type="radio"
-                    name="urgent-option"
-                    value="no-urgent"
-                    checked={!urgent}
-                    onChange={() => {
-                      setUrgent(false);
-                      setExtraUrgent("");
-                    }}
-                  />
-                  <span className="option-checkmark"></span>
-                  <span className="option-text">Atende urgência</span>
-                </label>
-
-                <label className="option-label">
-                  <input
-                    type="radio"
-                    name="urgent-option"
-                    value="urgent"
-                    checked={urgent}
-                    onChange={() => setUrgent(true)}
-                  />
-                  <span className="option-checkmark"></span>
-                  <span className="option-text">Disponibilidade de ugência</span>
-                </label>
-              </div>
-
-              {urgent && (
-                <div className="input-group extra-info-group">
-                  <input
-                    id="extra-urgent"
-                    className="input-field"
-                    placeholder="Mensagem sobre urgência"
-                    value={extraUrgent}
-                    onChange={(e) => setExtraUrgent(e.target.value)}
-                  />
+            <h3 className="section-title"><FaMoneyBillWave /> Tabela de Serviços (Mín. 3)</h3>
+            <p className="section-hint">Adicione entre 3 e 5 serviços com preço base.</p>
+            
+            <div className="add-service-box">
+                <div className="input-row compact">
+                    <input 
+                        className="input-field" 
+                        placeholder="Nome do serviço"
+                        value={tempServicoNome}
+                        onChange={(e) => setTempServicoNome(e.target.value)}
+                    />
+                    <input 
+                        type="number"
+                        className="input-field" 
+                        placeholder="Preço R$"
+                        value={tempServicoPreco}
+                        onChange={(e) => setTempServicoPreco(e.target.value)}
+                    />
+                    <button type="button" className="add-btn" onClick={adicionarServico} disabled={servicos.length >= 5}>
+                        <FaPlusCircle />
+                    </button>
                 </div>
-              )}
             </div>
 
-            {/* Opções de Agenda Flexível */}
-            <div className="option-container">
-              <div className="option-group">
-                <label className="option-label">
-                  <input
-                    type="radio"
-                    name="calendar-option"
-                    value="no-calendar"
-                    checked={!calendar}
-                    onChange={() => {
-                      setCalendar(false);
-                      setExtraCalendar("");
-                    }}
-                  />
-                  <span className="option-checkmark"></span>
-                  <span className="option-text">Horário padrão</span>
+            <div className="services-list-display">
+                {servicos.length === 0 && <span className="empty-msg">Nenhum serviço adicionado ainda.</span>}
+                
+                {servicos.map((servico) => (
+                    <div key={servico.id} className="service-item-row">
+                        <span className="svc-name">{servico.nome}</span>
+                        <span className="svc-price">R$ {servico.preco}</span>
+                        <button type="button" className="remove-btn" onClick={() => removerServico(servico.id)}>
+                            <FaTrash />
+                        </button>
+                    </div>
+                ))}
+            </div>
+            {servicos.length > 0 && servicos.length < 3 && (
+                <p className="error-text">Adicione mais {3 - servicos.length} serviços para continuar.</p>
+            )}
+        </div>
+        
+        {/* 4. DISPONIBILIDADE */}
+        <div className="form-section">
+            <h3 className="section-title"><FaClock /> Disponibilidade (Marque pelo menos um)</h3>
+            
+            <div className="availability-options">
+                <label className={`check-box-card ${atendeImediato ? 'active' : ''}`}>
+                    <input 
+                        type="checkbox" 
+                        checked={atendeImediato}
+                        onChange={(e) => setAtendeImediato(e.target.checked)}
+                    />
+                    <div className="check-content">
+                        <strong>Atendimento Imediato</strong>
+                        <span>Posso atender chamados de urgência agora.</span>
+                    </div>
                 </label>
 
-                <label className="option-label">
-                  <input
-                    type="radio"
-                    name="calendar-option"
-                    value="calendar"
-                    checked={calendar}
-                    onChange={() => setCalendar(true)}
-                  />
-                  <span className="option-checkmark"></span>
-                  <span className="option-text">Agenda flexível</span>
+                <label className={`check-box-card ${atendeAgenda ? 'active' : ''}`}>
+                    <input 
+                        type="checkbox" 
+                        checked={atendeAgenda}
+                        onChange={(e) => setAtendeAgenda(e.target.checked)}
+                    />
+                    <div className="check-content">
+                        <strong>Trabalho com Agenda</strong>
+                        <span>O cliente marca um horário futuro.</span>
+                    </div>
                 </label>
-              </div>
+            </div>
 
-              {calendar && (
-                <div className="input-group extra-info-group">
-                  <input
-                    id="extra-calendar"
-                    className="input-field"
-                    placeholder="Mensagem sobre agenda"
-                    value={extraCalendar}
-                    onChange={(e) => setExtraCalendar(e.target.value)}
-                  />
+            {atendeAgenda && (
+                <div className="agenda-details fade-in">
+                    <label className="input-label">Como o cliente agenda?</label>
+                    <div className="input-row">
+                        <select 
+                            className="select-field"
+                            value={tipoAgenda}
+                            onChange={(e) => setTipoAgenda(e.target.value)}
+                        >
+                            <option value="">Selecione...</option>
+                            <option value="contato">Entrar em contato para combinar</option>
+                            <option value="link">Link externo (Calendly, Google Agenda...)</option>
+                        </select>
+                        
+                        {tipoAgenda === 'link' && (
+                            <input 
+                                className="input-field" 
+                                placeholder="Cole o link da sua agenda aqui"
+                                value={linkAgenda}
+                                onChange={(e) => setLinkAgenda(e.target.value)}
+                            />
+                        )}
+                    </div>
                 </div>
-              )}
-            </div>
-          </div>
+            )}
         </div>
 
         <button type="submit" className="submit-btn">
-          Cadastrar Serviço <FaCheckCircle style={{ marginLeft: '8px' }} />
+          Finalizar Cadastro <FaCheckCircle style={{marginLeft: '8px'}} />
         </button>
       </form>
     </div>

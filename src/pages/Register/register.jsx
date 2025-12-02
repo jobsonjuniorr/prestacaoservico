@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/register.css";
-import user from "../../data/users";
+import user from "../../data/users"; // Se esse arquivo existir mesmo
 import logo from "../../assets/logo.png"; 
 
 export default function Register() {
@@ -17,16 +17,19 @@ export default function Register() {
   function handleRegister(e) {
     e.preventDefault();
 
+    // 1. Busca usuários existentes
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
+    // 2. Validações
     const userExists = users.find((u) => u.email === email);
     if (userExists) {
       alert("Já existe um usuário com este e-mail!");
       return;
     }
 
+    // Verifica no arquivo estático E no localStorage
     const cpfExists =
-      user.find((u) => u.cpf === cpf) || users.find((u) => u.cpf === cpf);
+      (user && user.find((u) => u.cpf === cpf)) || users.find((u) => u.cpf === cpf);
 
     if (cpfExists) {
       setCpfError("Este CPF já está cadastrado.");
@@ -35,20 +38,32 @@ export default function Register() {
 
     setCpfError("");
 
-    const newUser = { nome, email, senha, telefone, cpf };
+    // 3. CRIAÇÃO DO USUÁRIO (COM O ID MÁGICO)
+    const newUser = { 
+        id: Date.now(), // <--- ISSO AQUI É O QUE FALTAVA!
+        nome, 
+        email, 
+        senha, 
+        telefone, 
+        cpf,
+        isAdmin: false // Já deixa preparado para o futuro
+    };
+
+    // 4. Salva no banco de dados (users)
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
 
+    // 5. FAZ O LOGIN AUTOMÁTICO (Salva na sessão atual)
+    localStorage.setItem("loggedUser", JSON.stringify(newUser));
+
     alert("Usuário cadastrado com sucesso!");
-    navigate("/");
+    navigate("/home"); // Manda direto para a Home logado
   }
 
   function formatTelefone(value) {
     value = value.replace(/\D/g, "");
-
     if (value.length <= 2) return `(${value}`;
     if (value.length <= 9) return `(${value.slice(0, 2)}) ${value.slice(2)}`;
-
     return `(${value.slice(0, 2)}) ${value.slice(2, 9)}-${value.slice(9, 11)}`;
   }
 
@@ -169,7 +184,7 @@ export default function Register() {
         </button>
 
         <p className="p">
-          Já tem conta? <a href="/" className="span">Voltar</a>
+          Já tem conta? <a href="/login" className="span">Faça login</a>
         </p>
       </form>
     </div>

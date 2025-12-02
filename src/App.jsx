@@ -15,7 +15,7 @@ import AutoLoginScreen from "./pages/Login/autoLoginScreen.jsx";
 import ContaUsuario from "./pages/ContaUsuario/ContaUsuario.jsx"; 
 import AdminPanel from "./pages/Admin/admin.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
-
+import Verificado from "./pages/Verificado/verificado.jsx"; 
 
 export default function App() {
   return (
@@ -36,6 +36,8 @@ export default function App() {
           <Route path="/auto-login" element={<AutoLoginScreen />} />
           <Route path="/ajuda" element={<Help />} />            
           <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
+          <Route path="/verificado" element={<Verificado />} />
+
         </Routes>
       </BrowserRouter>
     </ServiceProvider>

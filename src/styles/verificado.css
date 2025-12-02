@@ -1,4 +1,3 @@
-/* 
 
 :root {
   --primary-blue: #1A8BF0;
@@ -172,7 +171,7 @@
 .verify-btn {
   width: 100%;
   padding: 16px;
-  background-color: var(--primary-blue);
+  background-color: #1570c4;
   color: white;
   border: none;
   border-radius: 12px;
@@ -184,6 +183,26 @@
 
 .verify-btn:hover { background-color: #1570c4; }
 .verify-btn:disabled { background-color: #ccc; cursor: not-allowed; }
+
+/* ... seu código existente ... */
+
+/* ADICIONE ISSO NO FINAL */
+.status-icon-box svg {
+    /* Alguns ícones usam stroke (linha), outros fill (preenchimento) */
+    color: currentColor; 
+}
+
+.status-initial svg {
+    color: var(--primary-blue);
+}
+
+.instruction-title svg {
+    color: var(--primary-blue);
+}
+
+.upload-label svg {
+    color: var(--primary-blue);
+}
 
 
 @media (min-width: 768px) {
@@ -217,4 +236,4 @@
     width: auto;
     font-size: 1.5rem;
   }
-}*/
+}
