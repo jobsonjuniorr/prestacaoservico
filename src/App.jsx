@@ -16,6 +16,7 @@ import ContaUsuario from "./pages/ContaUsuario/ContaUsuario.jsx";
 import AdminPanel from "./pages/Admin/admin.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
 
+
 export default function App() {
   return (
     <ServiceProvider>

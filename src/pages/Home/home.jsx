@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import "../../styles/Home.css";
-import "../../styles/global.css";
-// import "../../styles/global.css"; // Se necessário
+// import "../../styles/global.css"; 
 import { useNavigate } from "react-router-dom";
 import { ServiceContext } from "../Context/serviceContext.jsx";
 import { Link } from "react-router-dom";
@@ -10,8 +9,8 @@ import diarista from "../../assets/diarista.png";
 import equipe from "../../assets/equipe.png";
 import pedreiro from "../../assets/pedreiro.png";
 import logoImg from '../../assets/logobranca.png';
-
-// icon
+import logoImgg from '../../assets/logolocal.png';
+// Ícones do sistema
 import {
   LuSearch, LuUser, LuFilter, LuArrowUpDown,
   LuLayoutGrid, LuSparkles, LuMonitor, LuHammer, LuPalette, LuBookOpen,
@@ -165,7 +164,7 @@ const HomeScreen = () => {
         </button>
       </section>
 
-      {/* --- LISTA DE PRESTADORES (CARDS NOVOS) --- */}
+      {/* --- LISTA DE PRESTADORES --- */}
       <section className="providers-list">
         {filteredProviders.length > 0 ? (
           filteredProviders.map((provider) => (
@@ -213,6 +212,52 @@ const HomeScreen = () => {
           </p>
         )}
       </section>
+
+      <footer className="desktop-footer">
+        <div className="footer-content">
+          
+          {/* Coluna 1 */}
+          <div className="footer-column brand-col">
+            <img src={logoImgg} alt="Local+ Logo" className="footer-logo" />
+            <p>Conectando você aos melhores profissionais da sua cidade de forma rápida, segura e eficiente.</p>
+          </div>
+
+          {/* Coluna 2 */}
+          <div className="footer-column">
+            <h4>Empresa</h4>
+            <ul>
+              <li><Link to="/sobre">Sobre nós</Link></li>
+              <li><Link to="/imprensa">Imprensa</Link></li>
+            </ul>
+          </div>
+
+          {/* Coluna 3 */}
+          <div className="footer-column">
+            <h4>Suporte</h4>
+            <ul>
+              <li><Link to="/ajuda">Central de Ajuda</Link></li>
+              <li><Link to="/seguranca">Segurança</Link></li>
+              <li><Link to="/termos">Termos de Uso</Link></li>
+              <li><Link to="/privacidade">Privacidade</Link></li>
+            </ul>
+          </div>
+
+          {/* Coluna 4: */}
+          <div className="footer-column">
+            <h4>Profissionais</h4>
+            <ul>
+              <li><Link to="/prestador/register">Seja um parceiro</Link></li>
+              <li><Link to="/sucesso">Casos de sucesso</Link></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div className="footer-bottom">
+          <p>&copy; 2025 Local+. Todos os direitos reservados. Feito para Concórdia do Pará.</p>
+        </div>
+      </footer>
+
     </div>
   );
 };
