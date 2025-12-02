@@ -16,6 +16,8 @@ import ContaUsuario from "./pages/ContaUsuario/ContaUsuario.jsx";
 import AdminPanel from "./pages/Admin/admin.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
 import Verificado from "./pages/Verificado/verificado.jsx"; 
+import MinhasSolicitacoes from "./pages/SolicitacaoServico/MinhasSolicitacoes.jsx";
+import SolicitacoesPrestador from "./pages/Prestador/SolicitacoesPrestador.jsx";
 
 export default function App() {
   return (
@@ -37,6 +39,8 @@ export default function App() {
           <Route path="/ajuda" element={<Help />} />            
           <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
           <Route path="/verificado" element={<Verificado />} />
+          <Route path="/minhas-solicitacoes" element={<MinhasSolicitacoes />} />
+          <Route path="/solicitacoes-prestador" element={<SolicitacoesPrestador />} />
 
         </Routes>
       </BrowserRouter>

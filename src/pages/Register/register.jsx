@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/register.css";
-import user from "../../data/users"; // Se esse arquivo existir mesmo
+import user from "../../data/users"; 
 import logo from "../../assets/logo.png"; 
 
 export default function Register() {
@@ -17,7 +17,6 @@ export default function Register() {
   function handleRegister(e) {
     e.preventDefault();
 
-    // 1. Busca usuários existentes
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
     // 2. Validações
@@ -27,7 +26,7 @@ export default function Register() {
       return;
     }
 
-    // Verifica no arquivo estático E no localStorage
+    
     const cpfExists =
       (user && user.find((u) => u.cpf === cpf)) || users.find((u) => u.cpf === cpf);
 
@@ -38,26 +37,26 @@ export default function Register() {
 
     setCpfError("");
 
-    // 3. CRIAÇÃO DO USUÁRIO (COM O ID MÁGICO)
+ 
     const newUser = { 
-        id: Date.now(), // <--- ISSO AQUI É O QUE FALTAVA!
+        id: Date.now(), 
         nome, 
         email, 
         senha, 
         telefone, 
         cpf,
-        isAdmin: false // Já deixa preparado para o futuro
+        isAdmin: false 
     };
 
-    // 4. Salva no banco de dados (users)
+   
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
 
-    // 5. FAZ O LOGIN AUTOMÁTICO (Salva na sessão atual)
+  
     localStorage.setItem("loggedUser", JSON.stringify(newUser));
 
     alert("Usuário cadastrado com sucesso!");
-    navigate("/home"); // Manda direto para a Home logado
+    navigate("/home"); 
   }
 
   function formatTelefone(value) {
@@ -79,7 +78,7 @@ export default function Register() {
     <div className="register-page">
       <form className="register-form" onSubmit={handleRegister}>
 
-        {/* LOGO CENTRALIZADA NO FORM */}
+    
         <img src={logo} alt="Logo" className="logo" />
 
         <div className="flex-column">

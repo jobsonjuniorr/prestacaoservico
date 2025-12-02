@@ -1,0 +1,205 @@
+/* --- src/styles/solicitarServico.css --- */
+
+:root {
+  --primary-blue: #1A8BF0;
+  --bg-gray: #f2f4f7;
+  --white: #ffffff;
+  --text-dark: #333;
+  --text-gray: #666;
+  --border-color: #eee;
+  --warning-bg: #fff3cd;
+  --warning-text: #856404;
+}
+
+.solicitar-container {
+  background-color: var(--bg-gray);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  padding-bottom: 100px;
+}
+
+/* Header com botão voltar */
+.header-nav-simple {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-gray);
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+/* Card Principal */
+.solicitar-card {
+  background-color: var(--white);
+  width: 100%;
+  max-width: 700px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+/* Aviso Legal */
+.legal-warning {
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
+    padding: 15px 20px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    border-bottom: 1px solid #ffeeba;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+/* Resumo do Prestador */
+.provider-mini-profile {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mini-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-blue);
+}
+
+.mini-info h3 { margin: 0; font-size: 1.1rem; color: var(--text-dark); }
+.mini-info p { margin: 2px 0 0; font-size: 0.9rem; color: var(--text-gray); }
+
+/* Corpo do Formulário */
+.form-body {
+    padding: 25px;
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.label-title {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.helper-text {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Inputs Gerais */
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.input-field, .textarea-field, .select-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+}
+
+.textarea-field { resize: vertical; min-height: 80px; }
+
+/* Seleção de Serviços */
+.services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.service-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.service-option:hover { background-color: #f9f9f9; }
+
+.service-option.selected {
+    border-color: var(--primary-blue);
+    background-color: #f0f8ff;
+}
+
+.radio-fake {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 15px;
+    position: relative;
+}
+
+.service-option.selected .radio-fake {
+    border-color: var(--primary-blue);
+    background-color: var(--primary-blue);
+}
+
+.svc-info { flex: 1; font-weight: 500; }
+.svc-price { font-weight: 700; color: #28a745; }
+
+/* Botões */
+.btn-confirm {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 10px;
+}
+
+.btn-confirm:hover { background-color: #1570c4; }
+
+/* Área de Ajuda */
+.help-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-help-link {
+    background: none;
+    border: 1px solid var(--primary-blue);
+    color: var(--primary-blue);
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .input-row { grid-template-columns: 1fr; }
+}

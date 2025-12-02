@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import "../../styles/Home.css";
-// import "../../styles/global.css"; 
+import "../../styles/global.css"; 
 import { useNavigate } from "react-router-dom";
 import { ServiceContext } from "../Context/serviceContext.jsx";
 import { Link } from "react-router-dom";
@@ -57,10 +57,10 @@ const HomeScreen = () => {
     rating: p.rating || 5,
     reviews: p.reviews || 0,
     verified: p.verified,
-    urgent: p.urgent,
-    calendar: p.calendar,
+    urgent: p.urgent,       // Garante que isso é booleano
+    calendar: p.calendar,   // Garante que isso é booleano
     img: p.img,
-    extraInfo: p.extraInfo || {}
+    // Não precisamos mais mapear o extraInfo aqui para exibição
   }));
 
   const filteredProviders = normalizedProviders.filter(provider => {
@@ -73,6 +73,7 @@ const HomeScreen = () => {
 
     return matchCategory && matchSearch;
   });
+
   const renderStars = (rating) => {
     return (
       <div className="stars">
@@ -86,7 +87,6 @@ const HomeScreen = () => {
   };
 
   const user = JSON.parse(localStorage.getItem("loggedUser"));
-  //   if(!user){ navigate("/login") } // Comentado para evitar loop se nao tiver login no teste
 
   return (
     <div className="home-container">
@@ -159,9 +159,6 @@ const HomeScreen = () => {
         <button className="filter-btn">
           <LuFilter className="icon-btn" /> Filtrar
         </button>
-        <button className="filter-btn">
-          <LuArrowUpDown className="icon-btn" /> Ordenar
-        </button>
       </section>
 
       {/* --- LISTA DE PRESTADORES --- */}
@@ -169,10 +166,9 @@ const HomeScreen = () => {
         {filteredProviders.length > 0 ? (
           filteredProviders.map((provider) => (
 
-            // 1. O PAI (Fundo Gradiente / Borda Colorida)
+            // 1. O CARD
             <div key={provider.id} className="provider-card">
 
-              {/* 2. O FILHO (Conteúdo Branco) */}
               <div className="provider-card-content">
 
                 <div className="card-left">
@@ -187,16 +183,31 @@ const HomeScreen = () => {
                     <h3 className="role-title">{provider.role}</h3>
                     {renderStars(provider.rating)}
                   </div>
-                  <div className="provider-info">
+                  
+                  {/* --- AQUI ESTÁ A MUDANÇA --- */}
+                 <div className="provider-info">
+                    {/* 1. Nome do Prestador */}
                     <p className="p-name"><LuUser /> {provider.name}</p>
-                    {Object.entries(provider.extraInfo).map(([key, text]) => (
-                      <p key={key} className="p-detail">
-                        {key === "calendar" && <LuCalendar />}
-                        {key === "urgent" && <LuClock />}
-                        {text}
-                      </p>
-                    ))}
+
+                    {/* 2. Urgência (Aparece se for true) */}
+                    {provider.urgent && (
+                       <p className="p-detail" style={{color: '#d32f2f', fontWeight: '500'}}>
+                          <LuClock style={{marginRight: 5}}/> Atende Imediato
+                       </p>
+                    )}
+
+                    {/* 3. Agenda (Lógica de SIM ou NÃO) */}
+                    {provider.calendar ? (
+                       <p className="p-detail" style={{color: '#1976d2'}}>
+                          <LuCalendar style={{marginRight: 5}}/> Trabalha com Agenda
+                       </p>
+                    ) : (
+                       <p className="p-detail" style={{color: '#777'}}>
+                          <LuCalendar style={{marginRight: 5}}/> Não trabalha com agenda
+                       </p>
+                    )}
                   </div>
+                  {/* --------------------------- */}
 
                   <Link to={`/prestador/${provider.id}`}>
                     <button className="orcamento-btn">Solicitar</button>
@@ -216,13 +227,11 @@ const HomeScreen = () => {
       <footer className="desktop-footer">
         <div className="footer-content">
           
-          {/* Coluna 1 */}
           <div className="footer-column brand-col">
             <img src={logoImg} alt="Local+ Logo" className="footer-logo" />
             <p>Conectando você aos melhores profissionais da sua cidade de forma rápida, segura e eficiente.</p>
           </div>
 
-          {/* Coluna 2 */}
           <div className="footer-column">
             <h4>Empresa</h4>
             <ul>
@@ -231,7 +240,6 @@ const HomeScreen = () => {
             </ul>
           </div>
 
-          {/* Coluna 3 */}
           <div className="footer-column">
             <h4>Suporte</h4>
             <ul>
@@ -242,7 +250,6 @@ const HomeScreen = () => {
             </ul>
           </div>
 
-          {/* Coluna 4: */}
           <div className="footer-column">
             <h4>Profissionais</h4>
             <ul>

@@ -1,12 +1,22 @@
 const user = [
   {
-    id: 1,
+    id: 30,
     nome: "Iza Daniela",
     email: "iza@gmail.com",
     senha: "123456",
     telefone: "47999999999",
-    cpf: "12345678"
+    cpf: "12345678910"
   },
+
+  {
+    id: 30,
+    nome: "admin",
+    email: "admin@local.com",
+    senha: "123456",
+    telefone: "47999999999",
+    cpf: "99999999999"
+  },
+
   {
     id: 2,
     nome: "Jobson Junior",

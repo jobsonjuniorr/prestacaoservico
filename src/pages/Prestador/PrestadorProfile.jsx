@@ -4,7 +4,7 @@ import { ServiceContext } from "../Context/serviceContext.jsx";
 // Ícones
 import { 
   LuChevronLeft, LuClock, LuCalendar, 
-  LuStar, LuBriefcase, LuInfo, LuMapPin
+   LuStar, LuBriefcase, LuInfo, LuMapPin
 } from "react-icons/lu";
 // Import do CSS
 import "../../styles/prestadorProfile.css";
@@ -76,9 +76,9 @@ export default function PrestadorProfile() {
                             <LuStar fill="#FFC107" stroke="none" />
                             <LuStar fill="#FFC107" stroke="none" />
                             <LuStar fill="#FFC107" stroke="none" />
-                            <LuStar fill="#FFC107" stroke="none" />
+                            <LuStar fill="#666" stroke="none" />
                             <span style={{color: '#666', fontSize: '0.9rem', marginLeft: '5px'}}>
-                                (5.0)
+                                (4.0)
                             </span>
                         </div>
 
@@ -106,31 +106,46 @@ export default function PrestadorProfile() {
                     </div>
 
                     <div className="content-section">
-                        <h3 className="section-title"><LuBriefcase /> Serviços e Preços</h3>
+                        <h3 className="section-title">
+                            <LuBriefcase /> Principais Serviços e Preços
+                        </h3>
+
+                        <p className="section-subtitle" style={{fontSize: '0.9rem', color: '#666', marginBottom: '10px'}}>
+                            Outros serviços podem ser solicitados além dos listados.
+                        </p>
+
                         <div className="services-list">
-                            {prestador.listaServicos && prestador.listaServicos.length > 0 ? (
-                                prestador.listaServicos.map((servico, index) => (
-                                    <div key={index} className="service-row">
-                                        <span className="service-name">{servico.nome}</span>
-                                        <span className="service-price">R$ {servico.preco}</span>
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="service-row">
-                                    <span className="service-name">Serviço Base / Visita</span>
-                                    <span className="service-price">A partir de R$ {prestador.preco || "A combinar"}</span>
-                                </div>
-                            )}
-                        </div>
+    {/* Verifica se a lista existe e faz o map direto. 
+        O "?.map" evita erro caso a lista venha nula por algum bug antigo */}
+    {prestador.listaServicos?.map((servico, index) => (
+        <div key={index} className="service-row">
+            <span className="service-name">{servico.nome}</span>
+            <span className="service-price">R$ {servico.preco}</span>
+        </div>
+    ))}
+</div>
+
+
                     </div>
 
-                    <div className="fixed-bottom-action">
+                    {/* Adjusted style to align right */}
+                    <div className="fixed-bottom-action" style={{flexDirection: 'column', alignItems: 'flex-end'}}>
                         <button 
                             className="contract-btn" 
                             onClick={() => navigate(`/solicitar/${prestador.id}`)}
                         >
-                            Contratar Serviço
+                            Solicitar um serviço
                         </button>
+                        
+                        <p className="extra-note" style={{
+                            fontSize: '0.8rem', 
+                            color: '#ff5656ff', 
+                            marginTop: '10px', 
+                            textAlign: 'right', /* Align text right */
+                            maxWidth: '100%'
+                        }}>
+                            Mesmo serviços não listados podem ser contratados clicando no botão.
+                        </p>
                     </div>
                 </div>
             </div>
