@@ -115,8 +115,7 @@ export default function PrestadorProfile() {
                         </p>
 
                         <div className="services-list">
-    {/* Verifica se a lista existe e faz o map direto. 
-        O "?.map" evita erro caso a lista venha nula por algum bug antigo */}
+ 
     {prestador.listaServicos?.map((servico, index) => (
         <div key={index} className="service-row">
             <span className="service-name">{servico.nome}</span>
@@ -128,7 +127,7 @@ export default function PrestadorProfile() {
 
                     </div>
 
-                    {/* Adjusted style to align right */}
+                   
                     <div className="fixed-bottom-action" style={{flexDirection: 'column', alignItems: 'flex-end'}}>
                         <button 
                             className="contract-btn" 
@@ -141,7 +140,7 @@ export default function PrestadorProfile() {
                             fontSize: '0.8rem', 
                             color: '#ff5656ff', 
                             marginTop: '10px', 
-                            textAlign: 'right', /* Align text right */
+                            textAlign: 'right', 
                             maxWidth: '100%'
                         }}>
                             Mesmo serviços não listados podem ser contratados clicando no botão.

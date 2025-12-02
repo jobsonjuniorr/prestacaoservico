@@ -57,10 +57,10 @@ const HomeScreen = () => {
     rating: p.rating || 5,
     reviews: p.reviews || 0,
     verified: p.verified,
-    urgent: p.urgent,       // Garante que isso é booleano
-    calendar: p.calendar,   // Garante que isso é booleano
+    urgent: p.urgent,     
+    calendar: p.calendar,  
     img: p.img,
-    // Não precisamos mais mapear o extraInfo aqui para exibição
+    
   }));
 
   const filteredProviders = normalizedProviders.filter(provider => {
@@ -184,19 +184,19 @@ const HomeScreen = () => {
                     {renderStars(provider.rating)}
                   </div>
                   
-                  {/* --- AQUI ESTÁ A MUDANÇA --- */}
+                
                  <div className="provider-info">
-                    {/* 1. Nome do Prestador */}
+                   
                     <p className="p-name"><LuUser /> {provider.name}</p>
 
-                    {/* 2. Urgência (Aparece se for true) */}
+                    
                     {provider.urgent && (
                        <p className="p-detail" style={{color: '#d32f2f', fontWeight: '500'}}>
                           <LuClock style={{marginRight: 5}}/> Atende Imediato
                        </p>
                     )}
 
-                    {/* 3. Agenda (Lógica de SIM ou NÃO) */}
+                   
                     {provider.calendar ? (
                        <p className="p-detail" style={{color: '#1976d2'}}>
                           <LuCalendar style={{marginRight: 5}}/> Trabalha com Agenda
@@ -207,7 +207,7 @@ const HomeScreen = () => {
                        </p>
                     )}
                   </div>
-                  {/* --------------------------- */}
+                
 
                   <Link to={`/prestador/${provider.id}`}>
                     <button className="orcamento-btn">Solicitar</button>

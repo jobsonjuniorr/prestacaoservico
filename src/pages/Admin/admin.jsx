@@ -29,31 +29,21 @@ export default function AdminPanel() {
     else alert("Simulação: Visualizando documento...\n[Documento Válido]");
   };
 
-  // --- NOVA FUNÇÃO: BANIR CONTA E PRESTADOR ---
+
   const banirUsuario = (prestador) => {
       if(window.confirm(`ATENÇÃO: Isso excluirá a conta de "${prestador.nomeProfissional}" permanentemente. Ele não poderá mais fazer login e o serviço sumirá. Confirmar?`)) {
           
-          // 1. Remove da lista de Prestadores (Home)
+
           const novaListaPrestadores = prestadores.filter(p => p.id !== prestador.id);
           setPrestadores(novaListaPrestadores);
           localStorage.setItem("prestadores", JSON.stringify(novaListaPrestadores));
 
-          // 2. Remove da lista de Usuários (Login)
-          // Precisamos buscar onde os usuários estão salvos (geralmente "users" ou "users_db")
           const usersDB = JSON.parse(localStorage.getItem("users")) || []; 
           const novaListaUsuarios = usersDB.filter(u => u.id !== prestador.usuarioId);
-          localStorage.setItem("users", JSON.stringify(novaListaUsuarios)); // Atualiza o banco de login
-
-          // Se estiver usando "users_db" em vez de "users", descomente abaixo:
-          // const usersDB2 = JSON.parse(localStorage.getItem("users_db")) || [];
-          // const novaListaUsuarios2 = usersDB2.filter(u => u.id !== prestador.usuarioId);
-          // localStorage.setItem("users_db", JSON.stringify(novaListaUsuarios2));
-
+          localStorage.setItem("users", JSON.stringify(novaListaUsuarios)); 
           alert("Conta banida e serviço removido com sucesso.");
       }
   }
-
-  // Função apenas para remover o SERVIÇO (mas manter a conta de usuário)
   const excluirServico = (id) => {
       if(window.confirm("Remover apenas o serviço deste prestador da lista? (A conta de usuário continuará existindo)")) {
           const novaLista = prestadores.filter(p => p.id !== id);

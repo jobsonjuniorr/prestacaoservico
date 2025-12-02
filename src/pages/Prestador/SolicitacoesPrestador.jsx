@@ -17,20 +17,19 @@ export default function VerSolicitacoes() {
   console.log("Meus Pedidos:", meusPedidos);
 
   useEffect(() => {
-    // 1. Verifica login
+   
     if (!user) {
         navigate("/login");
         return;
     }
 
-    // 2. Descobre quem é o PRESTADOR associado a este usuário
-    // Precisamos saber o ID do prestador, não só do usuário
+    
     const todosPrestadores = [
         ...(prestadores || []), 
         ...(JSON.parse(localStorage.getItem("prestadores")) || [])
     ];
     
-    // Procura o prestador que tem o mesmo usuarioId do logado
+    
     const meuPerfilPrestador = todosPrestadores.find(p => String(p.usuarioId) === String(user.id));
 
     if (!meuPerfilPrestador) {
@@ -39,11 +38,8 @@ export default function VerSolicitacoes() {
         return;
     }
 
-    // 3. Carrega as solicitações do localStorage
     const todasSolicitacoes = JSON.parse(localStorage.getItem("solicitacoes")) || [];
-    
-    // 4. Filtra apenas as solicitações para MIM (meu ID de prestador)
-    // E inverte a ordem para mostrar as novas primeiro
+
     const pedidosFiltrados = todasSolicitacoes
         .filter(s => String(s.prestadorId) === String(meuPerfilPrestador.id))
         .reverse();
@@ -53,7 +49,6 @@ export default function VerSolicitacoes() {
 
   }, [navigate, prestadores]);
 
-  // Função para mudar o status
   const atualizarStatus = (idSolicitacao, novoStatus) => {
     const todasSolicitacoes = JSON.parse(localStorage.getItem("solicitacoes")) || [];
     
@@ -66,17 +61,14 @@ export default function VerSolicitacoes() {
 
     localStorage.setItem("solicitacoes", JSON.stringify(atualizadas));
     
-    // Atualiza a tela filtrando de novo
-    // (Poderia otimizar, mas assim garante sincronia)
+
     const user = JSON.parse(localStorage.getItem("loggedUser"));
-    // Reencontra o prestador ID (simplificado aqui pois já sabemos que existe)
-    // Na prática ideal, salvaríamos o ID do prestador no state no useEffect
-    window.location.reload(); // Recarrega para simplificar atualização visual
+ 
+    window.location.reload(); 
   };
 
   if (loading) return <div style={{padding:20, textAlign:'center'}}>Carregando painel...</div>;
 
-  // Renderiza botões diferentes dependendo do status
   const renderBotoes = (pedido) => {
       switch (pedido.status) {
           case "Pendente":

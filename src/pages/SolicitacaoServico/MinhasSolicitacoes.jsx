@@ -10,7 +10,7 @@ export default function MinhasSolicitacoes() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("loggedUser"));
   
-  // Lê todas as solicitações do "banco"
+
   const [todasSolicitacoes, setTodasSolicitacoes] = useState([]);
   
   useEffect(() => {
@@ -19,8 +19,7 @@ export default function MinhasSolicitacoes() {
         return;
     }
     const dados = JSON.parse(localStorage.getItem("solicitacoes")) || [];
-    // Filtra para mostrar APENAS as desse cliente
-    // E ordena: as mais recentes primeiro
+   
     const minhas = dados
         .filter(s => s.clienteId === user.id)
         .sort((a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao));
@@ -28,12 +27,11 @@ export default function MinhasSolicitacoes() {
     setTodasSolicitacoes(minhas);
   }, [navigate]);
 
-  // Função para atualizar status (Cancelar ou Finalizar)
   const atualizarStatusLocal = (idSolicitacao, novoStatus) => {
     // 1. Pega o banco geral
     const bancoGeral = JSON.parse(localStorage.getItem("solicitacoes")) || [];
     
-    // 2. Atualiza o item específico
+   
     const bancoAtualizado = bancoGeral.map(item => {
         if (item.id === idSolicitacao) {
             return { ...item, status: novoStatus };
@@ -41,10 +39,9 @@ export default function MinhasSolicitacoes() {
         return item;
     });
 
-    // 3. Salva e atualiza estado da tela
-    localStorage.setItem("solicitacoes", JSON.stringify(bancoAtualizado));
     
-    // Atualiza a visualização local filtrando de novo
+    localStorage.setItem("solicitacoes", JSON.stringify(bancoAtualizado));
+   
     setTodasSolicitacoes(
         bancoAtualizado
             .filter(s => s.clienteId === user.id)
@@ -59,13 +56,13 @@ export default function MinhasSolicitacoes() {
   };
 
   const handleConfirmarConclusao = (id) => {
-      // O cliente confirma que o serviço foi feito
+   
       atualizarStatusLocal(id, "Finalizado");
       alert("Serviço finalizado! Obrigado por usar a Local+.");
-      // Aqui poderia abrir um modal de avaliação (estrelas)
+  
   };
 
-  // Funções de renderização de acordo com o status
+ 
   const renderStatusBadge = (status) => {
       switch(status) {
           case "Pendente": return <span className="status-badge badge-pendente">Aguardando Prestador</span>;
@@ -79,7 +76,7 @@ export default function MinhasSolicitacoes() {
   };
 
   const renderActionArea = (item) => {
-      // 1. PENDENTE ou ACEITO (Pode cancelar)
+     
       if (item.status === "Pendente") {
           return (
               <div className="action-area">
@@ -106,7 +103,6 @@ export default function MinhasSolicitacoes() {
           );
       }
 
-      // 2. EM ANDAMENTO (Bloqueado)
       if (item.status === "Em Andamento") {
           return (
               <div className="action-area" style={{background: '#e0f7fa'}}>
@@ -117,7 +113,6 @@ export default function MinhasSolicitacoes() {
           );
       }
 
-      // 3. CONCLUÍDO (Pelo prestador, espera OK do cliente)
       if (item.status === "Concluído") {
           return (
               <div className="action-area" style={{background: '#fff3cd', border:'1px solid #ffeeba'}}>
@@ -131,10 +126,10 @@ export default function MinhasSolicitacoes() {
           );
       }
 
-      return null; // Finalizado ou Cancelado não tem ações
+      return null; 
   };
 
-  // Helper para classe CSS da borda
+
   const getBorderClass = (status) => {
       if(status === "Pendente") return "status-pendente";
       if(status === "Aceito") return "status-aceito";
@@ -153,7 +148,7 @@ export default function MinhasSolicitacoes() {
             <LuArrowLeft size={28} color="#333"/>
         </button>
         <h1 className="requests-title">Minhas Solicitações</h1>
-        <div style={{width:28}}></div> {/* Espaço vazio para equilibrar o header */}
+        <div style={{width:28}}></div> 
       </div>
 
       <div className="requests-list">
@@ -171,7 +166,7 @@ export default function MinhasSolicitacoes() {
             todasSolicitacoes.map((item) => (
                 <div key={item.id} className={`request-card ${getBorderClass(item.status)}`}>
                     
-                    {/* Cabeçalho do Card */}
+                 
                     <div className="card-header-row">
                         <div>
                             <h3 className="service-title">{item.tipoServico}</h3>
@@ -180,7 +175,7 @@ export default function MinhasSolicitacoes() {
                         {renderStatusBadge(item.status)}
                     </div>
 
-                    {/* Corpo do Card */}
+                   
                     <div className="card-body-row">
                         <div className="info-item">
                             <label><LuCalendar size={12}/> Data e Hora</label>
@@ -200,7 +195,7 @@ export default function MinhasSolicitacoes() {
                         </div>
                     )}
 
-                    {/* Área de Ação Dinâmica */}
+                
                     {renderActionArea(item)}
 
                 </div>

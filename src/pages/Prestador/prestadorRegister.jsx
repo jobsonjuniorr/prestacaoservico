@@ -90,49 +90,48 @@ export default function PrestadorRegister() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // 1. Validações
+   
     if (!cpf || !documentoFile) return alert("CPF e Documento são obrigatórios.");
     if (!categoria || !cargo || !descricao) return alert("Preencha os dados profissionais.");
     if (servicos.length < 3) return alert("Adicione pelo menos 3 serviços na tabela.");
     if (!atendeImediato && !atendeAgenda) return alert("Selecione sua disponibilidade.");
 
-    // 3. Montagem do Objeto (Compatível com PrestadorProfile.jsx)
+    
     const novoPrestador = {
       id: Date.now(),
       usuarioId: usuarioLogado.id,
       nomeProfissional: nome,
       email: email,
       
-      // Dados para exibição na Home e Perfil
-      area: cargo,          // Ex: "Manicure"
-      category: categoria,  // Ex: "Beleza" (usado no filtro da Home)
+     
+      area: cargo,          
+      category: categoria,  
       descricao: descricao,
       img: "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector", // Placeholder
       
-      // Status
-      verified: false, // Começa falso, Admin aprova depois
+    
+      verified: false, 
       
-      // Flags lógicas para ícones
+      
       urgent: atendeImediato,
       calendar: atendeAgenda,
       
-      // Dados completos (para uso futuro ou admin)
+     
       cpf: cpf,
-      docNome: documentoFile.name, // Apenas simulando o arquivo
-      listaServicos: servicos, // Salvamos a lista toda aqui
+      docNome: documentoFile.name, 
+      listaServicos: servicos, 
       
-      // Mapeamento para o "Informações Adicionais" do PrestadorProfile
+   
       extraInfo: {
         "Disponibilidade": atendeImediato ? "Atende Imediato" : "Apenas Agendado",
         "Agenda": atendeAgenda ? (tipoAgenda === 'link' ? "Link Externo" : "Combinar via Chat") : "Não agendado",
         "Qtd. Serviços": `${servicos.length} opções disponíveis`
       },
-      
-      // Campo necessário para o PrestadorProfile exibir horário (adaptamos)
+     
       horarioAtendimento: atendeImediato ? "Plantão / Imediato" : "Horário Comercial"
     };
 
-    // 4. Envia para o Contexto
+   
     adicionarPrestador(novoPrestador);
     
     alert("Solicitação de cadastro enviada! Aguarde a verificação do documento.");
@@ -145,7 +144,6 @@ export default function PrestadorRegister() {
         <h2 className="card-title">Torne-se um Prestador</h2>
         <p className="card-subtitle">Complete seu cadastro profissional para começar.</p>
 
-        {/* 1. DADOS PESSOAIS E DOCUMENTOS */}
         <div className="form-section">
           <h3 className="section-title"><FaIdCard /> Documentação Obrigatória</h3>
           <div className="input-row">
@@ -173,7 +171,6 @@ export default function PrestadorRegister() {
           </div>
         </div>
 
-        {/* 2. DADOS PROFISSIONAIS */}
         <div className="form-section">
           <h3 className="section-title"><FaBriefcase /> Perfil Profissional</h3>
           

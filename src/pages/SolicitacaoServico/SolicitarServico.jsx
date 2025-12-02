@@ -13,15 +13,15 @@ export default function SolicitarServico() {
   const { prestadores } = useContext(ServiceContext);
   const user = JSON.parse(localStorage.getItem("loggedUser"));
 
-  // Estados
+
   const [prestador, setPrestador] = useState(null);
   
-  // Dados do Formulário
+  
   const [data, setData] = useState("");
   const [horario, setHorario] = useState("");
-  const [modalidade, setModalidade] = useState("Presencial"); // Presencial ou Remoto
-  const [servicoSelecionado, setServicoSelecionado] = useState(null); // Objeto do serviço ou 'outro'
-  const [descricaoOutro, setDescricaoOutro] = useState(""); // Texto se escolher "Outro"
+  const [modalidade, setModalidade] = useState("Presencial"); 
+  const [servicoSelecionado, setServicoSelecionado] = useState(null); 
+  const [descricaoOutro, setDescricaoOutro] = useState("");
 
   useEffect(() => {
     if (!user) {
@@ -30,7 +30,6 @@ export default function SolicitarServico() {
         return;
     }
 
-    // Busca o prestador (Unindo fixos e locais)
     const prestadoresLocal = JSON.parse(localStorage.getItem("prestadores")) || [];
     const todos = [...(prestadores || []), ...prestadoresLocal];
     const encontrado = todos.find(p => String(p.id) === String(idPrestador));
@@ -38,7 +37,7 @@ export default function SolicitarServico() {
     if (encontrado) {
         setPrestador(encontrado);
         
-        // Se for prestador antigo (sem lista de serviços), seleciona padrão
+    
         if (!encontrado.listaServicos || encontrado.listaServicos.length === 0) {
             setServicoSelecionado({ nome: "Serviço Padrão", preco: encontrado.preco });
         }
@@ -52,7 +51,6 @@ export default function SolicitarServico() {
     if (servicoSelecionado === 'outro' && !descricaoOutro) return alert("Descreva o serviço que você precisa.");
     if (!data || !horario) return alert("Informe a data e hora.");
 
-    // Define o nome final do serviço
     const nomeServicoFinal = servicoSelecionado === 'outro' 
         ? "Serviço Personalizado" 
         : servicoSelecionado.nome;
@@ -61,13 +59,12 @@ export default function SolicitarServico() {
         ? descricaoOutro 
         : `Serviço de lista: ${servicoSelecionado.nome}`;
 
-    // Cria o objeto da solicitação
     const novaSolicitacao = {
         id: Date.now(),
         // Quem pede
         clienteId: user.id,
         clienteNome: user.nome,
-        clienteWhatsapp: user.telefone || "Não informado", // Importante para o contato
+        clienteWhatsapp: user.telefone || "Não informado", 
         
         // Quem faz
         prestadorId: prestador.id,
@@ -85,7 +82,7 @@ export default function SolicitarServico() {
         statusAgenda: prestador.calendar ? "Horário Marcado" : "Sugestão de Horário",
         
         // Status do fluxo
-        status: "Pendente", // Pendente -> Aceito -> Em Andamento -> Concluído
+        status: "Pendente",
         dataCriacao: new Date().toISOString()
     };
 
@@ -95,7 +92,7 @@ export default function SolicitarServico() {
 
     // Feedback e Redirecionamento
     alert(`Solicitação enviada para ${prestador.nomeProfissional}!\n\nSe ele aceitar, entrará em contato pelo seu WhatsApp cadastrado.`);
-    navigate("/minhas-solicitacoes"); // Vai para a tela de acompanhamento
+    navigate("/minhas-solicitacoes"); 
   };
 
   if (!prestador) return <div style={{padding:20}}>Carregando...</div>;
@@ -136,12 +133,12 @@ export default function SolicitarServico() {
 
         <form className="form-body" onSubmit={handleSubmit}>
             
-            {/* 1. SELEÇÃO DE SERVIÇO */}
+         
             <div className="form-section">
                 <label className="label-title">Qual serviço você precisa?</label>
                 
                 <div className="services-grid">
-                    {/* Lista os serviços cadastrados pelo prestador */}
+                  
                     {prestador.listaServicos && prestador.listaServicos.map((svc, idx) => (
                         <div 
                             key={idx} 
@@ -154,7 +151,7 @@ export default function SolicitarServico() {
                         </div>
                     ))}
 
-                    {/* Opção OUTRO SERVIÇO */}
+                    
                     <div 
                         className={`service-option ${servicoSelecionado === 'outro' ? 'selected' : ''}`}
                         onClick={() => setServicoSelecionado('outro')}
@@ -165,7 +162,6 @@ export default function SolicitarServico() {
                     </div>
                 </div>
 
-                {/* Se escolheu "Outro", mostra campo de texto */}
                 {servicoSelecionado === 'outro' && (
                     <div style={{marginTop: 15}}>
                         <label className="label-title">Descreva o que você precisa:</label>
@@ -179,11 +175,11 @@ export default function SolicitarServico() {
                 )}
             </div>
 
-            {/* 2. AGENDA E MODALIDADE */}
+           
             <div className="form-section">
                 <label className="label-title">Detalhes do Agendamento</label>
                 
-                {/* Lógica de Texto da Agenda */}
+              
                 <p className="helper-text">
                     {prestador.calendar 
                         ? "Este profissional possui agenda ativa. Selecione o horário para reserva." 
@@ -242,7 +238,7 @@ export default function SolicitarServico() {
                 </div>
             </div>
 
-            {/* 3. FINALIZAR */}
+  
             <button type="submit" className="btn-confirm">
                 Solicitar Serviço
             </button>
@@ -250,7 +246,6 @@ export default function SolicitarServico() {
         </form>
       </div>
 
-      {/* RODAPÉ DE AJUDA */}
       <div className="help-section">
         <p style={{marginBottom: 15, color: '#666'}}>Dúvidas sobre como contratar?</p>
         <button className="btn-help-link" onClick={() => navigate('/ajuda')}>

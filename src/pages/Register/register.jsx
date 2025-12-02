@@ -19,7 +19,7 @@ export default function Register() {
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // 2. Validações
+
     const userExists = users.find((u) => u.email === email);
     if (userExists) {
       alert("Já existe um usuário com este e-mail!");
