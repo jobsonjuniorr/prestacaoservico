@@ -17,11 +17,12 @@ export function ServiceProvider({ children }) {
       img: "https://i.pravatar.cc/150?img=11",
       category: "Reforma",
       verified: true,
-      urgent: true,
+      urgent: false,
       calendar: true,
       extraInfo: {
-        Disponibilidade: "Disponível imediato",
-        Agenda: "Verificar com prestador"
+        Agenda: "Verificar com prestador",
+        Disponibilidade: "Disponível com agenda"
+        
       }
     },
     {
@@ -37,10 +38,11 @@ export function ServiceProvider({ children }) {
       reviews: 210,
       verified: true,
       urgent: true,
-      calendar: true,
+      calendar: false,
       extraInfo: {
-        Disponibilidade: "Disponível imediato",
-        Agenda: "Verificar com prestador"
+        Agenda: "Verificar com prestador",
+        Disponibilidade: "Disponível imediato"
+        
       }
     },
     {
@@ -58,8 +60,9 @@ export function ServiceProvider({ children }) {
       urgent: true,
       calendar: false,
       extraInfo: {
-        Disponibilidade: "Disponível imediato",
-        Agenda: "Verificar com prestador"
+         Agenda: "Verificar com prestador",
+        Disponibilidade: "Disponível imediato"
+       
       }
     },
   ];
