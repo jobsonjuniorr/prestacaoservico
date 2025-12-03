@@ -36,7 +36,7 @@ export default function App() {
           <Route path="/ContaUsuario" element={<ContaUsuario />} /> 
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/auto-login" element={<AutoLoginScreen />} />
-          <Route path="/ajuda" element={<Help />} />            
+          <Route path="/help" element={<Help />} />            
           <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
           <Route path="/verificado" element={<Verificado />} />
           <Route path="/minhas-solicitacoes" element={<MinhasSolicitacoes />} />

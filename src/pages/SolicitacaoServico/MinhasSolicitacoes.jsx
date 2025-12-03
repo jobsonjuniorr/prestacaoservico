@@ -92,7 +92,7 @@ export default function MinhasSolicitacoes() {
 
       if (item.status === "Aceito") {
           return (
-              <div className="action-area" style={{background: '#e3f2fd'}}>
+              <div className="action-area" style={{background: '#fde3e3ff'}}>
                   <span className="status-message" style={{color:'#0d47a1'}}>
                       <LuMessageCircle /> O prestador aceitou! Aguarde o contato no WhatsApp.
                   </span>

@@ -88,7 +88,7 @@ export default function ContaUsuario() {
             </Link>
         </li>
         <li>
-            <Link to="/ajuda">
+            <Link to="/help">
                 <div className="menu-item-left">
                     <LuMessageSquare size={24} className="menu-icon-blue" />
                     <span>Preciso de ajuda</span>
