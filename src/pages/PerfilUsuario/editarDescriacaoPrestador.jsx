@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react"; // CORRIGIDO: useContext adicionado
 import { LuPencil, LuFileText, LuX, LuCheck, LuChevronLeft } from "react-icons/lu";
 import "../../styles/global.css";
 import "../../styles/editarDescriacaoPrestador.css";
 import { useNavigate } from "react-router-dom";
+import { ServiceContext } from "../Context/serviceContext.jsx"; // ATENÇÃO: mudei o caminho
 
 export default function DescricaoPrestador() {
   const [prestador, setPrestador] = useState(null);
@@ -11,6 +12,9 @@ export default function DescricaoPrestador() {
   const [arrayIndex, setArrayIndex] = useState(null);
 
   const navigate = useNavigate();
+  
+  // AGORA FUNCIONA: useContext foi importado
+  const { atualizarPrestador, loadPrestadores } = useContext(ServiceContext);
 
   // Lógica de carregamento (Mantida igual para garantir funcionamento)
   useEffect(() => {
@@ -89,43 +93,90 @@ export default function DescricaoPrestador() {
     try {
       const raw = localStorage.getItem("prestadores");
       const parsed = raw ? JSON.parse(raw) : null;
+      let prestadorAtualizado = null;
 
       if (originalFormat === "object") {
         const newObj = { ...parsed, ...prestador };
         localStorage.setItem("prestadores", JSON.stringify(newObj));
+        prestadorAtualizado = newObj;
+        
+        // Notifica o contexto
+        if (atualizarPrestador) {
+          atualizarPrestador(newObj);
+        }
       } else if (originalFormat === "array") {
         if (!Array.isArray(parsed)) {
           localStorage.setItem("prestadores", JSON.stringify([prestador]));
+          prestadorAtualizado = prestador;
+          
+          // Notifica o contexto
+          if (atualizarPrestador) {
+            atualizarPrestador(prestador);
+          }
         } else if (arrayIndex >= 0 && arrayIndex < parsed.length) {
           const newArr = [...parsed];
           newArr[arrayIndex] = { ...newArr[arrayIndex], ...prestador };
           localStorage.setItem("prestadores", JSON.stringify(newArr));
+          prestadorAtualizado = newArr[arrayIndex];
+          
+          // Notifica o contexto
+          if (atualizarPrestador) {
+            atualizarPrestador(newArr[arrayIndex]);
+          }
         }
       } else {
         localStorage.setItem("prestadores", JSON.stringify(prestador));
+        prestadorAtualizado = prestador;
+        
+        // Notifica o contexto
+        if (atualizarPrestador) {
+          atualizarPrestador(prestador);
+        }
       }
 
       setEditMode(false);
-      // Opcional: Adicionar um Toast de sucesso aqui
+      
+      // Opcional: Forçar recarregamento
+      if (loadPrestadores) {
+        loadPrestadores();
+      }
+      
+      // Feedback visual (opcional)
+      // alert("Descrição atualizada com sucesso!");
+      
     } catch (err) {
       console.error("Erro ao salvar:", err);
       alert("Erro ao salvar.");
     }
   };
 
-  if (!prestador) return null;
+  if (!prestador) {
+    return (
+      <div className="descricao-card">
+        <header className="page-header-fixed">
+          <button onClick={() => navigate("/perfil")} className="back-btn-simple">
+            <LuChevronLeft size={28} />
+          </button>
+          <h2>Editar Descrição</h2>
+        </header>
+        <div style={{ height: "70px" }}></div>
+        <div className="loading-state">
+          <p>Carregando informações...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="descricao-card">
-
-    <header className="page-header-fixed">
-            <button onClick={() => navigate("/perfil")} className="back-btn-simple">
-              <LuChevronLeft size={28} />
-            </button>
-            <h2>Editar Categoria</h2>
-          </header>
-          {/* Espaçamento para compensar header fixo */}
-          <div style={{ height: "70px" }}></div>
+      <header className="page-header-fixed">
+        <button onClick={() => navigate("/perfil")} className="back-btn-simple">
+          <LuChevronLeft size={28} />
+        </button>
+        <h2>Editar Descrição</h2>
+      </header>
+      
+      <div style={{ height: "70px" }}></div>
 
       <div className="card-header">
         <div className="header-icon-title">

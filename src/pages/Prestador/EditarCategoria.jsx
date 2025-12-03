@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react"; // Adicionar useContext
 import { 
   LuPencil, LuBriefcase, LuX, LuCheck, 
   LuSparkles, LuMonitor, LuHammer, LuPalette, 
@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import "../../styles/global.css";
 import "../../styles/editarCategoria.css";
+import { ServiceContext } from "../Context/serviceContext.jsx"; // Importar o contexto
 
 export default function EditarCategoria() {
   const [prestador, setPrestador] = useState(null);
@@ -18,6 +19,9 @@ export default function EditarCategoria() {
   const [arrayIndex, setArrayIndex] = useState(null);
 
   const navigate = useNavigate();
+  
+  // Obter funções do contexto
+  const { atualizarPrestador, loadPrestadores } = useContext(ServiceContext);
 
   // Lista de Categorias
   const categories = [
@@ -109,13 +113,30 @@ export default function EditarCategoria() {
       };
 
       if (originalFormat === "object") {
-        localStorage.setItem("prestadores", JSON.stringify({ ...parsed, ...updated }));
+        const newObj = { ...parsed, ...updated };
+        localStorage.setItem("prestadores", JSON.stringify(newObj));
+        
+        // Atualiza o contexto
+        if (atualizarPrestador) {
+          atualizarPrestador(newObj);
+        }
       } else {
         const arr = Array.isArray(parsed) ? parsed : [];
         if (arrayIndex !== null) {
-            arr[arrayIndex] = { ...arr[arrayIndex], ...updated };
-            localStorage.setItem("prestadores", JSON.stringify(arr));
+            const newArr = [...arr];
+            newArr[arrayIndex] = { ...newArr[arrayIndex], ...updated };
+            localStorage.setItem("prestadores", JSON.stringify(newArr));
+            
+            // Atualiza o contexto
+            if (atualizarPrestador) {
+              atualizarPrestador(newArr[arrayIndex]);
+            }
         }
+      }
+
+      // Recarrega os dados no contexto
+      if (loadPrestadores) {
+        loadPrestadores();
       }
 
       setEditMode(false);
@@ -126,7 +147,6 @@ export default function EditarCategoria() {
   };
 
   if (loading) return null; 
-
 
   if (!prestador) {
     return (
@@ -158,7 +178,6 @@ export default function EditarCategoria() {
     );
   }
 
- 
   return (
     <div className="categoria-page">
 

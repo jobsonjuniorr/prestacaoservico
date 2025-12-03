@@ -4,6 +4,7 @@ export const ServiceContext = createContext();
 
 export function ServiceProvider({ children }) {
   const [prestadores, setPrestadores] = useState([]);
+  const [trigger, setTrigger] = useState(0);
 
   const fakeData = [
   {
@@ -93,40 +94,44 @@ export function ServiceProvider({ children }) {
   }
 ];
 
-
-  useEffect(() => {
-    // pega os dados salvos no navegador
+ useEffect(() => {
+    loadPrestadores();
+  }, [trigger]); 
+  
+  const loadPrestadores = () => {
     const localPrestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
-
-    // junta os fixos com os salvos
     const listaCompleta = [...fakeData, ...localPrestadores];
-
-    //  garantir que não existam dois prestadores com o mesmo ID
     const listaUnica = listaCompleta.filter((item, index, self) =>
-      index === self.findIndex((t) => (
-        t.id === item.id
-      ))
+      index === self.findIndex((t) => t.id === item.id)
     );
-
     setPrestadores(listaUnica);
-  }, []);
-
-  const adicionarPrestador = (novoPrestador) => {
-    // Pega o que já tem salvo
-    const localPrestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
-    
-    // Adiciona o novo na lista do LocalStorage
-    const atualizadoLocal = [...localPrestadores, novoPrestador];
-
-    // Salva no navegador
-    localStorage.setItem("prestadores", JSON.stringify(atualizadoLocal));
-
-    // Atualiza a tela (Estado)
-    setPrestadores(prev => [...prev, novoPrestador]);
   };
 
+ const adicionarPrestador = (novoPrestador) => {
+    const localPrestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
+    const atualizadoLocal = [...localPrestadores, novoPrestador];
+    localStorage.setItem("prestadores", JSON.stringify(atualizadoLocal));
+    setTrigger(prev => prev + 1); // Força recarregamento
+  };
+
+ const atualizarPrestador = (prestadorAtualizado) => {
+    const localPrestadores = JSON.parse(localStorage.getItem("prestadores")) || [];
+    
+    // Encontra e atualiza o prestador
+    const atualizadoLocal = localPrestadores.map(p => 
+      p.id === prestadorAtualizado.id ? { ...p, ...prestadorAtualizado } : p
+    );
+    
+    localStorage.setItem("prestadores", JSON.stringify(atualizadoLocal));
+    setTrigger(prev => prev + 1); // Força recarregamento
+  };
   return (
-    <ServiceContext.Provider value={{ prestadores, adicionarPrestador, setPrestadores }}>
+     <ServiceContext.Provider value={{ 
+      prestadores, 
+      adicionarPrestador, 
+      atualizarPrestador, // Exporta a nova função
+      loadPrestadores // Exporta também para recarregamento manual
+    }}>
       {children}
     </ServiceContext.Provider>
   );
