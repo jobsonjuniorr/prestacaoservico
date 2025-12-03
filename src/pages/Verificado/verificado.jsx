@@ -21,9 +21,7 @@ export default function Verificado() {
       return;
     }
 
-    // --- CORREÇÃO DE SEGURANÇA AQUI ---
-    // Só considera se encontrar um prestador que tenha usuarioId VÁLIDO
-    // e que seja igual ao ID do usuário logado (convertendo ambos para string para garantir)
+  
     const prestadorEncontrado = prestadores.find(p => 
         p.usuarioId && String(p.usuarioId) === String(user.id)
     );
@@ -33,7 +31,7 @@ export default function Verificado() {
             setStatus('approved');
             return;
         } else {
-            // É prestador mas não verificado = Em análise (pois já mandou doc no cadastro)
+            // É prestador mas não verificado = Em análise 
             setStatus('pending');
             return;
         }
@@ -68,9 +66,7 @@ export default function Verificado() {
     setStatus('pending');
   };
 
-  // --- COMPONENTES VISUAIS ---
-
-  // 1. TELA DE SUCESSO (JÁ VERIFICADO)
+  
   if (status === 'approved') {
     return (
       <div className="verificado-container">
@@ -93,7 +89,7 @@ export default function Verificado() {
     );
   }
 
-  // 2. TELA DE ESPERA (EM ANÁLISE)
+
   if (status === 'pending') {
     return (
       <div className="verificado-container">
@@ -121,7 +117,7 @@ export default function Verificado() {
     );
   }
 
-  // 3. TELA INICIAL (ENVIAR DOCUMENTO)
+
   return (
     <div className="verificado-container">
       <Header navigate={navigate} />

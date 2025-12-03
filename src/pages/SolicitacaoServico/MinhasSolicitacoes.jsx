@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/minhasSolicitacoes.css";
 import { 
     LuArrowLeft, LuClock, LuCalendar, LuCircleCheck, 
-    LuOctagonAlert, LuCircleX, LuMessageCircle 
+    LuOctagonAlert, LuCircleX, LuMessageCircle, LuChevronLeft
 } from "react-icons/lu";
 
 export default function MinhasSolicitacoes() {
@@ -28,7 +28,7 @@ export default function MinhasSolicitacoes() {
   }, [navigate]);
 
   const atualizarStatusLocal = (idSolicitacao, novoStatus) => {
-    // 1. Pega o banco geral
+  
     const bancoGeral = JSON.parse(localStorage.getItem("solicitacoes")) || [];
     
    
@@ -145,7 +145,7 @@ export default function MinhasSolicitacoes() {
       
       <div className="requests-header">
         <button onClick={() => navigate('/home')} style={{background:'none', border:'none', cursor:'pointer'}}>
-            <LuArrowLeft size={28} color="#333"/>
+            <LuChevronLeft size={28} color="#333"/>
         </button>
         <h1 className="requests-title">Minhas Solicitações</h1>
         <div style={{width:28}}></div> 

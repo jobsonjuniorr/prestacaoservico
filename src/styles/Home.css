@@ -1,4 +1,4 @@
-/* --- VARIÁVEIS --- */
+
 :root {
   --primary-blue: #1A8BF0;
   --bg-gray: #f2f4f7;
@@ -16,27 +16,25 @@ body {
 .home-container {
   display: flex;
   flex-direction: column;
-  padding-bottom: 80px; /* Espaço para navbar mobile se houver */
+  padding-bottom: 80px; 
   width: 100%;
 }
 
-/* =========================================
-   HEADER RESPONSIVO (CORRIGIDO)
-   ========================================= */
+
 .home-header {
   background-color: var(--primary-blue);
   padding: 15px 20px;
-  padding-bottom: 25px; /* Espaço extra para as categorias subirem */
+  padding-bottom: 25px; 
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   
   display: flex;
-  flex-direction: column; /* Mobile: Coluna */
+  flex-direction: column; 
   gap: 15px;
 }
 
-/* Grupo Logo + Botões (Mobile: Linha Superior) */
+
 .header-top-group {
   display: flex;
   justify-content: space-between;
@@ -74,7 +72,6 @@ body {
   background-color: rgba(255,255,255,0.3);
 }
 
-/* No mobile pequeno, esconde o texto dos botões */
 .btn-text {
   display: none; 
 }
@@ -101,23 +98,21 @@ body {
 .search-icon {
   color: #999;
   font-size: 1.2rem;
-  min-width: 20px; /* Impede que o ícone seja esmagado */
+  min-width: 20px; 
   flex-shrink: 0;
 }
 
 .search-input {
   border: none;
   outline: none;
-  flex: 1; /* Faz o input ocupar todo o espaço restante */
+  flex: 1; 
   font-size: 1rem;
   color: var(--text-dark);
   background: transparent;
   margin-left: 10px;
 }
 
-/* =========================================
-   ESTILOS GERAIS (CATEGORIAS, BANNER)
-   ========================================= */
+
 .categories-section {
   margin-top: -20px;
   padding-left: 20px;
@@ -194,13 +189,23 @@ body {
 .dot.active { background-color: white; width: 15px; border-radius: 10px; }
 
 /* Filtros */
-.filters-section { padding: 0 20px; margin-bottom: 15px; }
-.filter-btn {
-  background-color: white; border: 1px solid #ddd;
-  padding: 8px 15px; border-radius: 20px;
-  display: flex; align-items: center; gap: 5px;
-  font-size: 0.9rem; color: var(--text-dark); cursor: pointer;
+.filters-section { padding: 0 20px; 
+  margin-bottom: 15px; 
 }
+
+.filter-btn {
+  background-color: white; 
+  border: 1px solid #ddd;
+  padding: 8px 15px; 
+  border-radius: 20px;
+  display: flex; 
+  align-items: center; 
+  gap: 5px;
+  font-size: 0.9rem; 
+  color: var(--text-dark); 
+  cursor: pointer;
+}
+
 .filters-box {
   background: white; padding: 15px; margin: 0 20px 20px;
   border-radius: 12px; box-shadow: 0 5px 12px rgba(0,0,0,0.08);
@@ -208,15 +213,13 @@ body {
 }
 .filter-option { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
 
-/* =========================================
-   CARD DO PRESTADOR (CORREÇÃO BORDA)
-   ========================================= */
+
 .providers-list { padding: 0 20px; display: flex; flex-direction: column; gap: 20px; }
 
 .provider-card {
   position: relative;
   width: 100%;
-  /* Correção da Borda: Padding menor e Border Radius calculado */
+
   border-radius: 20px;
   padding: 2px; 
   background-image: linear-gradient(144deg,#1A8BF0,#2368E8 50%, #00C4FF);
@@ -225,22 +228,22 @@ body {
 
 .provider-card-content {
   background: #ffffff;
-  /* IMPORTANTE: Radius interno deve ser menor que o externo */
+
   border-radius: 18px; 
   width: 100%;
   padding: 15px;
   display: flex;
   gap: 12px;
-  height: 100%; /* Garante altura total */
+  height: 100%; 
 }
 
 .card-left { display: flex; align-items: flex-start; }
 .provider-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #f0f0f0; }
 .provider-avatar-wrapper {
-  position: relative; /* ISSO É ESSENCIAL para o ícone ficar preso aqui */
-  width: fit-content; /* Ajusta ao tamanho da imagem */
+  position: relative; 
+  width: fit-content; 
   height: fit-content;
-  margin-right: 15px; /* Espaço entre a foto e o texto */
+  margin-right: 15px; 
 }
 .verified-badge {
   position: absolute; bottom: 0; right: 0;
@@ -263,16 +266,12 @@ body {
   filter: brightness(1.2);
 }
 
-/* =========================================
-   FOOTER (MOBILE FIRST: OCULTO)
-   ========================================= */
+
 .desktop-footer {
-  display: none; /* PADRÃO: ESCONDIDO NO MOBILE */
+  display: none; 
 }
 
-/* =========================================
-   VERSÃO DESKTOP (PC / TABLET GRANDE)
-   ========================================= */
+
 @media (min-width: 1024px) {
   .home-container {
     padding: 0 2%;
@@ -281,55 +280,49 @@ body {
     padding-bottom: 0;
   }
 
-  /* 1. HEADER NA HORIZONTAL */
+ 
   .home-header {
-    flex-direction: row; /* Muda para linha */
+    flex-direction: row;
     align-items: center;
     padding: 15px 50px 30px 50px;
     gap: 40px;
   }
 
   .header-top-group {
-    width: auto; /* Deixa de ocupar 100% */
+    width: auto; 
     gap: 0;
-    /* No PC, a logo fica na esquerda, os botões saem daqui visualmente via flex order se precisar, 
-       mas vamos manter simples: Logo fica na esquerda. */
+
   }
 
   .header-actions {
-    /* No HTML, actions está dentro do top-group. Vamos tirar ele do fluxo normal?
-       Melhor: Vamos fazer o Search Bar crescer no meio. */
-    display: none; /* Esconde o actions de dentro do group no PC e mostraremos de outra forma? 
-                    Não, vamos manter e usar CSS para reposicionar é dificil sem mudar HTML.
-                    Vamos usar position absolute ou mudar a logica do flex. */
+    display: none; 
+                    
   }
 
-  /* REORGANIZANDO HEADER PC DE FORMA SIMPLES */
-  /* Vamos sobrescrever o comportamento do .header-top-group no PC */
+
   .header-top-group {
-    display: contents; /* Remove a div do layout visual */
+    display: contents; 
   }
 
   .logo-area {
-    order: 1; /* Logo na esquerda */
+    order: 1; 
     margin-right: 20px;
   }
 
   .search-bar-wrapper {
-    order: 2; /* Busca no meio */
-    flex: 1; /* Ocupa o espaço sobrando */
+    order: 2;
+    flex: 1; 
     max-width: 600px;
   }
   
   .header-actions {
-    display: flex; /* Garante que aparece */
-    order: 3; /* Botões na direita */
+    display: flex; 
+    order: 3;
     margin-left: 20px;
   }
 
   .header-logo { height: 45px; }
 
-  /* 2. GRID E BANNER PC */
   .banner-section { padding: 30px 50px; }
   .banner-card { height: 280px; }
   .banner-image { height: 260px; }
@@ -345,9 +338,9 @@ body {
     gap: 30px;
   }
 
-  /* 3. FOOTER VISÍVEL APENAS NO PC */
+ 
   .desktop-footer {
-    display: block; /* SÓ APARECE AQUI */
+    display: block; 
     background-color: #1A8BF0;
     color: white;
     padding-top: 50px;

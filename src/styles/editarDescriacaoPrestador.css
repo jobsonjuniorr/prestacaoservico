@@ -1,117 +1,207 @@
 :root {
   --primary-blue: #1A8BF0;
+  --primary-hover: #1570c4;
   --bg-gray: #f2f4f7;
   --white: #ffffff;
-  --text-dark: #333;
-  --text-gray: #666;
-  --border-color: #eee;
-  --red:#ff4d4d;
+  --text-dark: #2c3e50;
+  --text-gray: #64748b;
+  --border-color: #e2e8f0;
+  --input-bg: #f8fafc;
 }
 
-/* ====== DESCRIÇÃO PRESTADOR (MESMO PADRÃO DO MEUSDADOS) ====== */
-
-.descricao-container {
+.descricao-card {
   background-color: var(--white);
-  margin: 10px 20px;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  padding: 25px;
+  margin: 20px 20px;
+  transition: transform 0.2s ease;
+  border: 1px solid rgba(0,0,0,0.02);
 }
 
-/* TÍTULO */
-.descricao-title-row {
+
+.card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.descricao-title-row .data-title {
+.header-icon-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-box {
+  background-color: #e0f2fe; 
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-dark);
+  margin: 0;
 }
 
-/* BOTÃO EDITAR */
-.edit-btn {
-  background: none;
+
+.icon-btn {
+  background: transparent;
   border: none;
   cursor: pointer;
   color: var(--text-gray);
-}
-
-/* TEXTO E CONTEÚDO */
-.descricao-text {
-  color: var(--text-gray);
-  line-height: 1.45rem;
-  white-space: pre-line;
-  font-size: 0.97rem;
-}
-
-/* LINHA DO TEXTO */
-.descricao-row {
-  padding: 12px 0;
-}
-
-/* TEXTAREA */
-.textarea-dados {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  font-size: 0.95rem;
-  resize: none;
-  outline: none;
-}
-
-/* ÁREA EXPANSIVA (Efeito accordion) */
-.descricao-accordion {
-  background-color: transparent;
-}
-
-/* BOTÕES DE AÇÃO */
-.edit-actions {
-  margin-top: 20px;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
 }
 
-/* BOTÃO SALVAR */
-.dados-btn {
-  width: 45%;
+.icon-btn:hover {
+  background-color: var(--input-bg);
+  color: var(--primary-blue);
+}
+
+
+.description-text {
+  color: var(--text-dark);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  white-space: pre-line; 
+}
+
+
+.empty-state {
+  text-align: center;
+  padding: 30px 20px;
+  background-color: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.empty-state:hover {
+  border-color: var(--primary-blue);
+  background-color: #f0f9ff;
+}
+
+.empty-state p {
+  color: var(--text-dark);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.empty-state span {
+  color: var(--primary-blue);
+  font-size: 0.9rem;
+}
+
+/* --- Modo Edição --- */
+.edit-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-textarea {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--input-bg);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  resize: vertical;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+  min-height: 120px;
+}
+
+.custom-textarea:focus {
+  background-color: var(--white);
+  border-color: var(--primary-blue);
+  box-shadow: 0 4px 12px rgba(26, 139, 240, 0.1);
+}
+
+.char-count {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* Botões de Ação */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+}
+
+.btn-save, .btn-cancel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 30px; 
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+
+.btn-save {
   background-color: var(--primary-blue);
   color: white;
-  border: none;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.2s;
+  box-shadow: 0 4px 10px rgba(26, 139, 240, 0.3);
 }
 
-.dados-btn:hover {
-  background-color: #1570c4;
+.btn-save:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
 }
 
-/* BOTÃO CANCELAR */
-.cancelar-btn {
-  width: 45%;
-  background-color: var(--red);
-  color: white;
-  border: none;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.2s;
+.btn-cancel {
+  background-color: white;
+  color: var(--text-gray);
+  border: 1px solid #e2e8f0;
 }
 
-/* PC */
+.btn-cancel:hover {
+  background-color: #f1f5f9;
+  color: var(--text-dark);
+}
+
+
+.animate-fade {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsividade PC --- */
 @media (min-width: 768px) {
-  .descricao-container {
+  .descricao-card {
     max-width: 800px;
-    margin: 20px auto;
+    margin: 30px auto; 
+    padding: 40px;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
   }
 }

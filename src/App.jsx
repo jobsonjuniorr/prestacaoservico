@@ -20,7 +20,7 @@ import MinhasSolicitacoes from "./pages/SolicitacaoServico/MinhasSolicitacoes.js
 import SolicitacoesPrestador from "./pages/Prestador/SolicitacoesPrestador.jsx";
 import MeusDados from "./pages/PerfilUsuario/meus-dados.jsx";
 import EditarDescricaoPrestador from "./pages/PerfilUsuario/editarDescriacaoPrestador.jsx";
-import EditarCategoria from "./pages/PerfilUsuario/editarCategoria.jsx";
+import EditarCategoria from "./pages/Prestador/editarCategoria.jsx";
 export default function App() {
   return (
     <ServiceProvider>

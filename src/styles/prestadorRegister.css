@@ -139,7 +139,6 @@
     text-overflow: ellipsis;
 }
 
-/* --- ESTILOS DA LISTA DE SERVIÇOS --- */
 .add-service-box {
     background-color: #eee;
     padding: 15px;
@@ -267,16 +266,14 @@
     background-color: #1670cc;
 }
 
-/* ... seu código existente ... */
 
-/* ADICIONE ISSO NO FINAL */
 .section-title svg {
     color: var(--primary-blue);
-    /* Força a cor mesmo se o SVG tiver style inline */
+    
     fill: var(--primary-blue); 
 }
 
-/* Para o ícone de upload ficar azul */
+
 .file-input-btn svg {
     color: var(--primary-blue);
 }

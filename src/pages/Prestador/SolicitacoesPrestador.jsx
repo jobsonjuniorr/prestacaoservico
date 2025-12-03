@@ -5,7 +5,7 @@ import "../../styles/SolicitacoesPrestador.css";
 import { 
     LuCheck, LuX, LuPlay, LuCircleCheck, LuClock, 
     LuCalendar, LuMapPin, LuDollarSign, LuMessageCircle,
-    LuBriefcase 
+    LuBriefcase, LuChevronLeft
 } from "react-icons/lu";
 
 export default function VerSolicitacoes() {
@@ -153,6 +153,9 @@ export default function VerSolicitacoes() {
     <div className="provider-requests-container">
       
       <header className="requests-header">
+        <button onClick={() => navigate("/ContaUsuario")} className="back-btn-simple">
+                  <LuChevronLeft size={28} />
+                </button>
         <h1 className="requests-title">Gerenciar Pedidos</h1>
         <p className="requests-subtitle">Acompanhe e gerencie as solicitações dos seus clientes.</p>
       </header>

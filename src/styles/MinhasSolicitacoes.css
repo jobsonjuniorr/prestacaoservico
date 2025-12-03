@@ -1,4 +1,4 @@
-/* --- src/styles/minhasSolicitacoes.css --- */
+
 
 :root {
   --primary-blue: #1A8BF0;
@@ -52,13 +52,13 @@
   font-size: 1.1rem;
 }
 
-/* O CARD DA SOLICITAÇÃO */
+
 .request-card {
   background-color: var(--white);
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  border-left: 5px solid #ccc; /* Cor padrão */
+  border-left: 5px solid #ccc; 
   transition: transform 0.2s;
 }
 
@@ -66,15 +66,15 @@
   transform: translateY(-2px);
 }
 
-/* Cores da borda lateral conforme status */
+
 .status-pendente { border-left-color: var(--warning-yellow); }
 .status-aceito { border-left-color: var(--primary-blue); }
-.status-andamento { border-left-color: #17a2b8; } /* Azul turquesa */
-.status-concluido-prestador { border-left-color: orange; } /* Laranja atenção */
+.status-andamento { border-left-color: #17a2b8; } 
+.status-concluido-prestador { border-left-color: orange; } 
 .status-finalizado { border-left-color: var(--success-green); }
 .status-cancelado { border-left-color: var(--danger-red); opacity: 0.7; }
 
-/* Cabeçalho do Card */
+
 .card-header-row {
   display: flex;
   justify-content: space-between;
@@ -105,14 +105,14 @@
   text-transform: uppercase;
 }
 
-/* Cores das Badges */
+
 .badge-pendente { background-color: #fff3cd; color: #856404; }
 .badge-aceito { background-color: #cce5ff; color: #004085; }
 .badge-andamento { background-color: #d1ecf1; color: #0c5460; }
 .badge-finalizado { background-color: #d4edda; color: #155724; }
 .badge-cancelado { background-color: #f8d7da; color: #721c24; }
 
-/* Corpo do Card */
+
 .card-body-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -133,7 +133,7 @@
   font-style: italic;
 }
 
-/* Área de Ação (Mensagens e Botões) */
+
 .action-area {
   background-color: #f0f8ff;
   padding: 15px;

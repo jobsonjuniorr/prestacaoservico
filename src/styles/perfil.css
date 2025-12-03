@@ -1,6 +1,4 @@
-/* --- src/styles/perfil.css (VERSÃO FINAL CORRIGIDA) --- */
 
-/* --- VARIÁVEIS --- */
 :root {
   --primary-blue: #1A8BF0;
   --header-blue: #2d8cff;
@@ -18,7 +16,7 @@ ul.menu-list {
   margin: 0;
 }
 
-/* CONTAINER PRINCIPAL (MOBILE FIRST) */
+
 .perfil-container {
   background-color: var(--bg-gray);
   min-height: 100vh;
@@ -27,8 +25,7 @@ ul.menu-list {
   padding-bottom: 50px;
 }
 
-/* --- HEADER DE NAVEGAÇÃO (MOBILE) --- */
-/* Usamos posição absoluta no botão para garantir o centro no mobile */
+
 .page-header-nav {
   display: flex;
   align-items: center;
@@ -36,12 +33,12 @@ ul.menu-list {
   position: relative;
   padding: 15px 20px;
   background-color: var(--bg-gray);
-  min-height: 60px; /* Garante altura mínima */
+  min-height: 60px; 
 }
 
 .back-btn {
-  position: absolute; /* Tira do fluxo normal */
-  left: 20px;         /* Cola na esquerda */
+  position: absolute; 
+  left: 20px;         
   background: none;
   border: none;
   cursor: pointer;
@@ -58,17 +55,16 @@ ul.menu-list {
   color: var(--text-gray);
   margin: 0;
   font-weight: 500;
-  width: 100%; /* Ocupa tudo para o text-align funcionar */
+  width: 100%; 
   z-index: 1;
 }
 
-/* --- HERO SECTION (MOBILE) --- */
+
 .user-hero {
   background-color: var(--header-blue);
   padding: 30px 25px;
   display: flex;
   align-items: center;
-  /* No mobile, junta na esquerda com um gap */
   justify-content: flex-start;
   gap: 25px;
   color: var(--white);
@@ -124,7 +120,7 @@ ul.menu-list {
   opacity: 0.9;
 }
 
-/* --- LISTA DE MENU (MOBILE) --- */
+
 .menu-list {
   background-color: var(--white);
   margin-top: 0; 
@@ -168,10 +164,6 @@ ul.menu-list {
 .edit-icon { color: #888; }
 
 
-/* ==================================================================
-   --- VERSÃO PC / NOTEBOOK (AQUI ESTÃO AS CORREÇÕES) ---
-   Tudo aqui só se aplica se a tela for maior que 768px
-================================================================== */
 @media (min-width: 768px) {
   
   .perfil-container {
@@ -181,7 +173,7 @@ ul.menu-list {
     width: 100%;
   }
 
-  /* Transforma em blocos separados e arredondados */
+
   .user-hero, 
   .menu-list {
     border-radius: 15px; 
@@ -189,41 +181,35 @@ ul.menu-list {
     overflow: hidden; 
   }
 
-  /* --- CORREÇÃO 1: Título Centralizado no PC --- */
-  /* Usamos CSS Grid para garantir que o título fique EXATAMENTE no meio */
+
   .page-header-nav {
     background-color: transparent;
     padding-bottom: 20px;
     display: grid;
-    /* 3 colunas: [botão] [espaço flexível título] [espaço vazio para equilibrar] */
+    
     grid-template-columns: 50px 1fr 50px; 
     align-items: center;
   }
   
   .back-btn {
-    position: static; /* Remove a posição absoluta do mobile */
-    grid-column: 1; /* Fica na primeira coluna */
+    position: static; 
+    grid-column: 1; 
   }
   
   .page-header-title {
-    grid-column: 2; /* Fica na coluna do meio */
+    grid-column: 2; 
     text-align: center;
     font-size: 1.5rem;
   }
-  /* ------------------------------------------- */
 
-
-  /* --- CORREÇÃO 2: Foto e Nome Juntos no PC --- */
   .user-hero {
     padding: 40px;
     display: flex;
-    /* FORÇA eles a ficarem juntos na esquerda */
     justify-content: flex-start !important; 
-    /* Define o espaço exato entre eles */
     gap: 40px; 
   }
   
-  /* Aumenta um pouco os elementos no PC */
+  
   .hero-img-wrapper {
     width: 110px;
     height: 110px;
@@ -236,5 +222,5 @@ ul.menu-list {
     font-size: 1.1rem;
     padding: 30px;
   }
-  /* ------------------------------------------- */
+ 
 }

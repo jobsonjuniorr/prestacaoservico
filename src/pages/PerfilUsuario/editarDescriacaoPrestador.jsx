@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { LuPencil } from "react-icons/lu";
+import { LuPencil, LuFileText, LuX, LuCheck, LuChevronLeft } from "react-icons/lu";
 import "../../styles/global.css";
 import "../../styles/editarDescriacaoPrestador.css";
+import { useNavigate } from "react-router-dom";
 
 export default function DescricaoPrestador() {
   const [prestador, setPrestador] = useState(null);
   const [editMode, setEditMode] = useState(false);
-
   const [originalFormat, setOriginalFormat] = useState(null);
   const [arrayIndex, setArrayIndex] = useState(null);
 
-  const contentRef = useRef(null);
-  const [height, setHeight] = useState("0px");
+  const navigate = useNavigate();
 
+  // Lógica de carregamento (Mantida igual para garantir funcionamento)
   useEffect(() => {
     const raw = localStorage.getItem("prestadores");
     if (!raw) return;
@@ -21,7 +21,7 @@ export default function DescricaoPrestador() {
     try {
       parsed = JSON.parse(raw);
     } catch (err) {
-      console.error("erro ao parsear prestadores do localStorage:", err);
+      console.error("erro ao parsear prestadores:", err);
       return;
     }
 
@@ -31,13 +31,12 @@ export default function DescricaoPrestador() {
         try {
           const logged = JSON.parse(loggedRaw);
           if (logged) {
-           
             const byUsuarioId = arr.findIndex(
               (it) =>
                 it &&
-                (it.usuarioId !== undefined) &&
+                it.usuarioId !== undefined &&
                 (String(it.usuarioId) === String(logged.usuarioId) ||
-                 String(it.usuarioId) === String(logged.id))
+                  String(it.usuarioId) === String(logged.id))
             );
             if (byUsuarioId !== -1) return byUsuarioId;
 
@@ -53,13 +52,12 @@ export default function DescricaoPrestador() {
           }
         } catch {}
       }
-
       const byDescricaoProp = arr.findIndex((it) => it && "descricao" in it);
       if (byDescricaoProp !== -1) return byDescricaoProp;
-
-      const bySomeId = arr.findIndex((it) => it && (it.id || it.usuarioId || it.nomeProfissional));
+      const bySomeId = arr.findIndex(
+        (it) => it && (it.id || it.usuarioId || it.nomeProfissional)
+      );
       if (bySomeId !== -1) return bySomeId;
-
       return -1;
     }
 
@@ -71,42 +69,19 @@ export default function DescricaoPrestador() {
         setArrayIndex(idx);
       } else {
         setPrestador(null);
-        setOriginalFormat("array");
-        setArrayIndex(null);
       }
     } else if (typeof parsed === "object") {
       setPrestador(parsed);
       setOriginalFormat("object");
     } else {
       setPrestador(null);
-      setOriginalFormat(null);
     }
   }, []);
-
-  useEffect(() => {
-    // animação do accordion quando abre/fecha
-    if (!editMode) {
-      setHeight(contentRef.current?.scrollHeight + "px");
-    } else {
-      setHeight("auto"); 
-    }
-  }, [prestador, editMode]);
-
-  if (!prestador) {
-    return (
-      <div className="descricao-container">
-        <div className="descricao-title-row">
-          <h3 className="data-title">Descrição do profissional</h3>
-        </div>
-        <p className="descricao-text">Dados do prestador não encontrados no localStorage.</p>
-      </div>
-    );
-  }
 
   const handleChange = (e) => {
     setPrestador((prev) => ({
       ...prev,
-      descricao: e.target.value
+      descricao: e.target.value,
     }));
   };
 
@@ -125,73 +100,85 @@ export default function DescricaoPrestador() {
           const newArr = [...parsed];
           newArr[arrayIndex] = { ...newArr[arrayIndex], ...prestador };
           localStorage.setItem("prestadores", JSON.stringify(newArr));
-        } else {
-          console.error("Não foi possível identificar o índice correto para salvar.");
-          return;
         }
       } else {
         localStorage.setItem("prestadores", JSON.stringify(prestador));
       }
 
       setEditMode(false);
-      alert("Descrição atualizada!");
+      // Opcional: Adicionar um Toast de sucesso aqui
     } catch (err) {
       console.error("Erro ao salvar:", err);
       alert("Erro ao salvar.");
     }
   };
 
+  if (!prestador) return null;
+
   return (
-    <div className="descricao-container">
-      <div className="descricao-title-row">
-        <h3 className="data-title">Descrição do profissional</h3>
+    <div className="descricao-card">
+
+    <header className="page-header-fixed">
+            <button onClick={() => navigate("/perfil")} className="back-btn-simple">
+              <LuChevronLeft size={28} />
+            </button>
+            <h2>Editar Categoria</h2>
+          </header>
+          {/* Espaçamento para compensar header fixo */}
+          <div style={{ height: "70px" }}></div>
+
+      <div className="card-header">
+        <div className="header-icon-title">
+          <div className="icon-box">
+            <LuFileText size={22} color="#1A8BF0" />
+          </div>
+          <h3 className="card-title">Sobre mim</h3>
+        </div>
 
         {!editMode && (
-          <button className="edit-btn" onClick={() => setEditMode(true)}>
-            <LuPencil size={20} />
+          <button className="icon-btn" onClick={() => setEditMode(true)} title="Editar descrição">
+            <LuPencil size={18} />
           </button>
         )}
       </div>
 
-      {/* ----- BLOCO COM EFEITO ----- */}
-      <div
-        ref={contentRef}
-        className="descricao-accordion"
-        style={{
-          maxHeight: height,
-          overflow: "hidden",
-          transition: "max-height 0.35s ease",
-        }}
-      >
-        <div className="descricao-row">
-          {editMode ? (
+      <div className="card-content">
+        {editMode ? (
+          <div className="edit-wrapper animate-fade">
             <textarea
-              className="textarea-dados"
-              rows={5}
+              className="custom-textarea"
+              rows={6}
+              placeholder="Conte aos clientes sobre sua experiência, especialidades e como você trabalha..."
               value={prestador.descricao || ""}
               onChange={handleChange}
+              autoFocus
             />
-          ) : (
-            <p className="descricao-text">
-              {prestador.descricao?.trim()
-                ? prestador.descricao
-                : "Nenhuma descrição adicionada."}
-            </p>
-          )}
-        </div>
+            <div className="char-count">
+              {(prestador.descricao || "").length} caracteres
+            </div>
+            
+            <div className="action-buttons">
+              <button className="btn-cancel" onClick={() => setEditMode(false)}>
+                <LuX size={18} /> Cancelar
+              </button>
+              <button className="btn-save" onClick={saveChanges}>
+                <LuCheck size={18} /> Salvar Alterações
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="view-wrapper animate-fade">
+            {prestador.descricao && prestador.descricao.trim().length > 0 ? (
+              <p className="description-text">{prestador.descricao}</p>
+            ) : (
+              <div className="empty-state" onClick={() => setEditMode(true)}>
+                <p>Você ainda não adicionou uma descrição.</p>
+                <span>Toque para escrever sobre você</span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
-
-      {editMode && (
-        <div className="edit-actions">
-          <button className="cancelar-btn" onClick={() => setEditMode(false)}>
-            Cancelar
-          </button>
-
-          <button className="dados-btn" onClick={saveChanges}>
-            Salvar
-          </button>
-        </div>
-      )}
     </div>
   );
 }

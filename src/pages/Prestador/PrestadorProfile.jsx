@@ -4,7 +4,7 @@ import { ServiceContext } from "../Context/serviceContext.jsx";
 // Ícones
 import { 
   LuChevronLeft, LuClock, LuCalendar, 
-   LuStar, LuBriefcase, LuInfo, LuMapPin
+   LuStar, LuHammer, LuInfo, LuMapPin, LuFileText
 } from "react-icons/lu";
 // Import do CSS
 import "../../styles/prestadorProfile.css";
@@ -99,7 +99,7 @@ export default function PrestadorProfile() {
 
                 <div className="right-column">
                     <div className="content-section">
-                        <h3 className="section-title"><LuInfo /> Sobre o profissional</h3>
+                        <h3 className="section-title"><LuFileText /> Sobre o profissional</h3>
                         <p className="description-text">
                             {prestador.descricao || "Este profissional é parceiro da Local+ e está pronto para atender suas demandas com qualidade e segurança."}
                         </p>
@@ -107,7 +107,7 @@ export default function PrestadorProfile() {
 
                     <div className="content-section">
                         <h3 className="section-title">
-                            <LuBriefcase /> Principais Serviços e Preços
+                            <LuHammer /> Principais Serviços e Preços
                         </h3>
 
                         <p className="section-subtitle" style={{fontSize: '0.9rem', color: '#666', marginBottom: '10px'}}>
