@@ -18,7 +18,7 @@ import AdminRoute from "./components/AdminRoute.jsx";
 import Verificado from "./pages/Verificado/verificado.jsx"; 
 import MinhasSolicitacoes from "./pages/SolicitacaoServico/MinhasSolicitacoes.jsx";
 import SolicitacoesPrestador from "./pages/Prestador/SolicitacoesPrestador.jsx";
-
+import MeusDados from "./pages/PerfilUsuario/meus-dados.jsx";
 export default function App() {
   return (
     <ServiceProvider>
@@ -41,7 +41,7 @@ export default function App() {
           <Route path="/verificado" element={<Verificado />} />
           <Route path="/minhas-solicitacoes" element={<MinhasSolicitacoes />} />
           <Route path="/solicitacoes-prestador" element={<SolicitacoesPrestador />} />
-
+          <Route path="/perfil/meus-dados" element={<MeusDados />} />
         </Routes>
       </BrowserRouter>
     </ServiceProvider>

@@ -103,7 +103,7 @@ export default function Perfil() {
             </Link>
         </li>
         <li>
-            <Link to="/perfil/editar-dados">
+            <Link to="/perfil/meus-dados">
                 <div className="menu-item-left">
                     <LuUser size={24} style={{marginRight: 15, color: '#1A8BF0'}}/>
                     <span>Seus dados pessoais</span>
