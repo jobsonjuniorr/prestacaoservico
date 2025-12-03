@@ -1,0 +1,117 @@
+:root {
+  --primary-blue: #1A8BF0;
+  --bg-gray: #f2f4f7;
+  --white: #ffffff;
+  --text-dark: #333;
+  --text-gray: #666;
+  --border-color: #eee;
+  --red:#ff4d4d;
+}
+
+/* ====== DESCRIÇÃO PRESTADOR (MESMO PADRÃO DO MEUSDADOS) ====== */
+
+.descricao-container {
+  background-color: var(--white);
+  margin: 10px 20px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+/* TÍTULO */
+.descricao-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.descricao-title-row .data-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* BOTÃO EDITAR */
+.edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-gray);
+}
+
+/* TEXTO E CONTEÚDO */
+.descricao-text {
+  color: var(--text-gray);
+  line-height: 1.45rem;
+  white-space: pre-line;
+  font-size: 0.97rem;
+}
+
+/* LINHA DO TEXTO */
+.descricao-row {
+  padding: 12px 0;
+}
+
+/* TEXTAREA */
+.textarea-dados {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  resize: none;
+  outline: none;
+}
+
+/* ÁREA EXPANSIVA (Efeito accordion) */
+.descricao-accordion {
+  background-color: transparent;
+}
+
+/* BOTÕES DE AÇÃO */
+.edit-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* BOTÃO SALVAR */
+.dados-btn {
+  width: 45%;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dados-btn:hover {
+  background-color: #1570c4;
+}
+
+/* BOTÃO CANCELAR */
+.cancelar-btn {
+  width: 45%;
+  background-color: var(--red);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* PC */
+@media (min-width: 768px) {
+  .descricao-container {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+}

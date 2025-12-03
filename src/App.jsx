@@ -19,6 +19,8 @@ import Verificado from "./pages/Verificado/verificado.jsx";
 import MinhasSolicitacoes from "./pages/SolicitacaoServico/MinhasSolicitacoes.jsx";
 import SolicitacoesPrestador from "./pages/Prestador/SolicitacoesPrestador.jsx";
 import MeusDados from "./pages/PerfilUsuario/meus-dados.jsx";
+import EditarDescricaoPrestador from "./pages/PerfilUsuario/editarDescriacaoPrestador.jsx";
+import EditarCategoria from "./pages/PerfilUsuario/editarCategoria.jsx";
 export default function App() {
   return (
     <ServiceProvider>
@@ -42,6 +44,8 @@ export default function App() {
           <Route path="/minhas-solicitacoes" element={<MinhasSolicitacoes />} />
           <Route path="/solicitacoes-prestador" element={<SolicitacoesPrestador />} />
           <Route path="/perfil/meus-dados" element={<MeusDados />} />
+          <Route path="/perfil/editar-descricao" element={<EditarDescricaoPrestador />} />
+          <Route path="/perfil/editar-categoria" element={<EditarCategoria />} />
         </Routes>
       </BrowserRouter>
     </ServiceProvider>

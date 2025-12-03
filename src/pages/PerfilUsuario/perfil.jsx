@@ -85,7 +85,7 @@ export default function Perfil() {
  
       <ul className="menu-list">
         <li>
-            <Link to="/perfil/EditarCategoria">
+            <Link to="/perfil/editar-categoria">
                 <div className="menu-item-left">
                     <LuLayoutGrid size={24} style={{marginRight: 15, color: '#1A8BF0'}}/>
                     <span>Sua categoria</span>
