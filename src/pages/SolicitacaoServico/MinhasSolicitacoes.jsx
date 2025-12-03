@@ -144,7 +144,7 @@ export default function MinhasSolicitacoes() {
     <div className="requests-container">
       
       <div className="requests-header">
-        <button onClick={() => navigate('/ContaUsuario')} style={{background:'none', border:'none', cursor:'pointer'}}>
+        <button onClick={() => navigate('/home')} style={{background:'none', border:'none', cursor:'pointer'}}>
             <LuArrowLeft size={28} color="#333"/>
         </button>
         <h1 className="requests-title">Minhas Solicitações</h1>

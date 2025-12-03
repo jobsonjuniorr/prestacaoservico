@@ -111,17 +111,6 @@ export default function Perfil() {
                 <LuPencil size={22} className="edit-icon" />
             </Link>
         </li>
-        
-
-        <li>
-            <Link to="/solicitacoes">
-                <div className="menu-item-left">
-                    <LuClipboardList size={24} style={{marginRight: 15, color: '#1A8BF0'}}/>
-                    <span>Minhas Solicitações</span>
-                </div>
-                <LuChevronLeft size={22} className="edit-icon" style={{transform: "rotate(180deg)"}} />
-            </Link>
-        </li>
 
       </ul>
     </>

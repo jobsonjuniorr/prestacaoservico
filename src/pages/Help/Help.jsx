@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import "../../styles/help.css";
 export default function Help() {
   const [open, setOpen] = useState(null);

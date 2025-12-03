@@ -9,6 +9,7 @@ import {
   LuBriefcase, 
   LuFileText,
   LuChevronRight,
+  LuClipboardList,
   LuChevronLeft 
 } from "react-icons/lu";
 import "../../styles/contaUsuario.css";
@@ -95,7 +96,18 @@ export default function ContaUsuario() {
                 <LuChevronRight className="chevron-icon" />
             </Link>
         </li>
-        <li className="logout-item">
+
+      <li>
+                  <Link to="/solicitacoes-prestador">
+                      <div className="menu-item-left">
+                          <LuClipboardList size={24} style={{color: '#1A8BF0'}}/>
+                          <span>Solicitações Recebidas</span>
+                      </div>
+                      < LuChevronRight className="chevron-icon"/>
+                  </Link>
+              </li>
+
+                <li className="logout-item">
             <button onClick={handleLogout} className="logout-btn-link">
                 <div className="menu-item-left">
                     <LuLogOut size={24} className="menu-icon-blue" />
@@ -104,6 +116,7 @@ export default function ContaUsuario() {
                <LuChevronRight className="chevron-icon" />
             </button>
         </li>
+
       </ul>
 
       <Link to="/prestador/register" className="provider-banner-link">

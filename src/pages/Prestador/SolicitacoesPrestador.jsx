@@ -4,15 +4,18 @@ import { ServiceContext } from "../Context/serviceContext.jsx";
 import "../../styles/SolicitacoesPrestador.css";
 import { 
     LuCheck, LuX, LuPlay, LuCircleCheck, LuClock, 
-    LuCalendar, LuMapPin, LuDollarSign, LuMessageCircle
+    LuCalendar, LuMapPin, LuDollarSign, LuMessageCircle,
+    LuBriefcase 
 } from "react-icons/lu";
 
 export default function VerSolicitacoes() {
   const navigate = useNavigate();
   const { prestadores } = useContext(ServiceContext);
   const user = JSON.parse(localStorage.getItem("loggedUser"));
+  
   const [meusPedidos, setMeusPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isPrestador, setIsPrestador] = useState(true); // Estado para controlar se é prestador
 
   console.log("Meus Pedidos:", meusPedidos);
 
@@ -23,21 +26,22 @@ export default function VerSolicitacoes() {
         return;
     }
 
-    
     const todosPrestadores = [
         ...(prestadores || []), 
         ...(JSON.parse(localStorage.getItem("prestadores")) || [])
     ];
     
-    
+    // Verifica se o usuário logado tem perfil de prestador
     const meuPerfilPrestador = todosPrestadores.find(p => String(p.usuarioId) === String(user.id));
 
     if (!meuPerfilPrestador) {
-        alert("Você não possui um perfil de prestador ativo.");
-        navigate("/home");
+        
+        setIsPrestador(false);
+        setLoading(false);
         return;
     }
 
+    // Se for prestador, segue a vida normal
     const todasSolicitacoes = JSON.parse(localStorage.getItem("solicitacoes")) || [];
 
     const pedidosFiltrados = todasSolicitacoes
@@ -61,14 +65,45 @@ export default function VerSolicitacoes() {
 
     localStorage.setItem("solicitacoes", JSON.stringify(atualizadas));
     
-
-    const user = JSON.parse(localStorage.getItem("loggedUser"));
- 
     window.location.reload(); 
   };
 
   if (loading) return <div style={{padding:20, textAlign:'center'}}>Carregando painel...</div>;
 
+  // SE NÃO FOR PRESTADOR
+  if (!isPrestador) {
+      return (
+        <div className="provider-requests-container" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '60vh'}}>
+            <div className="empty-state" style={{maxWidth: '500px', textAlign: 'center', padding: '40px'}}>
+                <LuBriefcase size={60} color="#2d8cff" style={{marginBottom: '20px'}} />
+                <h2 style={{fontSize: '1.5rem', marginBottom: '10px', color: '#333'}}>Você ainda não é um Prestador</h2>
+                <p style={{color: '#666', marginBottom: '30px'}}>
+                    Para gerenciar solicitações e oferecer seus serviços, você precisa completar seu cadastro profissional.
+                </p>
+                <button 
+                    onClick={() => navigate("/prestador/register")} 
+                    className="btn-action"
+                    style={{
+                        backgroundColor: '#2d8cff', 
+                        color: 'white', 
+                        padding: '12px 24px', 
+                        fontSize: '1rem',
+                        borderRadius: '8px',
+                        border: 'none',
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                    }}
+                >
+                   <LuPlay /> Começar Agora
+                </button>
+            </div>
+        </div>
+      );
+  }
+
+  // (SE FOR PRESTADOR) 
   const renderBotoes = (pedido) => {
       switch (pedido.status) {
           case "Pendente":

@@ -14,7 +14,7 @@ import logoImg from '../../assets/logobranca.png';
 import {
   LuSearch, LuUser, LuFilter, LuArrowUpDown,
   LuLayoutGrid, LuSparkles, LuMonitor, LuHammer, LuPalette, LuBookOpen,
-  LuCalendar, LuClock
+  LuCalendar, LuClock, LuClipboardList // <--- Adicionei este ícone
 } from "react-icons/lu";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
@@ -66,7 +66,6 @@ const HomeScreen = () => {
     urgent: p.urgent,     
     calendar: p.calendar,  
     img: p.img,
-    
   }));
 
   const applyFilters = () => {
@@ -105,25 +104,75 @@ const HomeScreen = () => {
   return (
     <div className="home-container">
 
-      <header className="home-header">
-        <div className="header-top">
-          <img src={logoImg} alt="Local Logo" className="header-logo" />
-          <Link to="/ContaUsuario" className="user-profile-chip">
-            <LuUser className="user-icon" />
-            <span> {user?.nome || "Visitante"}</span>
-          </Link>
+      {/* --- HEADER REESTRUTURADO --- */}
+      <header className="home-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px 40px' }}>
+        
+        {/* 1. Logo à Esquerda */}
+        <div className="logo-area">
+           <img src={logoImg} alt="Local Logo" className="header-logo" style={{height: '40px', objectFit: 'contain'}} />
         </div>
 
-        <div className="search-bar-container">
-          <LuSearch className="search-icon" />
+        {/* 2. Barra de Pesquisa no Centro/Lado */}
+        <div className="search-bar-container" style={{ 
+            flex: 1, 
+            maxWidth: '600px', 
+            margin: '0 30px',
+            background: 'rgba(255, 255, 255, 1)', // Fundo translúcido para combinar com o azul
+            display: 'flex',
+            alignItems: 'center',
+            padding: '8px 15px',
+            borderRadius: '50px'
+        }}>
+          <LuSearch className="search-icon" style={{color: 'rgb(141, 141, 141)'}} />
           <input
             type="text"
             placeholder="O que você precisa hoje?"
             className="search-input"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
+            style={{ 
+                background: 'transparent', 
+                border: 'none', 
+                color: '#fff', 
+                outline: 'none', 
+                width: '100%',
+                marginLeft: '10px',
+                fontSize: '1rem'
+            }}
           />
+          {/* Hack CSS para o placeholder branco: adicione isso no seu CSS global se precisar: 
+              ::placeholder { color: rgba(255,255,255,0.8); } 
+          */}
         </div>
+
+        {/* 3. Área da Direita: Botão Solicitações + Perfil */}
+        <div className="header-actions" style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
+            
+  <Link 
+  to="/minhas-solicitacoes" 
+  className="user-profile-chip"
+  style={{
+    background: 'rgba(255,255,255,0.2)',
+    padding: '8px 15px',
+    borderRadius: '30px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    textDecoration: 'none',
+    color: 'white'
+  }}
+>
+    <LuClipboardList size={18}/>
+    <span>Minhas Solicitações</span>
+</Link>
+
+            {/* Perfil do Usuário */}
+            <Link to="/ContaUsuario" className="user-profile-chip" style={{background: 'rgba(255,255,255,0.2)', padding: '8px 15px', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'white'}}>
+                <LuUser className="user-icon" />
+                <span> {user?.nome || "Visitante"}</span>
+            </Link>
+        </div>
+
       </header>
 
       {/* --- CATEGORIAS --- */}
@@ -240,7 +289,7 @@ const HomeScreen = () => {
                   </div>
                   
                 
-                 <div className="provider-info">
+                  <div className="provider-info">
                    
                     <p className="p-name"><LuUser /> {provider.name}</p>
 
