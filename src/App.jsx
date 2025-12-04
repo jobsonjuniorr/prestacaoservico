@@ -21,10 +21,13 @@ import SolicitacoesPrestador from "./pages/Prestador/SolicitacoesPrestador.jsx";
 import MeusDados from "./pages/PerfilUsuario/meus-dados.jsx";
 import EditarDescricaoPrestador from "./pages/PerfilUsuario/editarDescriacaoPrestador.jsx";
 import EditarCategoria from "./pages/Prestador/editarCategoria.jsx";
+import { ToastProvider } from "./pages/Notifications/ToastContext.jsx";
+
 export default function App() {
   return (
     <ServiceProvider>
       <BrowserRouter>
+      <ToastProvider>
         <Routes>
           <Route path="/" element={<FirstScreen />} />
           <Route path="/home" element={<Home />} />
@@ -47,6 +50,7 @@ export default function App() {
           <Route path="/perfil/editar-descricao" element={<EditarDescricaoPrestador />} />
           <Route path="/perfil/editar-categoria" element={<EditarCategoria />} />
         </Routes>
+        </ToastProvider>
       </BrowserRouter>
     </ServiceProvider>
   );

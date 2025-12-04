@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/register.css";
 import user from "../../data/users"; 
 import logo from "../../assets/logo.png"; 
+import { useAlert } from "../Notifications/ToastContext.jsx";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ export default function Register() {
   const [telefone, setTelefone] = useState("");
   const [cpf, setCpf] = useState("");
   const [cpfError, setCpfError] = useState("");
-
+  const { showAlert } = useAlert();
   const navigate = useNavigate();
 
   function handleRegister(e) {
@@ -22,7 +23,7 @@ export default function Register() {
 
     const userExists = users.find((u) => u.email === email);
     if (userExists) {
-      alert("Já existe um usuário com este e-mail!");
+      showAlert("Já existe um usuário com este e-mail!", "error");
       return;
     }
 
@@ -31,7 +32,7 @@ export default function Register() {
       (user && user.find((u) => u.cpf === cpf)) || users.find((u) => u.cpf === cpf);
 
     if (cpfExists) {
-      setCpfError("Este CPF já está cadastrado.");
+      showAlert("Este CPF já está cadastrado.", "error");
       return;
     }
 
@@ -55,7 +56,7 @@ export default function Register() {
   
     localStorage.setItem("loggedUser", JSON.stringify(newUser));
 
-    alert("Usuário cadastrado com sucesso!");
+    showAlert("Seja bem vindo ao sistema", "success");
     navigate("/home"); 
   }
 

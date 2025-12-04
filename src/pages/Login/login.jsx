@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/login.css";
 import logo from "../../assets/logo.png";
 import user from "../../data/users";
+import { useAlert } from "../Notifications/ToastContext.jsx";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
   const navigate = useNavigate();
+  const { showAlert } = useAlert();
 
   function handleLogin(e) {
     e.preventDefault();
@@ -29,7 +31,7 @@ export default function Login() {
       );
       navigate("/home");
     } else {
-      alert("E-mail ou senha incorretos!");
+      showAlert("E-mail ou senha incorretos!", "error");
     }
   }
 

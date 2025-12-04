@@ -6,6 +6,7 @@ import {
 } from "react-icons/lu";
 import "../../styles/meusdados.css";
 import "../../styles/global.css";
+import { useAlert } from "../Notifications/ToastContext.jsx";
 
 const placeholderUserImg = "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector";
 
@@ -13,7 +14,7 @@ export default function MeusDados() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [editMode, setEditMode] = useState(false);
-
+  const { showAlert } = useAlert();
   useEffect(() => {
     const data = localStorage.getItem("loggedUser");
     if (!data) {
@@ -53,7 +54,7 @@ export default function MeusDados() {
   const saveChanges = () => {
     localStorage.setItem("loggedUser", JSON.stringify(user));
     setEditMode(false);
-    alert("Dados atualizados com sucesso!");
+    showAlert("Dados atualizados com sucesso!", "success");
   };
 
   return (

@@ -11,12 +11,13 @@ import {
 } from "react-icons/lu";
 import "../../styles/perfil.css";
 import "../../styles/global.css";
-
+import { useAlert } from "../Notifications/ToastContext.jsx";
 const placeholderUserImg = "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector"; 
 
 export default function Perfil() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     const data = localStorage.getItem("loggedUser");
@@ -42,7 +43,7 @@ export default function Perfil() {
 
       localStorage.setItem("loggedUser", JSON.stringify(updatedUser));
 
-      alert("Foto atualizada e salva!");
+      showAlert("Foto atualizada e salva!", "success");
     };
 
     reader.readAsDataURL(file);

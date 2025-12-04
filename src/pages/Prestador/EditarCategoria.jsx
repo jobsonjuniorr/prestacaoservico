@@ -9,7 +9,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import "../../styles/global.css";
 import "../../styles/editarCategoria.css";
-import { ServiceContext } from "../Context/serviceContext.jsx"; // Importar o contexto
+import { ServiceContext } from "../Context/serviceContext.jsx"; 
+import { useAlert } from "../Notifications/ToastContext.jsx";
 
 export default function EditarCategoria() {
   const [prestador, setPrestador] = useState(null);
@@ -22,8 +23,8 @@ export default function EditarCategoria() {
   
   // Obter funções do contexto
   const { atualizarPrestador, loadPrestadores } = useContext(ServiceContext);
+  const { showAlert } = useAlert();
 
-  // Lista de Categorias
   const categories = [
     { name: "Limpeza", icon: <LuSparkles /> },
     { name: "Tecnologia", icon: <LuMonitor /> },
@@ -140,9 +141,9 @@ export default function EditarCategoria() {
       }
 
       setEditMode(false);
-      alert("Categoria atualizada com sucesso!");
+      showAlert("Categoria atualizada com sucesso!", "success");
     } catch {
-      alert("Erro ao salvar.");
+      showAlert("Erro ao salvar.", "error");
     }
   };
 

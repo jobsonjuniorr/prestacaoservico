@@ -5,11 +5,11 @@ import {
     LuArrowLeft, LuClock, LuCalendar, LuCircleCheck, 
     LuOctagonAlert, LuCircleX, LuMessageCircle, LuChevronLeft
 } from "react-icons/lu";
-
+import { useAlert } from "../Notifications/ToastContext.jsx";
 export default function MinhasSolicitacoes() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("loggedUser"));
-  
+  const { showAlert } = useAlert();
 
   const [todasSolicitacoes, setTodasSolicitacoes] = useState([]);
   
@@ -58,7 +58,7 @@ export default function MinhasSolicitacoes() {
   const handleConfirmarConclusao = (id) => {
    
       atualizarStatusLocal(id, "Finalizado");
-      alert("Serviço finalizado! Obrigado por usar a Local+.");
+      showAlert("Serviço finalizado! Obrigado por usar a Local+.", "success");
   
   };
 

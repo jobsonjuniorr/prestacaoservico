@@ -12,13 +12,15 @@ import {
   FaBriefcase 
 } from 'react-icons/fa';
 import { ServiceContext } from "../Context/serviceContext.jsx";
+import { useAlert } from "../Notifications/ToastContext.jsx";
 
 export default function PrestadorRegister() {
   
   const usuarioLogado = JSON.parse(localStorage.getItem("loggedUser"));
   const { adicionarPrestador } = useContext(ServiceContext);
   const navigate = useNavigate();
-  
+  const { showAlert } = useAlert();
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
@@ -91,10 +93,10 @@ export default function PrestadorRegister() {
     e.preventDefault();
 
    
-    if (!cpf || !documentoFile) return alert("CPF e Documento são obrigatórios.");
-    if (!categoria || !cargo || !descricao) return alert("Preencha os dados profissionais.");
-    if (servicos.length < 3) return alert("Adicione pelo menos 3 serviços na tabela.");
-    if (!atendeImediato && !atendeAgenda) return alert("Selecione sua disponibilidade.");
+    if (!cpf || !documentoFile) return showAlert("CPF e Documento são obrigatórios.", "error");
+    if (!categoria || !cargo || !descricao) return showAlert("Preencha os dados profissionais.", "error");
+    if (servicos.length < 3) return showAlert("Adicione pelo menos 3 serviços na tabela.", "error");
+    if (!atendeImediato && !atendeAgenda) return showAlert("Selecione sua disponibilidade.", "error");
 
     
     const novoPrestador = {
@@ -134,7 +136,7 @@ export default function PrestadorRegister() {
    
     adicionarPrestador(novoPrestador);
     
-    alert("Solicitação de cadastro enviada! Aguarde a verificação do documento.");
+    showAlert("Solicitação de cadastro enviada! Aguarde a verificação do documento.", "success");
     navigate("/home");
   }
 

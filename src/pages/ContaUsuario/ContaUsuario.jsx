@@ -14,12 +14,13 @@ import {
 } from "react-icons/lu";
 import "../../styles/contaUsuario.css";
 import "../../styles/global.css";
+import { useAlert } from "../Notifications/ToastContext.jsx";
 
 const placeholderUserImg = "https://cdn.create.vista.com/api/media/small/51405259/stock-vector-male-avatar-profile-picture-use-for-social-website-vector";
 
 export default function ContaUsuario() {
   const navigate = useNavigate();
-  
+  const { showAlert } = useAlert();
   let user = { nome: "Visitante", email: "", profissao: "Tecnologia > Desenvolvedora" };
   try {
     const storedUser = localStorage.getItem("loggedUser");
@@ -36,7 +37,7 @@ export default function ContaUsuario() {
   };
 
   const handleNotifications = () => {
-    alert("Abrir tela de notificações");
+    showAlert("Abrir tela de notificações", "info");
   };
 
   return (

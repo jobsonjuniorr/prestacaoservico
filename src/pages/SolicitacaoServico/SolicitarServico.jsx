@@ -6,13 +6,14 @@ import {
     LuChevronLeft, LuTriangleAlert, LuCalendar, LuClock, 
     LuMapPin, LuLaptop, LuShieldCheck, LuInfo 
 } from "react-icons/lu";
+import { useAlert } from "../Notifications/ToastContext.jsx";
 
 export default function SolicitarServico() {
   const { idPrestador } = useParams();
   const navigate = useNavigate();
   const { prestadores } = useContext(ServiceContext);
   const user = JSON.parse(localStorage.getItem("loggedUser"));
-
+  const { showAlert } = useAlert();
 
   const [prestador, setPrestador] = useState(null);
   
@@ -25,7 +26,7 @@ export default function SolicitarServico() {
 
   useEffect(() => {
     if (!user) {
-        alert("Você precisa estar logado para solicitar um serviço.");
+        showAlert("Você precisa estar logado para solicitar um serviço.", "error");
         navigate("/login");
         return;
     }
@@ -91,7 +92,7 @@ export default function SolicitarServico() {
     localStorage.setItem("solicitacoes", JSON.stringify([...solicitacoesExistentes, novaSolicitacao]));
 
     // Feedback e Redirecionamento
-    alert(`Solicitação enviada para ${prestador.nomeProfissional}!\n\nSe ele aceitar, entrará em contato pelo seu WhatsApp cadastrado.`);
+    showAlert(`Solicitação enviada para ${prestador.nomeProfissional}!\n\nSe ele aceitar, entrará em contato pelo seu WhatsApp cadastrado.`, "success");
     navigate("/minhas-solicitacoes"); 
   };
 
