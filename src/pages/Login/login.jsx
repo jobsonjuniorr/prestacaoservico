@@ -102,14 +102,7 @@ export default function Login() {
 
         <button className="button-submit">Entrar</button>
 
-        <p className="p">
-          Não tem conta?{" "}
-          <a href="/register" className="span">
-            Criar Conta
-          </a>
-        </p>
-
-        <button className="google-btn">
+    <button className="google-btn">
           <svg
             xmlSpace="preserve"
             viewBox="0 0 512 512"
@@ -143,6 +136,17 @@ export default function Login() {
           </svg>
           Entrar com Google
         </button>
+        <p className="p">
+          Não tem conta?{" "}
+          <a href="/register" className="span">
+            Criar Conta
+          </a>
+        </p>
+         <p className="p">
+           <a href="/login" className="span">Esqueceu a senha?</a>
+        </p>
+
+        
       </form>
     </div>
   );
