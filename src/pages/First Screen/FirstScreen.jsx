@@ -56,7 +56,7 @@ const FirstScreen = () => {
 
       <button
         className="help-btn"
-        onClick={() => navigate("/ajuda")}
+        onClick={() => navigate("/help")}
       >
         <div className="help-icon">?</div>
         <span>Ajuda</span>
