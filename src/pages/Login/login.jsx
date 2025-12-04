@@ -143,7 +143,7 @@ export default function Login() {
           </a>
         </p>
          <p className="p">
-           <a href="/login" className="span">Esqueceu a senha ?</a>
+           <a href="/login" className="span">Esqueceu a senha?</a>
         </p>
 
         
